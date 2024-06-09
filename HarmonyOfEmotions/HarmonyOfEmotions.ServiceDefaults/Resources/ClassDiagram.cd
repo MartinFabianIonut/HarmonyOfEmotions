@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HarmonyOfEmotions.ApiService.Authentication.SpotifyClientBuilder">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAEA=</HashCode>
+      <FileName>Authentication\SpotifyClientBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HarmonyOfEmotions.ApiService.Controllers.HarmonyOfEmotionsController">
+    <Position X="2.75" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAEAAAAAAAQAAAAAAAIIAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Controllers\HarmonyOfEmotionsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="HarmonyOfEmotions.ApiService.Domain.Centroid">
+    <Position X="3" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Centroid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HarmonyOfEmotions.ApiService.Domain.Track">
+    <Position X="0.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQQCZAAABAAAAAQAAAAEAAQAEoAAEAAgAAAECAAAIAA=</HashCode>
+      <FileName>Domain\Track.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HarmonyOfEmotions.ApiService.Implementations.FirebaseRepository">
+    <Position X="11.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAAJAAQEAAAAAAAAAAAAAgAAAAAIQBAAAAAAA=</HashCode>
+      <FileName>Implementations\FirebaseRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IRepository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="HarmonyOfEmotions.ApiService.Implementations.Service">
+    <Position X="7.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIIABEAABAAAAAAAAAAAAIAAAAAAAAAAIAAIAAAAA=</HashCode>
+      <FileName>Implementations\Service.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="HarmonyOfEmotions.ApiService.Interfaces.IRepository">
+    <Position X="14" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAABAAQAAAAAAAAAAAAAAgAAAAAIQAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="HarmonyOfEmotions.ApiService.Interfaces.IService">
+    <Position X="9.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAIAAIAAAAA=</HashCode>
+      <FileName>Interfaces\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

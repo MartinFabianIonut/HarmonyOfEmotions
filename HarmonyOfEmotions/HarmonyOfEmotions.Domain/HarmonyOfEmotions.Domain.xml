@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HarmonyOfEmotions.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:HarmonyOfEmotions.Domain.Country">
+            <summary>
+            The country of the artist.
+            </summary>
+        </member>
+    </members>
+</doc>

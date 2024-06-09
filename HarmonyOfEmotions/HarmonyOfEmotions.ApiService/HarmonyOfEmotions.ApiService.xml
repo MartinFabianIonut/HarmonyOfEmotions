@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HarmonyOfEmotions.ApiService</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "T:HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController" -->
+        <!-- Badly formed XML comment ignored for member "M:HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController.#ctor(Microsoft.Extensions.Logging.ILogger{HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController},HarmonyOfEmotions.ApiService.Interfaces.IRecommenderService)" -->
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController.GetEmotionForTrack(System.String)">
+            <summary>
+            This method is responsible for getting the emotion for a given track.
+            </summary>
+            <param name="previewUrl">The preview url of the track</param>
+            <returns>A string representing the emotion</returns>
+        </member>
+        <member name="T:HarmonyOfEmotions.ApiService.Controllers.SpotifyTrackController">
+            <summary>
+            This controller is responsible for handling requests related to Spotify tracks.
+            </summary>
+            <param name="logger">For logging purposes</param>
+            <param name="service">The service that will handle the requests</param>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.SpotifyTrackController.#ctor(Microsoft.Extensions.Logging.ILogger{HarmonyOfEmotions.ApiService.Controllers.SpotifyTrackController},HarmonyOfEmotions.ApiService.Interfaces.ISpotifyService)">
+            <summary>
+            This controller is responsible for handling requests related to Spotify tracks.
+            </summary>
+            <param name="logger">For logging purposes</param>
+            <param name="service">The service that will handle the requests</param>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.SpotifyTrackController.GetTopTracksForArtist(System.String)">
+            <summary>
+            This method is responsible for getting the top tracks for a given artist.
+            </summary>
+            <param name="artistId">This must be the artist's id</param>
+            <returns></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.SpotifyTrackController.SearchTraksByKeyword(System.String)">
+            <summary>
+            Search for tracks by keyword.
+            </summary>
+            <param name="keyword">A keyword to search for</param>
+            <returns></returns>
+        </member>
+        <member name="T:HarmonyOfEmotions.ApiService.Migrations.Users">
+            <inheritdoc />
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Migrations.Users.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Migrations.Users.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Migrations.Users.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:HarmonyOfEmotions.ApiService.Migrations.AddUserTrackPreferences">
+            <inheritdoc />
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Migrations.AddUserTrackPreferences.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Migrations.AddUserTrackPreferences.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Migrations.AddUserTrackPreferences.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:HarmonyOfEmotions_ApiService.ClassifierModel.ModelInput">
+            <summary>
+            model input class for ClassifierModel.
+            </summary>
+        </member>
+        <member name="T:HarmonyOfEmotions_ApiService.ClassifierModel.ModelOutput">
+            <summary>
+            model output class for ClassifierModel.
+            </summary>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.ClassifierModel.PredictAllLabels(HarmonyOfEmotions_ApiService.ClassifierModel.ModelInput)">
+            <summary>
+            Use this method to predict scores for all possible labels.
+            </summary>
+            <param name="input">model input.</param>
+            <returns><seealso cref="T:HarmonyOfEmotions_ApiService.ClassifierModel.ModelOutput"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.ClassifierModel.GetSortedScoresWithLabels(HarmonyOfEmotions_ApiService.ClassifierModel.ModelOutput)">
+            <summary>
+            Map the unlabeled result score array to the predicted label names.
+            </summary>
+            <param name="result">Prediction to get the labeled scores from.</param>
+            <returns>Ordered list of label and score.</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.ClassifierModel.GetLabels(HarmonyOfEmotions_ApiService.ClassifierModel.ModelOutput)">
+            <summary>
+            Get the ordered label names.
+            </summary>
+            <param name="result">Predicted result to get the labels from.</param>
+            <returns>List of labels.</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.ClassifierModel.Predict(HarmonyOfEmotions_ApiService.ClassifierModel.ModelInput)">
+            <summary>
+            Use this method to predict on <see cref="T:HarmonyOfEmotions_ApiService.ClassifierModel.ModelInput"/>.
+            </summary>
+            <param name="input">model input.</param>
+            <returns><seealso cref="T:HarmonyOfEmotions_ApiService.ClassifierModel.ModelOutput"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.ClassifierModel.LoadImageFromFolder(Microsoft.ML.MLContext,System.String)">
+            <summary>
+             Load an IDataView from a folder path.
+            </summary>
+            <param name="mlContext">The common context for all ML.NET operations.</param>
+            <param name="folder"> Folder to the image data for training.</param>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.ClassifierModel.RetrainModel(Microsoft.ML.MLContext,Microsoft.ML.IDataView)">
+            <summary>
+            Retrains model using the pipeline generated as part of the training process.
+            </summary>
+            <param name="mlContext"></param>
+            <param name="trainData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.ClassifierModel.BuildPipeline(Microsoft.ML.MLContext)">
+            <summary>
+            build the pipeline that is used from model builder. Use this function to retrain model.
+            </summary>
+            <param name="mlContext"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

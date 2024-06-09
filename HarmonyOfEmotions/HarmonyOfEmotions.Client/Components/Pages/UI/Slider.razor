@@ -1,0 +1,66 @@
+﻿<input class="slider"
+	type="range"
+	   min="@Min"
+	   max="@Max"
+	   step="@Step"
+	   @bind="Value" 
+	   @bind:event="oninput"/>
+
+<style>
+	.slider {
+		/* -webkit-appearance: none;
+		width: 200px;
+		height: 15px;
+		border-radius: 5px;
+		background: #4CAF50;
+		outline: none;
+		opacity: 0.7;
+		-webkit-transition: .2s;
+		transition: opacity .2s; */
+		width: 200px;
+		height: 15px;
+		opacity: 0.7;
+		appearance: none;
+		border-radius: 5px;
+		background: linear-gradient( to right, #11A252 0%, #4CAF50 50%, #ddd 50%, #ddd 100%);
+	}
+/* 
+	.slider:hover {
+		opacity: 1;
+	}
+
+	.slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		background: #4CAF50;
+		cursor: pointer;
+	}
+
+	.slider::-moz-range-thumb {
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		background: #4CAF50;
+		cursor: pointer;
+	} */
+</style>
+
+@code {
+	[Parameter]
+	public float Min { get; set; } = 0;
+
+	[Parameter]
+	public float Max { get; set; } = 1;
+
+	[Parameter]
+	public float Step { get; set; } = 0.01f;
+
+	[Parameter]
+	public float Value { get; set; }
+
+	[Parameter]
+	public EventCallback<float> ValueChanged { get; set; }
+}

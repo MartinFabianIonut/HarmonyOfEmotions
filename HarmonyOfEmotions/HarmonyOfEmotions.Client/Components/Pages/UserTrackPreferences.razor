@@ -1,0 +1,33 @@
+﻿@page "/user-track-preferences"
+@inject UserTrackPreferencesService UserTrackPreferencesService
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<AuthorizeView>
+	<NotAuthorized>
+		<AccessDenied />
+	</NotAuthorized>
+	<Authorized>
+		<h1>User Track Preferences</h1>
+
+		<button @onclick="LoadPreferences">Load Preferences</button>
+
+		@if (preferences != null)
+		{
+			<ul>
+				@foreach (var preference in preferences)
+				{
+					<li>@preference.TrackId - @preference.IsLiked</li>
+				}
+			</ul>
+		}
+	</Authorized>
+</AuthorizeView>
+
+@code {
+	private IEnumerable<UserTrackPreference> preferences;
+
+	private async Task LoadPreferences()
+	{
+		preferences = await UserTrackPreferencesService.GetUserTrackPreferences();
+	}
+}

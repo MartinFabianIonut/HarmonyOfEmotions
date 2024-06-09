@@ -1,0 +1,1360 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HarmonyOfEmotions.ServiceDefaults</name>
+    </assembly>
+    <members>
+        <member name="T:HarmonyOfEmotions.ServiceDefaults.Resources.Countries">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Afghanistan">
+            <summary>
+              Looks up a localized string similar to AF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Åland_Islands">
+            <summary>
+              Looks up a localized string similar to AX.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Albania">
+            <summary>
+              Looks up a localized string similar to AL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Algeria">
+            <summary>
+              Looks up a localized string similar to DZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.American_Samoa">
+            <summary>
+              Looks up a localized string similar to AS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Andorra">
+            <summary>
+              Looks up a localized string similar to AD.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Angola">
+            <summary>
+              Looks up a localized string similar to AO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Anguilla">
+            <summary>
+              Looks up a localized string similar to AI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Antarctica">
+            <summary>
+              Looks up a localized string similar to AQ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Antigua_and_Barbuda">
+            <summary>
+              Looks up a localized string similar to AG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Argentina">
+            <summary>
+              Looks up a localized string similar to AR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Armenia">
+            <summary>
+              Looks up a localized string similar to AM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Aruba">
+            <summary>
+              Looks up a localized string similar to AW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Australia">
+            <summary>
+              Looks up a localized string similar to AU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Austria">
+            <summary>
+              Looks up a localized string similar to AT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Azerbaijan">
+            <summary>
+              Looks up a localized string similar to AZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bahamas">
+            <summary>
+              Looks up a localized string similar to BS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bahrain">
+            <summary>
+              Looks up a localized string similar to BH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bangladesh">
+            <summary>
+              Looks up a localized string similar to BD.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Barbados">
+            <summary>
+              Looks up a localized string similar to BB.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Belarus">
+            <summary>
+              Looks up a localized string similar to BY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Belgium">
+            <summary>
+              Looks up a localized string similar to BE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Belize">
+            <summary>
+              Looks up a localized string similar to BZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Benin">
+            <summary>
+              Looks up a localized string similar to BJ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bermuda">
+            <summary>
+              Looks up a localized string similar to BM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bhutan">
+            <summary>
+              Looks up a localized string similar to BT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bolivia">
+            <summary>
+              Looks up a localized string similar to BO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bonaire">
+            <summary>
+              Looks up a localized string similar to BQ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bosnia_and_Herzegovina">
+            <summary>
+              Looks up a localized string similar to BA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Botswana">
+            <summary>
+              Looks up a localized string similar to BW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bouvet_Island">
+            <summary>
+              Looks up a localized string similar to BV.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Brazil">
+            <summary>
+              Looks up a localized string similar to BR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.British_Indian_Ocean_Territory">
+            <summary>
+              Looks up a localized string similar to IO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.British_Virgin_Islands">
+            <summary>
+              Looks up a localized string similar to VG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Brunei_Darussalam">
+            <summary>
+              Looks up a localized string similar to BN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Bulgaria">
+            <summary>
+              Looks up a localized string similar to BG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Burkina_Faso">
+            <summary>
+              Looks up a localized string similar to BF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Burundi">
+            <summary>
+              Looks up a localized string similar to BI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Cabo_Verde">
+            <summary>
+              Looks up a localized string similar to CV.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Cambodia">
+            <summary>
+              Looks up a localized string similar to KH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Cameroon">
+            <summary>
+              Looks up a localized string similar to CM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Canada">
+            <summary>
+              Looks up a localized string similar to CA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Cayman_Islands">
+            <summary>
+              Looks up a localized string similar to KY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Central_African_Republic">
+            <summary>
+              Looks up a localized string similar to CF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Chad">
+            <summary>
+              Looks up a localized string similar to TD.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Chile">
+            <summary>
+              Looks up a localized string similar to CL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.China">
+            <summary>
+              Looks up a localized string similar to CN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Christmas_Island">
+            <summary>
+              Looks up a localized string similar to CX.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Cocos_Islands">
+            <summary>
+              Looks up a localized string similar to CC.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Colombia">
+            <summary>
+              Looks up a localized string similar to CO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Comoros">
+            <summary>
+              Looks up a localized string similar to KM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Congo">
+            <summary>
+              Looks up a localized string similar to CG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Cook_Islands">
+            <summary>
+              Looks up a localized string similar to CK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Costa_Rica">
+            <summary>
+              Looks up a localized string similar to CR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Côte_d_Ivoire">
+            <summary>
+              Looks up a localized string similar to CI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Croatia">
+            <summary>
+              Looks up a localized string similar to HR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Cuba">
+            <summary>
+              Looks up a localized string similar to CU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Curaçao">
+            <summary>
+              Looks up a localized string similar to CW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Cyprus">
+            <summary>
+              Looks up a localized string similar to CY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Czechia">
+            <summary>
+              Looks up a localized string similar to CZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Denmark">
+            <summary>
+              Looks up a localized string similar to DK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Djibouti">
+            <summary>
+              Looks up a localized string similar to DJ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Dominica">
+            <summary>
+              Looks up a localized string similar to DM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Dominican_Republic">
+            <summary>
+              Looks up a localized string similar to DO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Ecuador">
+            <summary>
+              Looks up a localized string similar to EC.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Egypt">
+            <summary>
+              Looks up a localized string similar to EG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.El_Salvador">
+            <summary>
+              Looks up a localized string similar to SV.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Equatorial_Guinea">
+            <summary>
+              Looks up a localized string similar to GQ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Eritrea">
+            <summary>
+              Looks up a localized string similar to ER.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Estonia">
+            <summary>
+              Looks up a localized string similar to EE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Eswatini">
+            <summary>
+              Looks up a localized string similar to SZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Ethiopia">
+            <summary>
+              Looks up a localized string similar to ET.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Falkland_Islands">
+            <summary>
+              Looks up a localized string similar to FK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Faroe_Islands">
+            <summary>
+              Looks up a localized string similar to FO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Fiji">
+            <summary>
+              Looks up a localized string similar to FJ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Finland">
+            <summary>
+              Looks up a localized string similar to FI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.France">
+            <summary>
+              Looks up a localized string similar to FR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.French_Guiana">
+            <summary>
+              Looks up a localized string similar to GF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.French_Polynesia">
+            <summary>
+              Looks up a localized string similar to PF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.French_Southern_Territories">
+            <summary>
+              Looks up a localized string similar to TF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Gabon">
+            <summary>
+              Looks up a localized string similar to GA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Gambia">
+            <summary>
+              Looks up a localized string similar to GM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Georgia">
+            <summary>
+              Looks up a localized string similar to GE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Germany">
+            <summary>
+              Looks up a localized string similar to DE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Ghana">
+            <summary>
+              Looks up a localized string similar to GH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Gibraltar">
+            <summary>
+              Looks up a localized string similar to GI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Greece">
+            <summary>
+              Looks up a localized string similar to GR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Greenland">
+            <summary>
+              Looks up a localized string similar to GL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Grenada">
+            <summary>
+              Looks up a localized string similar to GD.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Guadeloupe">
+            <summary>
+              Looks up a localized string similar to GP.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Guam">
+            <summary>
+              Looks up a localized string similar to GU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Guatemala">
+            <summary>
+              Looks up a localized string similar to GT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Guernsey">
+            <summary>
+              Looks up a localized string similar to GG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Guinea">
+            <summary>
+              Looks up a localized string similar to GN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Guinea_Bissau">
+            <summary>
+              Looks up a localized string similar to GW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Guyana">
+            <summary>
+              Looks up a localized string similar to GY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Haiti">
+            <summary>
+              Looks up a localized string similar to HT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Heard_Island_and_McDonald_Islands">
+            <summary>
+              Looks up a localized string similar to HM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Holy_See">
+            <summary>
+              Looks up a localized string similar to VA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Honduras">
+            <summary>
+              Looks up a localized string similar to HN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Hong_Kong">
+            <summary>
+              Looks up a localized string similar to HK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Hungary">
+            <summary>
+              Looks up a localized string similar to HU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Iceland">
+            <summary>
+              Looks up a localized string similar to IS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.India">
+            <summary>
+              Looks up a localized string similar to IN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Indonesia">
+            <summary>
+              Looks up a localized string similar to ID.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Iran">
+            <summary>
+              Looks up a localized string similar to IR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Iraq">
+            <summary>
+              Looks up a localized string similar to IQ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Ireland">
+            <summary>
+              Looks up a localized string similar to IE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Isle_of_Man">
+            <summary>
+              Looks up a localized string similar to GB.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Israel">
+            <summary>
+              Looks up a localized string similar to IL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Italy">
+            <summary>
+              Looks up a localized string similar to IT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Jamaica">
+            <summary>
+              Looks up a localized string similar to JM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Japan">
+            <summary>
+              Looks up a localized string similar to JP.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Jersey">
+            <summary>
+              Looks up a localized string similar to JE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Jordan">
+            <summary>
+              Looks up a localized string similar to JO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Kazakhstan">
+            <summary>
+              Looks up a localized string similar to KZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Kenya">
+            <summary>
+              Looks up a localized string similar to KE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Kiribati">
+            <summary>
+              Looks up a localized string similar to KI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Korea">
+            <summary>
+              Looks up a localized string similar to KR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Kuwait">
+            <summary>
+              Looks up a localized string similar to KW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Kyrgyzstan">
+            <summary>
+              Looks up a localized string similar to KG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Laos">
+            <summary>
+              Looks up a localized string similar to LA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Latvia">
+            <summary>
+              Looks up a localized string similar to LV.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Lebanon">
+            <summary>
+              Looks up a localized string similar to LB.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Lesotho">
+            <summary>
+              Looks up a localized string similar to LS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Liberia">
+            <summary>
+              Looks up a localized string similar to LR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Libya">
+            <summary>
+              Looks up a localized string similar to LY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Liechtenstein">
+            <summary>
+              Looks up a localized string similar to LI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Lithuania">
+            <summary>
+              Looks up a localized string similar to LT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Luxembourg">
+            <summary>
+              Looks up a localized string similar to LU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Macao">
+            <summary>
+              Looks up a localized string similar to MO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Madagascar">
+            <summary>
+              Looks up a localized string similar to MG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Malawi">
+            <summary>
+              Looks up a localized string similar to MW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Malaysia">
+            <summary>
+              Looks up a localized string similar to MY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Maldives">
+            <summary>
+              Looks up a localized string similar to MV.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Mali">
+            <summary>
+              Looks up a localized string similar to ML.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Malta">
+            <summary>
+              Looks up a localized string similar to MT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Marshall_Islands">
+            <summary>
+              Looks up a localized string similar to MH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Martinique">
+            <summary>
+              Looks up a localized string similar to MQ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Mauritania">
+            <summary>
+              Looks up a localized string similar to MR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Mauritius">
+            <summary>
+              Looks up a localized string similar to MU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Mayotte">
+            <summary>
+              Looks up a localized string similar to YT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Mexico">
+            <summary>
+              Looks up a localized string similar to MX.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Micronesia">
+            <summary>
+              Looks up a localized string similar to FM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Moldova">
+            <summary>
+              Looks up a localized string similar to MD.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Monaco">
+            <summary>
+              Looks up a localized string similar to MC.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Mongolia">
+            <summary>
+              Looks up a localized string similar to MN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Montenegro">
+            <summary>
+              Looks up a localized string similar to ME.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Montserrat">
+            <summary>
+              Looks up a localized string similar to MS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Morocco">
+            <summary>
+              Looks up a localized string similar to MA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Mozambique">
+            <summary>
+              Looks up a localized string similar to MZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Myanmar">
+            <summary>
+              Looks up a localized string similar to MM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Namibia">
+            <summary>
+              Looks up a localized string similar to NA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Nauru">
+            <summary>
+              Looks up a localized string similar to NR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Nepal">
+            <summary>
+              Looks up a localized string similar to NP.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Netherlands">
+            <summary>
+              Looks up a localized string similar to NL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.New_Caledonia">
+            <summary>
+              Looks up a localized string similar to NC.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.New_Zealand">
+            <summary>
+              Looks up a localized string similar to NZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Nicaragua">
+            <summary>
+              Looks up a localized string similar to NI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Niger">
+            <summary>
+              Looks up a localized string similar to NE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Nigeria">
+            <summary>
+              Looks up a localized string similar to NG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Niue">
+            <summary>
+              Looks up a localized string similar to NU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Norfolk_Island">
+            <summary>
+              Looks up a localized string similar to NF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.North_Korea">
+            <summary>
+              Looks up a localized string similar to KP.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.North_Macedonia">
+            <summary>
+              Looks up a localized string similar to MK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Northern_Ireland">
+            <summary>
+              Looks up a localized string similar to GB.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Northern_Mariana_Islands">
+            <summary>
+              Looks up a localized string similar to MP.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Norway">
+            <summary>
+              Looks up a localized string similar to NO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Oman">
+            <summary>
+              Looks up a localized string similar to OM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Pakistan">
+            <summary>
+              Looks up a localized string similar to PK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Palau">
+            <summary>
+              Looks up a localized string similar to PW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Palestine">
+            <summary>
+              Looks up a localized string similar to PS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Panama">
+            <summary>
+              Looks up a localized string similar to PA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Papua_New_Guinea">
+            <summary>
+              Looks up a localized string similar to PG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Paraguay">
+            <summary>
+              Looks up a localized string similar to PY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Peru">
+            <summary>
+              Looks up a localized string similar to PE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Philippines">
+            <summary>
+              Looks up a localized string similar to PH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Pitcairn">
+            <summary>
+              Looks up a localized string similar to PN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Poland">
+            <summary>
+              Looks up a localized string similar to PL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Portugal">
+            <summary>
+              Looks up a localized string similar to PT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Puerto_Rico">
+            <summary>
+              Looks up a localized string similar to PR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Qatar">
+            <summary>
+              Looks up a localized string similar to QA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Réunion">
+            <summary>
+              Looks up a localized string similar to RE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Romania">
+            <summary>
+              Looks up a localized string similar to RO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Russian_Federation">
+            <summary>
+              Looks up a localized string similar to RU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Rwanda">
+            <summary>
+              Looks up a localized string similar to RW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Saint_Barthélemy">
+            <summary>
+              Looks up a localized string similar to BL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Saint_Helena">
+            <summary>
+              Looks up a localized string similar to SH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Saint_Kitts_and_Nevis">
+            <summary>
+              Looks up a localized string similar to KN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Saint_Lucia">
+            <summary>
+              Looks up a localized string similar to LC.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Saint_Martin">
+            <summary>
+              Looks up a localized string similar to MF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Saint_Pierre_and_Miquelon">
+            <summary>
+              Looks up a localized string similar to PM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Saint_Vincent_and_the_Grenadines">
+            <summary>
+              Looks up a localized string similar to VC.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Samoa">
+            <summary>
+              Looks up a localized string similar to WS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.San_Marino">
+            <summary>
+              Looks up a localized string similar to SM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Sao_Tome_and_Principe">
+            <summary>
+              Looks up a localized string similar to ST.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Saudi_Arabia">
+            <summary>
+              Looks up a localized string similar to SA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Scotland">
+            <summary>
+              Looks up a localized string similar to GB.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Senegal">
+            <summary>
+              Looks up a localized string similar to SN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Serbia">
+            <summary>
+              Looks up a localized string similar to RS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Seychelles">
+            <summary>
+              Looks up a localized string similar to SC.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Sierra_Leone">
+            <summary>
+              Looks up a localized string similar to SL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Singapore">
+            <summary>
+              Looks up a localized string similar to SG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Sint_Maarten">
+            <summary>
+              Looks up a localized string similar to SX.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Slovakia">
+            <summary>
+              Looks up a localized string similar to SK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Slovenia">
+            <summary>
+              Looks up a localized string similar to SI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Solomon_Islands">
+            <summary>
+              Looks up a localized string similar to SB.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Somalia">
+            <summary>
+              Looks up a localized string similar to SO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.South_Africa">
+            <summary>
+              Looks up a localized string similar to ZA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.South_Georgia_and_the_South_Sandwich_Islands">
+            <summary>
+              Looks up a localized string similar to GS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.South_Sudan">
+            <summary>
+              Looks up a localized string similar to SS.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Spain">
+            <summary>
+              Looks up a localized string similar to ES.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Sri_Lanka">
+            <summary>
+              Looks up a localized string similar to LK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Sudan">
+            <summary>
+              Looks up a localized string similar to SD.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Suriname">
+            <summary>
+              Looks up a localized string similar to SR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Svalbard_and_Jan_Mayen">
+            <summary>
+              Looks up a localized string similar to SJ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Sweden">
+            <summary>
+              Looks up a localized string similar to SE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Switzerland">
+            <summary>
+              Looks up a localized string similar to CH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Syria">
+            <summary>
+              Looks up a localized string similar to SY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Taiwan">
+            <summary>
+              Looks up a localized string similar to TW.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Tajikistan">
+            <summary>
+              Looks up a localized string similar to TJ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Tanzania">
+            <summary>
+              Looks up a localized string similar to TZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Thailand">
+            <summary>
+              Looks up a localized string similar to TH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Timor_Leste">
+            <summary>
+              Looks up a localized string similar to TL.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Togo">
+            <summary>
+              Looks up a localized string similar to TG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Tokelau">
+            <summary>
+              Looks up a localized string similar to TK.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Tonga">
+            <summary>
+              Looks up a localized string similar to TO.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Trinidad_and_Tobago">
+            <summary>
+              Looks up a localized string similar to TT.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Tunisia">
+            <summary>
+              Looks up a localized string similar to TN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Turkey">
+            <summary>
+              Looks up a localized string similar to TR.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Turkmenistan">
+            <summary>
+              Looks up a localized string similar to TM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Turks_and_Caicos_Islands">
+            <summary>
+              Looks up a localized string similar to TC.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Tuvalu">
+            <summary>
+              Looks up a localized string similar to TV.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Uganda">
+            <summary>
+              Looks up a localized string similar to UG.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Ukraine">
+            <summary>
+              Looks up a localized string similar to UA.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.United_Arab_Emirates">
+            <summary>
+              Looks up a localized string similar to AE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.United_Kingdom">
+            <summary>
+              Looks up a localized string similar to GB.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.United_States">
+            <summary>
+              Looks up a localized string similar to US.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.United_States_Minor_Outlying_Islands">
+            <summary>
+              Looks up a localized string similar to UM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.United_States_of_America">
+            <summary>
+              Looks up a localized string similar to US.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Uruguay">
+            <summary>
+              Looks up a localized string similar to UY.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.USA">
+            <summary>
+              Looks up a localized string similar to US.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Uzbekistan">
+            <summary>
+              Looks up a localized string similar to UZ.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Vanuatu">
+            <summary>
+              Looks up a localized string similar to VU.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Venezuela">
+            <summary>
+              Looks up a localized string similar to VE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Viet_Nam">
+            <summary>
+              Looks up a localized string similar to VN.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Virgin_Islands">
+            <summary>
+              Looks up a localized string similar to VI.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Wales">
+            <summary>
+              Looks up a localized string similar to GB.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Wallis_and_Futuna">
+            <summary>
+              Looks up a localized string similar to WF.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Western_Sahara">
+            <summary>
+              Looks up a localized string similar to EH.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Yemen">
+            <summary>
+              Looks up a localized string similar to YE.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Zambia">
+            <summary>
+              Looks up a localized string similar to ZM.
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Resources.Countries.Zimbabwe">
+            <summary>
+              Looks up a localized string similar to ZW.
+            </summary>
+        </member>
+        <member name="T:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator">
+            <summary>
+            Instantiate a spectrogram generator.
+            This module calculates the FFT over a moving window as data comes in.
+            Using the Add() method to load new data and process it as it arrives.
+            </summary>
+            <param name="sampleRate">Number of samples per second (Hz)</param>
+            <param name="fftSize">Number of samples to use for each FFT operation. This value must be a power of 2.</param>
+            <param name="stepSize">Number of samples to step forward</param>
+            <param name="minFreq">Frequency data lower than this value (Hz) will not be stored</param>
+            <param name="maxFreq">Frequency data higher than this value (Hz) will not be stored</param>
+            <param name="offsetHz">This value will be added to displayed frequency axis tick labels</param>
+        </member>
+        <member name="M:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.#ctor(System.Int32,System.Int32,System.Int32,System.Double,System.Double,System.Int32)">
+            <summary>
+            Instantiate a spectrogram generator.
+            This module calculates the FFT over a moving window as data comes in.
+            Using the Add() method to load new data and process it as it arrives.
+            </summary>
+            <param name="sampleRate">Number of samples per second (Hz)</param>
+            <param name="fftSize">Number of samples to use for each FFT operation. This value must be a power of 2.</param>
+            <param name="stepSize">Number of samples to step forward</param>
+            <param name="minFreq">Frequency data lower than this value (Hz) will not be stored</param>
+            <param name="maxFreq">Frequency data higher than this value (Hz) will not be stored</param>
+            <param name="offsetHz">This value will be added to displayed frequency axis tick labels</param>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.FftsToProcess">
+            <summary>
+            Number of FFTs that remain to be processed for data which has been added but not yet analuyzed
+            </summary>
+        </member>
+        <member name="P:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.FftsProcessed">
+            <summary>
+            Total number of FFT steps processed
+            </summary>
+        </member>
+        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.Settings">
+            <summary>
+            This module contains detailed FFT/Spectrogram settings
+            </summary>
+        </member>
+        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.FFTs">
+            <summary>
+            This is the list of FFTs which is translated to the spectrogram image when it is requested.
+            The length of this list is the spectrogram width.
+            The length of the arrays in this list is the spectrogram height.
+            </summary>
+        </member>
+        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.UnprocessedData">
+            <summary>
+            This list contains data values which have not yet been processed.
+            Process() processes all unprocessed data.
+            This list may not be empty after processing if there aren't enough values to fill a full FFT (FftSize).
+            </summary>
+        </member>
+        <member name="M:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.Add(System.Collections.Generic.IEnumerable{System.Double},System.Boolean)">
+            <summary>
+            Load new data into the spectrogram generator
+            </summary>
+        </member>
+        <member name="M:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.Process">
+            <summary>
+            Perform FFT analysis on all unprocessed data
+            </summary>
+        </member>
+        <member name="M:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.SaveImage(System.String)">
+            <summary>
+            Generate the spectrogram and save it as an image file.
+            </summary>
+            <param name="fileName">Path of the file to save.</param>
+        </member>
+    </members>
+</doc>

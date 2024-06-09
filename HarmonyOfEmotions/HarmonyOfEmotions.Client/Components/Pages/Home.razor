@@ -1,0 +1,23 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<div class="row">
+	<div class="col-12">
+		<h2 class="fw-bolder">Welcome to <span class="text-primary">Harmony of Emotions</span></h2>
+	</div>
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				<AuthorizeView>
+					<Authorized>
+						<span>You are logged in as <b>@context.User.Identity.Name</b>. <a class="fw-bolder" href="/logout">Logout</a></span>
+					</Authorized>
+					<NotAuthorized>
+						<p class="text-muted">You are not logged in yet. Please <a class="fw-bolder" href="/login">Login</a> to access the application.</p>
+					</NotAuthorized>
+				</AuthorizeView>
+			</div>
+		</div>
+	</div>
+</div>

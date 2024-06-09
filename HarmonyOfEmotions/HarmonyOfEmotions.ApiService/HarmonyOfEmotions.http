@@ -1,0 +1,20 @@
+@HarmonyOfEmotions_HostAddress = http://localhost:5216
+
+GET {{HarmonyOfEmotions_HostAddress}}/spotifytrack/
+Accept: application/json
+
+###
+GET {{HarmonyOfEmotions_HostAddress}}/artistinfo/
+Accept: application/json
+
+###
+GET {{HarmonyOfEmotions_HostAddress}}/musicrecommendersystem/
+Accept: application/json
+
+###
+GET {{HarmonyOfEmotions_HostAddress}}/imageclassification/
+Accept: application/json
+
+###
+GET {{HarmonyOfEmotions_HostAddress}}/usertrackpreferences/
+Accept: application/json

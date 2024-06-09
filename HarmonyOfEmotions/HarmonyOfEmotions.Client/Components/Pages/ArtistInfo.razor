@@ -1,0 +1,88 @@
+﻿@page "/artist-info"
+@inject ArtistInfoService ArtistInfoService
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+<AuthorizeView>
+	<NotAuthorized>
+		<AccessDenied />
+	</NotAuthorized>
+	<Authorized>
+
+		<h1 class="my-4">Artist Info</h1>
+
+		<div class="input-group mb-3">
+			<input @bind="artist" class="form-control" placeholder="Enter artist name" />
+			<button class="btn btn-primary" @onclick="LoadArtistInfo">Load Artist Info</button>
+		</div>
+
+		@if (artistInfo != null)
+		{
+			<div class="d-flex flex-row align-items-start">
+				<div class="me-3">
+					@if (!string.IsNullOrEmpty(artistInfo.ImageUrl))
+					{
+						<img src="@artistInfo.ImageUrl" class="artist-image" alt="@artistInfo.Name" />
+					}
+				</div>
+				<div class="flex-grow-1">
+					<h2>@artistInfo.Name</h2>
+					@if (artistInfo.Country != null)
+					{
+						<p>
+							<strong>Country:</strong> @artistInfo.Country.Name @GetCountryEmoji(artistInfo.Country.Code)
+						</p>
+					}
+					@if (artistInfo.Lifetime != null)
+					{
+						<p>
+							<strong>Lived between:</strong> @artistInfo.Lifetime.Begin - @artistInfo.Lifetime.End
+						</p>
+					}
+					@if (!string.IsNullOrEmpty(artistInfo.Summary))
+					{
+						<p><strong>Biography:</strong> @((MarkupString)@artistInfo.Summary)</p>
+					}
+					@if (!string.IsNullOrEmpty(artistInfo.Content))
+					{
+						<div>
+							<button class="btn btn-link" @onclick="ToggleContentVisibility">
+								@(showContent ? "Show Less" : "Show More")
+							</button>
+							@if (showContent)
+							{
+								<p>@((MarkupString)@artistInfo.Content)</p>
+							}
+						</div>
+					}
+				</div>
+			</div>
+		}
+
+	</Authorized>
+</AuthorizeView>
+
+@code {
+	private string artist;
+	private Artist artistInfo;
+	private bool showContent = false;
+
+	private async Task LoadArtistInfo()
+	{
+		if (!string.IsNullOrEmpty(artist))
+		{
+			artistInfo = await ArtistInfoService.GetArtistInfo(artist);
+		}
+	}
+
+	private void ToggleContentVisibility()
+	{
+		showContent = !showContent;
+	}
+
+	private string GetCountryEmoji(string code)
+	{
+		if (string.IsNullOrEmpty(code)) return string.Empty;
+
+		// Convert country code to emoji flag
+		return string.Concat(code.ToUpper().Select(c => char.ConvertFromUtf32(c + 0x1F1A5)));
+	}
+}

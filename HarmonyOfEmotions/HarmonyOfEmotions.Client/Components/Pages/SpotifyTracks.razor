@@ -1,0 +1,44 @@
+﻿@page "/spotify-tracks"
+@inject SpotifyTrackService SpotifyTrackService
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<AuthorizeView>
+	<NotAuthorized>
+		<AccessDenied />
+	</NotAuthorized>
+	<Authorized>
+		<h1>Spotify Tracks</h1>
+
+		<input @bind="artistId" placeholder="Artist Id" />
+		<button @onclick="LoadTopTracks">Load Top Tracks</button>
+
+		<input @bind="keyword" placeholder="Keyword" />
+		<button @onclick="SearchTracks">Search Tracks</button>
+
+		@if (tracks != null)
+		{
+			<ul>
+				@foreach (var track in tracks)
+				{
+					<li>@track.Name</li>
+				}
+			</ul>
+		}
+
+	</Authorized>
+</AuthorizeView>
+@code {
+	private string artistId;
+	private string keyword;
+	private IEnumerable<Track> tracks;
+
+	private async Task LoadTopTracks()
+	{
+		tracks = await SpotifyTrackService.GetTopTracksForArtist(artistId);
+	}
+
+	private async Task SearchTracks()
+	{
+		tracks = await SpotifyTrackService.SearchTracksByKeyword(keyword);
+	}
+}

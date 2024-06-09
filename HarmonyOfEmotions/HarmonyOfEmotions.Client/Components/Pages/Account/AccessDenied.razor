@@ -1,0 +1,28 @@
+﻿@page "/access-denied"
+@inject NavigationManager Navigation
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<div class="row">
+	<div class="col-md-13">
+		<div class="card border-0">
+			<div class="card-body flex-column">
+				<div class="text-center mt-5">
+					<img src="restricted.png" style="max-width:7rem;" />
+				</div>
+				<div class="text-center mb-5">
+					<span class="text-danger fw-bolder">Access denied</span>
+				</div>
+				<div class="text-center">
+					<button class="btn btn-primary" @onclick="NavigateToLogin">Go to Login</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	private void NavigateToLogin()
+	{
+		Navigation.NavigateTo("/login");
+	}
+}

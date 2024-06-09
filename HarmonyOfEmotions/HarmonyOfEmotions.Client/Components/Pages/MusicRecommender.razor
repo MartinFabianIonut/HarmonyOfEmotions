@@ -1,0 +1,123 @@
+﻿@page "/music-recommender-system"
+@inject IJSRuntime JSRuntime
+@inject MusicRecommenderSystemService MusicRecommenderSystemService
+@inject UserTrackPreferencesService UserTrackPreferencesService
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<AuthorizeView>
+	<NotAuthorized>
+		<AccessDenied />
+	</NotAuthorized>
+	<Authorized>
+		<h1>Music Recommender System</h1>
+
+		<div class="row">
+			<div class="col-md-13">
+				<div class="card border-0">
+					<div class="card-body flex-column">
+						<div class="text-center mt-1">
+							<div class="matrix-container">
+								<canvas @ref="canvasRef" width="500" height="400" @onclick="OnCanvasClick"></canvas>
+							</div>
+
+							<div class="slider-container">
+								<label for="zSlider">Select danceability value:</label>
+								
+								<!-- Adjusted width, step value, and added background color -->
+								<input type="range" id="zSlider" min="0" max="100000" step="1" @bind="z" class="slider" style="width: 300px; background-color: #ddd;" />
+							</div>
+
+							<div class="text-center mb-2 d-grid gap-2">
+								<button type="button" class="btn btn-primary" @onclick="GetRecommendations">Get Recommendations</button>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		@if (recommendedTracks != null)
+		{
+			<div class="row">
+				@foreach (var track in recommendedTracks.Take(4)) // Afișează doar primele 5 piese
+				{
+					<div class="col-md-4 mb-4 position-relative">
+						<!-- Adăugăm clasa "position-relative" pentru a poziționa elementul peste iframe -->
+						<div class="embed-responsive">
+							<iframe class="embed-responsive-item" src="@($"https://open.spotify.com/embed/track/{track.Id}")" width="100%" height="352" frameborder="0" allowfullscreen=""></iframe>
+						</div>
+						<!-- Adăugăm inima peste iframe folosind CSS -->
+						<button type="button" class="btn btn-link position-absolute top-0 start-0 translate-middle" @onclick="() => LikeTrack(track.Id)">
+							<img src="like.png" alt="Like" style="width: 24px; height: 24px;" />
+						</button>
+					</div>
+					@* <div class="col-md-4 mb-4">
+						<div class="embed-responsive">
+							<iframe class="embed-responsive-item" src="@($"https://open.spotify.com/embed/track/{track.Id}")" width="100%" height="352" frameborder="0" allowfullscreen=""></iframe>
+						</div>
+						<div class="text-center mt-2">
+							<button type="button" class="btn btn-success mx-1" @onclick="() => LikeTrack(track.Id!)">
+								<img src="like.png" alt="Like" style="width: 24px; height: 24px;" />
+							</button>
+							<button type="button" class="btn btn-danger mx-1" @onclick="() => DislikeTrack(track.Id!)">
+								<img src="dislike.png" alt="Dislike" style="width: 24px; height: 24px;" />
+							</button>
+						</div>
+					</div> *@
+				}
+			</div>
+		}
+	</Authorized>
+</AuthorizeView>
+
+@code {
+	private ElementReference canvasRef;
+	private float x, y, z;
+	private IEnumerable<Track>? recommendedTracks;
+
+	private async Task GetRecommendations()
+	{
+		z = z / 100000;
+		recommendedTracks = await MusicRecommenderSystemService.GetRecommendedTracks(x, y, z);
+	}
+
+	private async Task LikeTrack(string trackId)
+	{
+		await UserTrackPreferencesService.AddOrUpdateUserTrackPreference(trackId, true);
+	}
+
+	private async Task DislikeTrack(string trackId)
+	{
+		await UserTrackPreferencesService.AddOrUpdateUserTrackPreference(trackId, false);
+	}
+
+	private async Task OnCanvasClick(MouseEventArgs e)
+	{
+		var rect = await JSRuntime.InvokeAsync<BoundingClientRect>("getBoundingClientRect", canvasRef);
+		var canvasX = e.ClientX - rect.Left;
+		var canvasY = e.ClientY - rect.Top;
+		x = (float)(canvasX / rect.Width);
+		y = (float)(canvasY / rect.Height);
+		await JSRuntime.InvokeVoidAsync("drawCircle", canvasRef, canvasX, canvasY);
+
+		StateHasChanged();
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await JSRuntime.InvokeVoidAsync("drawMatrix", canvasRef);
+		}
+	}
+
+	private class BoundingClientRect
+	{
+		public double Left { get; set; }
+		public double Top { get; set; }
+		public double Width { get; set; }
+		public double Height { get; set; }
+	}
+}

@@ -4,8 +4,38 @@
         <name>HarmonyOfEmotions.ApiService</name>
     </assembly>
     <members>
+        <member name="T:HarmonyOfEmotions.ApiService.Controllers.ArtistInfoController">
+            <summary>
+            This controller is responsible for handling requests related to the artist info.
+            </summary>
+            <param name="logger"> For logging purposes</param>
+            <param name="service"> The service that will handle the requests</param>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.ArtistInfoController.#ctor(Microsoft.Extensions.Logging.ILogger{HarmonyOfEmotions.ApiService.Controllers.ArtistInfoController},HarmonyOfEmotions.ApiService.Interfaces.IArtistService)">
+            <summary>
+            This controller is responsible for handling requests related to the artist info.
+            </summary>
+            <param name="logger"> For logging purposes</param>
+            <param name="service"> The service that will handle the requests</param>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.ArtistInfoController.GetArtistInfo(System.String)">
+            <summary>
+            Get the complete information about an artist. If just some information is found, it will be returned.
+            </summary>
+            <param name="artist"> The name of the artist</param>
+            <returns> Short biography of the artist</returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController" -->
         <!-- Badly formed XML comment ignored for member "M:HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController.#ctor(Microsoft.Extensions.Logging.ILogger{HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController},HarmonyOfEmotions.ApiService.Interfaces.IRecommenderService)" -->
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController.GetRecommendedTraks(System.Single,System.Single,System.Single)">
+            <summary>
+            Get a list of 5 recommended tracks based on the user's emotional state.
+            </summary>
+            <param name="x"> The valence of the user's emotional state</param>
+            <param name="y"> The arousal of the user's emotional state</param>
+            <param name="z"> The danceability of the user's emotional state</param>
+            <returns> A list of 5 recommended tracks</returns>
+        </member>
         <member name="M:HarmonyOfEmotions.ApiService.Controllers.MusicRecommenderSystemController.GetEmotionForTrack(System.String)">
             <summary>
             This method is responsible for getting the emotion for a given track.
@@ -32,14 +62,48 @@
             This method is responsible for getting the top tracks for a given artist.
             </summary>
             <param name="artistId">This must be the artist's id</param>
-            <returns></returns>
+            <returns> A list of top tracks</returns>
         </member>
         <member name="M:HarmonyOfEmotions.ApiService.Controllers.SpotifyTrackController.SearchTraksByKeyword(System.String)">
             <summary>
             Search for tracks by keyword.
             </summary>
             <param name="keyword">A keyword to search for</param>
-            <returns></returns>
+            <returns> A list of tracks</returns>
+        </member>
+        <member name="T:HarmonyOfEmotions.ApiService.Controllers.UserTrackPreferencesController">
+            <summary>
+            This controller is responsible for handling requests related to user track preferences.
+            </summary>
+            <param name="logger"> For logging purposes</param>
+            <param name="service"> The service that will handle the requests</param>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.UserTrackPreferencesController.#ctor(Microsoft.Extensions.Logging.ILogger{HarmonyOfEmotions.ApiService.Controllers.UserTrackPreferencesController},HarmonyOfEmotions.ApiService.Interfaces.IUserTrackService)">
+            <summary>
+            This controller is responsible for handling requests related to user track preferences.
+            </summary>
+            <param name="logger"> For logging purposes</param>
+            <param name="service"> The service that will handle the requests</param>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.UserTrackPreferencesController.AddOrUpdateUserTrackPreference(HarmonyOfEmotions.Domain.DataModels.UserTrackPreference)">
+            <summary>
+            Save the user's track preference (either liked or disliked).
+            </summary>
+            <param name="userTrackPreference"> The user's track preference</param>
+            <returns> Ok if the user's track preference was saved</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.UserTrackPreferencesController.GetUserTrackPreferences">
+            <summary>
+            Retrieve the user's track preferences.
+            </summary>
+            <returns> A list of the user's track preferences</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.UserTrackPreferencesController.DeleteUserTrackPreference(System.String)">
+            <summary>
+            Delete the user's track preference (the track that the user liked or disliked).
+            </summary>
+            <param name="trackId"> The id of the track</param>
+            <returns> Ok if the user's track preference was deleted</returns>
         </member>
         <member name="T:HarmonyOfEmotions.ApiService.Migrations.Users">
             <inheritdoc />
@@ -121,6 +185,68 @@
             <returns></returns>
         </member>
         <member name="M:HarmonyOfEmotions_ApiService.ClassifierModel.BuildPipeline(Microsoft.ML.MLContext)">
+            <summary>
+            build the pipeline that is used from model builder. Use this function to retrain model.
+            </summary>
+            <param name="mlContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HarmonyOfEmotions_ApiService.MLModel.ModelInput">
+            <summary>
+            model input class for MLModel.
+            </summary>
+        </member>
+        <member name="T:HarmonyOfEmotions_ApiService.MLModel.ModelOutput">
+            <summary>
+            model output class for MLModel.
+            </summary>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.MLModel.PredictAllLabels(HarmonyOfEmotions_ApiService.MLModel.ModelInput)">
+            <summary>
+            Use this method to predict scores for all possible labels.
+            </summary>
+            <param name="input">model input.</param>
+            <returns><seealso cref="T:HarmonyOfEmotions_ApiService.MLModel.ModelOutput"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.MLModel.GetSortedScoresWithLabels(HarmonyOfEmotions_ApiService.MLModel.ModelOutput)">
+            <summary>
+            Map the unlabeled result score array to the predicted label names.
+            </summary>
+            <param name="result">Prediction to get the labeled scores from.</param>
+            <returns>Ordered list of label and score.</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.MLModel.GetLabels(HarmonyOfEmotions_ApiService.MLModel.ModelOutput)">
+            <summary>
+            Get the ordered label names.
+            </summary>
+            <param name="result">Predicted result to get the labels from.</param>
+            <returns>List of labels.</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.MLModel.Predict(HarmonyOfEmotions_ApiService.MLModel.ModelInput)">
+            <summary>
+            Use this method to predict on <see cref="T:HarmonyOfEmotions_ApiService.MLModel.ModelInput"/>.
+            </summary>
+            <param name="input">model input.</param>
+            <returns><seealso cref="T:HarmonyOfEmotions_ApiService.MLModel.ModelOutput"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.MLModel.LoadImageFromFolder(Microsoft.ML.MLContext,System.String)">
+            <summary>
+             Load an IDataView from a folder path.
+            </summary>
+            <param name="mlContext">The common context for all ML.NET operations.</param>
+            <param name="folder"> Folder to the image data for training.</param>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.MLModel.RetrainModel(Microsoft.ML.MLContext,Microsoft.ML.IDataView)">
+            <summary>
+            Retrains model using the pipeline generated as part of the training process.
+            </summary>
+            <param name="mlContext"></param>
+            <param name="trainData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions_ApiService.MLModel.BuildPipeline(Microsoft.ML.MLContext)">
             <summary>
             build the pipeline that is used from model builder. Use this function to retrain model.
             </summary>

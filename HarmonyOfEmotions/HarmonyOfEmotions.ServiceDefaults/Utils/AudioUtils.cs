@@ -1,4 +1,5 @@
-﻿using HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram;
+﻿using HarmonyOfEmotions.Domain.Exceptions;
+using HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram;
 using MP3Sharp;
 using NAudio.Wave;
 using System.Drawing;
@@ -27,7 +28,7 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils
 				}
 			} while (samplesRead > 0);
 
-			return buffer.ToArray();
+			return [.. buffer];
 		}
 
 		public static double[] ReadMP3(string filePath, int bufferSize = 4096)
@@ -48,27 +49,49 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils
 
 		public static Bitmap CreateGraySpetrogram(byte[] mp3Bytes)
 		{
-			//var audio = ReadMp3FromBytes(mp3Bytes);
-			var audio = ReadMP3("audio-wow.mp3");
-			// delete file
-			File.Delete("audio-wow.mp3");
-			int sampleRate = 44100;
+			try
+			{
+				double[] audio;
+				try
+				{
+					audio = ReadMP3("audio-wow.mp3");
+					// delete file
+					File.Delete("audio-wow.mp3");
+				}
+				catch (IOException ioException)
+				{
+					throw new InternalServerErrorException(ServiceName.AudioFileService, ioException);
+				}
 
-			int fftSize = 1024;
-			int targetWidthPx = 775;
-			int stepSize = audio.Length / targetWidthPx;
+				int sampleRate = 44100;
 
-			var spectogramGenerator = new SpectrogramGenerator(sampleRate, fftSize, stepSize, maxFreq: sampleRate / 2);
-			spectogramGenerator.Add(audio);
-			var bmp = spectogramGenerator.GetBitmap();
-			return bmp;
+				int fftSize = 1024;
+				int targetWidthPx = 775;
+				int stepSize = audio.Length / targetWidthPx;
+
+				var spectogramGenerator = new SpectrogramGenerator(sampleRate, fftSize, stepSize, maxFreq: sampleRate / 2);
+				spectogramGenerator.Add(audio);
+				var bmp = spectogramGenerator.GetBitmap();
+				return bmp;
+			}
+			catch (Exception spectrogramException)
+			{
+				throw new InternalServerErrorException(ServiceName.SpectrogramService, spectrogramException);
+			}
 		}
 
 		public static MemoryStream GetMemoryStreamFromSpetrogram(Bitmap bmp)
 		{
-			var ms = new MemoryStream();
-			bmp.Save(ms, ImageFormat.Png);
-			return ms;
+			try
+			{
+				var ms = new MemoryStream();
+				bmp.Save(ms, ImageFormat.Png);
+				return ms;
+			}
+			catch (Exception memoryStreamException)
+			{
+				throw new InternalServerErrorException(ServiceName.MemoryStreamService, memoryStreamException);
+			}
 		}
 	}
 }

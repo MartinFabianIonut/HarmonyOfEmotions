@@ -11,6 +11,11 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 		private readonly ILogger<MusicBrainzService> _logger = logger;
 		public async Task<Artist?> GetArtistDetailsAsync(string artistId)
 		{
+			if (string.IsNullOrWhiteSpace(artistId))
+			{
+				_logger.LogInformation("ArtistId is null or empty");
+				return null;
+			}
 			var response = await _httpClient.GetAsync($"artist/{Uri.EscapeDataString(artistId)}?inc=url-rels&fmt=json");
 			response.EnsureSuccessStatusCode();
 			var jsonResponse = await response.Content.ReadAsStringAsync();

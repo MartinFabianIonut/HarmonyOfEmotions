@@ -6,6 +6,8 @@ using HarmonyOfEmotions.ApiService.Data;
 using HarmonyOfEmotions.ApiService.Implementations;
 using HarmonyOfEmotions.ApiService.Interfaces;
 using HarmonyOfEmotions.Domain;
+using HarmonyOfEmotions.Domain.Exceptions;
+using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -98,6 +100,16 @@ builder.Services.AddDbContext<HarmonyOfEmotionsDbContext>(options =>
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
 	.AddEntityFrameworkStores<HarmonyOfEmotionsDbContext>();
+
+builder.Services.AddOptions<BearerTokenOptions>(IdentityConstants.BearerScheme).Configure(options => {
+	options.BearerTokenExpiration = TimeSpan.FromSeconds(60*30);
+});
+
+// add exception handling
+builder.Services.AddControllers(options =>
+{
+	options.Filters.Add<GlobalExceptionFilter>();
+});
 
 var app = builder.Build();
 

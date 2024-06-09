@@ -2,6 +2,7 @@
 using HarmonyOfEmotions.Domain;
 using HarmonyOfEmotions.ApiService.Interfaces;
 using System.Text.Json;
+using HarmonyOfEmotions.Domain.Exceptions;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
@@ -42,7 +43,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "Failed to parse LastFM response for artist correction");
-				return null;
+				throw new InternalServerErrorException(ServiceName.LastFMApiService, ex);
 			}
 		}
 
@@ -52,63 +53,65 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			if (correctedArtist != null)
 			{
 				artistName = correctedArtist;
+			}
+			else
+			{
+				_logger.LogInformation("No correction found for artist name {ArtistName}", artistName);
+			}
+			try
+			{
+				// remove trailing whitespaces
+				artistName = artistName.Trim();
 				var response = await _httpClient.GetAsync($"?method=artist.getinfo&artist={Uri.EscapeDataString(artistName)}&api_key={_apiKey}&format=json");
 				response.EnsureSuccessStatusCode();
 
 				var jsonResponse = await response.Content.ReadAsStringAsync();
 
-				try
+
+				using var document = JsonDocument.Parse(jsonResponse);
+				var root = document.RootElement;
+
+				var artist = new Artist();
+
+				if (root.TryGetProperty("artist", out var artistJson))
 				{
-					using var document = JsonDocument.Parse(jsonResponse);
-					var root = document.RootElement;
-
-					var artist = new Artist();
-
-					if (root.TryGetProperty("artist", out var artistJson))
+					if (artistJson.TryGetProperty("mbid", out var mbid))
 					{
-						if (artistJson.TryGetProperty("mbid", out var mbid))
-						{
-							artist.Id = mbid.GetString();
-						}
-						else
-						{
-							_logger.LogInformation("MBID not found for artist {ArtistName}", artistName);
-						}
-						if (artistJson.TryGetProperty("name", out var name))
-						{
-							artist.Name = name.GetString();
-						}
-						else
-						{
-							_logger.LogInformation("Name not found for artist {ArtistName}", artistName);
-						}
-						if (artistJson.TryGetProperty("bio", out var bio) &&
-							bio.TryGetProperty("summary", out var summary) &&
-							bio.TryGetProperty("content", out var content))
-						{
-							artist.Summary = summary.GetString();
-							artist.Content = content.GetString();
-						}
-						else
-						{
-							_logger.LogInformation("Bio not found for artist {ArtistName}", artistName);
-						}
+						artist.Id = mbid.GetString();
 					}
 					else
 					{
-						_logger.LogInformation("Artist info not found for artist {ArtistName}", artistName);
+						_logger.LogInformation("MBID not found for artist {ArtistName}", artistName);
 					}
-					return artist;
+					if (artistJson.TryGetProperty("name", out var name))
+					{
+						artist.Name = name.GetString();
+					}
+					else
+					{
+						_logger.LogInformation("Name not found for artist {ArtistName}", artistName);
+					}
+					if (artistJson.TryGetProperty("bio", out var bio) &&
+						bio.TryGetProperty("summary", out var summary) &&
+						bio.TryGetProperty("content", out var content))
+					{
+						artist.Summary = summary.GetString();
+						artist.Content = content.GetString();
+					}
+					else
+					{
+						_logger.LogInformation("Bio not found for artist {ArtistName}", artistName);
+					}
 				}
-				catch (Exception ex)
+				else
 				{
-					_logger.LogError(ex, "Failed to parse LastFM response for artist info");
-					return null;
+					_logger.LogInformation("Artist info not found for artist {ArtistName}", artistName);
 				}
+				return artist;
 			}
-			else
+			catch (Exception ex)
 			{
-				_logger.LogInformation("No correction found for artist name {ArtistName}", artistName);
+				_logger.LogError(ex, "Failed to parse LastFM response for artist info");
 				return null;
 			}
 		}

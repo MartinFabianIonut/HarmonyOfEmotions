@@ -22,7 +22,8 @@ builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddSingleton<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<BearerTokenHandler>();
+//builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<BearerTokenHandler>();
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -49,6 +50,8 @@ builder.Services.AddScoped<UserTrackPreferencesService>();
 builder.Services.AddScoped<SpotifyTrackService>();
 builder.Services.AddScoped<MusicRecommenderSystemService>();
 builder.Services.AddScoped<ArtistInfoService>();
+
+builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 
 var app = builder.Build();
 

@@ -9,25 +9,29 @@
 	<Authorized>
 		<h1>User Track Preferences</h1>
 
-		<button @onclick="LoadPreferences">Load Preferences</button>
-
 		@if (preferences != null)
 		{
-			<ul>
-				@foreach (var preference in preferences)
-				{
-					<li>@preference.TrackId - @preference.IsLiked</li>
-				}
-			</ul>
+			<TrackListComponent Tracks="trackPreferences" />
 		}
 	</Authorized>
 </AuthorizeView>
 
 @code {
 	private IEnumerable<UserTrackPreference> preferences;
+	private List<Track> trackPreferences = new List<Track>();
 
-	private async Task LoadPreferences()
+	protected override async Task OnInitializedAsync()
 	{
 		preferences = await UserTrackPreferencesService.GetUserTrackPreferences();
+		trackPreferences.Clear();
+		foreach (var preference in preferences)
+		{
+			var track = new Track
+				{
+					Id = preference.TrackId
+				};
+			trackPreferences.Add(track);
+		}
+		StateHasChanged();
 	}
 }

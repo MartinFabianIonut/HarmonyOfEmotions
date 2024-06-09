@@ -10,7 +10,5 @@ namespace HarmonyOfEmotions.ApiService.Interfaces
 		Task<Track> GetTrackById(string id);
 		Task<Track> GetTrackByIndex(int index);
 		Task<Track[]> GetTracksByArtist(string artist);
-
-		void AddTrackInDatabase(Track track);
 	}
 }

@@ -33,6 +33,11 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils
 
 		public static Country? GetCountryForCode(string code)
 		{
+			if (string.IsNullOrEmpty(code))
+			{
+				return null;
+			}
+
 			if (_countries.TryGetValue(code, out var country))
 			{
 				return country;

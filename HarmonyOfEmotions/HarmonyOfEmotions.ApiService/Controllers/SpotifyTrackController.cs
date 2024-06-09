@@ -24,10 +24,17 @@ public class SpotifyTrackController(
 	/// This method is responsible for getting the top tracks for a given artist.
 	/// </summary>
 	/// <param name="artistId">This must be the artist's id</param>
-	/// <returns></returns>
+	/// <returns> A list of top tracks</returns>
 	[HttpGet("GetTopTracksForArtist")]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 	public async Task<IActionResult> GetTopTracksForArtist(string artistId)
 	{
+		if (string.IsNullOrEmpty(artistId))
+		{
+			return BadRequest();
+		}
 		var topTracks = await _service.GetTopTracksForArtist(artistId);
 		_logger.LogInformation("Top tracks for artistId");
 
@@ -38,10 +45,18 @@ public class SpotifyTrackController(
 	/// Search for tracks by keyword.
 	/// </summary>
 	/// <param name="keyword">A keyword to search for</param>
-	/// <returns></returns>
+	/// <returns> A list of tracks</returns>
 	[HttpGet("SearchTraksByKeyword")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+	[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
 	public async Task<IActionResult> SearchTraksByKeyword(string keyword)
 	{
+		if (string.IsNullOrEmpty(keyword))
+		{
+			return BadRequest();
+		}
 		var tracks = await _service.SearchTraksByKeyword(keyword);
 		_logger.LogInformation("Tracks found");
 

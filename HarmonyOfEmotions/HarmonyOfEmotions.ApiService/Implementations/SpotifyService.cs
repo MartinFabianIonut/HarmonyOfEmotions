@@ -3,6 +3,7 @@ using HarmonyOfEmotions.ApiService.Authentication;
 using HarmonyOfEmotions.Domain;
 using HarmonyOfEmotions.ApiService.Interfaces;
 using HarmonyOfEmotions.ServiceDefaults.Utils;
+using HarmonyOfEmotions.Domain.Exceptions;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
@@ -13,23 +14,37 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 
 		public async Task<Track[]> GetTopTracksForArtist(string artistId)
 		{
-			var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
-			var artistTopTracksRequest = new ArtistsTopTracksRequest("DE");
-			var response = await spotifyClient.Artists.GetTopTracks(artistId, artistTopTracksRequest);
-			var topTracks = response.Tracks;
-			_logger.LogInformation("Top tracks found for artist {ArtistId}", artistId);
+			try
+			{
+				var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
+				var artistTopTracksRequest = new ArtistsTopTracksRequest("DE");
+				var response = await spotifyClient.Artists.GetTopTracks(artistId, artistTopTracksRequest);
+				var topTracks = response.Tracks;
+				_logger.LogInformation("Top tracks found for artist {ArtistId}", artistId);
 
-			return [.. TrackUtils.ConvertToTracks(topTracks)];
+				return [.. TrackUtils.ConvertToTracks(topTracks)];
+			}
+			catch (Exception ex) {
+				_logger.LogError(ex, "Error while getting top tracks for artist {ArtistId}", artistId);
+				throw new ExternalServiceException(ServiceName.SpotifyApiService, ex);
+			}
 		}
 
 		public async Task<Track[]> SearchTraksByKeyword(string keyword)
 		{
-			var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
-			var searchRequest = new SearchRequest(SearchRequest.Types.Track, keyword);
-			var response = await spotifyClient.Search.Item(searchRequest);
-			_logger.LogInformation("Tracks found for keyword {Keyword}", keyword);
+			try
+			{
+				var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
+				var searchRequest = new SearchRequest(SearchRequest.Types.Track, keyword);
+				var response = await spotifyClient.Search.Item(searchRequest);
+				_logger.LogInformation("Tracks found for keyword {Keyword}", keyword);
 
-			return [.. TrackUtils.ConvertToTracks(response.Tracks.Items!)];
+				return [.. TrackUtils.ConvertToTracks(response.Tracks.Items!)];
+			}
+			catch (Exception ex) {
+				_logger.LogError(ex, "Error while searching tracks by keyword {Keyword}", keyword);
+				throw new ExternalServiceException(ServiceName.SpotifyApiService, ex);
+			}
 		}
 	}
 }

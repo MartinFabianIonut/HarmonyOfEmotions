@@ -1,5 +1,9 @@
 ﻿@page "/spotify-tracks"
+@page "/spotify-tracks/{searchKeyword}"
 @inject SpotifyTrackService SpotifyTrackService
+@inject UserTrackPreferencesService UserTrackPreferencesService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <AuthorizeView>
@@ -9,36 +13,116 @@
 	<Authorized>
 		<h1>Spotify Tracks</h1>
 
-		<input @bind="artistId" placeholder="Artist Id" />
-		<button @onclick="LoadTopTracks">Load Top Tracks</button>
+		<div class="input-group mb-3">
+			<input @bind="searchKeyword" placeholder="Search for an artist, a composer, or a song" class="form-control" />
+			<button class="btn btn-primary" @onclick="SearchTracks">Search</button>
+		</div>
 
-		<input @bind="keyword" placeholder="Keyword" />
-		<button @onclick="SearchTracks">Search Tracks</button>
+		<br/>
 
-		@if (tracks != null)
+		@if (tracks != null || topTracks != null)
 		{
-			<ul>
-				@foreach (var track in tracks)
+			<div class="row">
+				@if (!showTopTracks)
 				{
-					<li>@track.Name</li>
+					<div class="col-9">
+						<TrackListComponent Tracks="tracks" ArtistList="artistList" />
+					</div>
 				}
-			</ul>
+				else
+				{
+					<div class="col-9">
+						<TrackListComponent Tracks="topTracks" ArtistList="artistList" />
+					</div>
+				}
+				<div class="col-2 text-center">
+					<h3>See top tracks of one of these artists</h3>
+					<ul>
+						@foreach (var artist in artistList)
+						{
+							<li>
+								<button class="btn btn-link" @onclick="() => LoadTopTracks(artist.Id)">@artist.Name</button>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
 		}
 
 	</Authorized>
 </AuthorizeView>
 @code {
-	private string artistId;
-	private string keyword;
-	private IEnumerable<Track> tracks;
-
-	private async Task LoadTopTracks()
-	{
-		tracks = await SpotifyTrackService.GetTopTracksForArtist(artistId);
-	}
+	[Parameter]
+	public string? searchKeyword { get; set; }
+	private IEnumerable<Track>? tracks;
+	private IEnumerable<Track>? topTracks;
+	private IEnumerable<Artist>? artistList;
+	private bool showTopTracks = false;
 
 	private async Task SearchTracks()
 	{
-		tracks = await SpotifyTrackService.SearchTracksByKeyword(keyword);
+		tracks = await SpotifyTrackService.SearchTracksByKeyword(searchKeyword);
+		LoadArtistList();
+		showTopTracks = false;
+	}
+
+	private void LoadArtistList()
+	{
+		if (tracks != null)
+		{
+			var artistSet = new HashSet<Artist>(new ArtistNameComparer());
+
+			// Adăugăm artiștii principali
+			foreach (var track in tracks)
+			{
+				artistSet.Add(new Artist { Id = track.ArtistId, Name = track.Artist });
+			}
+
+			// Adăugăm ceilalți artiști
+			var otherArtists = tracks.SelectMany(t => t.OtherArtists.Zip(t.OtherArtistIds, (name, id) => new Artist { Id = id, Name = name }));
+			foreach (var artist in otherArtists)
+			{
+				artistSet.Add(artist);
+			}
+
+			artistList = artistSet.ToList();
+		}
+	}
+
+	private async Task LoadTopTracks(string artistId)
+	{
+		topTracks = await SpotifyTrackService.GetTopTracksForArtist(artistId);
+		showTopTracks = true;
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			var storedTracks = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "tracks");
+			var storedArtistList = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "artistList");
+			if (!string.IsNullOrEmpty(storedTracks) && !string.IsNullOrEmpty(storedArtistList))
+			{
+				tracks = JsonSerializer.Deserialize<IEnumerable<Track>>(storedTracks);
+				artistList = JsonSerializer.Deserialize<IEnumerable<Artist>>(storedArtistList);
+				await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "tracks");
+				await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "artistList");
+				StateHasChanged();
+			}
+		}
+	}
+
+	private class ArtistNameComparer : IEqualityComparer<Artist>
+	{
+		public bool Equals(Artist x, Artist y)
+		{
+			if (x == null || y == null) return false;
+			return x.Name == y.Name;
+		}
+
+		public int GetHashCode(Artist obj)
+		{
+			return obj.Name.GetHashCode();
+		}
 	}
 }

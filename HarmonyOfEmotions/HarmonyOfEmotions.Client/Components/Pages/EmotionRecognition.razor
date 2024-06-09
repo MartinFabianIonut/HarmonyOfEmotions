@@ -1,0 +1,54 @@
+﻿@page "/emotion-recognition/{previewUrl}"
+@inject MusicRecommenderSystemService MusicRecommenderSystemService 
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<AuthorizeView>
+	<NotAuthorized>
+		<AccessDenied />
+	</NotAuthorized>
+	<Authorized>
+		<h1>Emotion recognition demo</h1>
+
+		@if(!string.IsNullOrEmpty(previewUrl))
+		{
+			<p>Emotion recognition for the track with preview URL: @previewUrl</p>
+			<p>Emotion: @emotion</p>
+		})
+
+	</Authorized>
+</AuthorizeView>
+
+@code {
+	[Parameter]
+	public string? previewUrl { get; set; }
+	private string emotion = string.Empty;
+
+	protected override async Task OnInitializedAsync()
+	{
+		if (!string.IsNullOrEmpty(previewUrl))
+		{
+			emotion = await MusicRecommenderSystemService.GetEmotionForTrack(previewUrl);
+			switch (emotion)
+			{
+				case "happy":
+					// play happy music
+					break;
+				case "sad":
+					// play sad music
+					break;
+				case "angry":
+					// play angry music
+					break;
+				case "calm":
+					// play calm music
+					break;
+				case "neutral":
+					// play neutral music
+					break;
+				default:
+					// play neutral music
+					break;
+			}
+		}
+	}
+}

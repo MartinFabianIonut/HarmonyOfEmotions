@@ -1,0 +1,163 @@
+﻿@inject UserTrackPreferencesService UserTrackPreferencesService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<div class="row">
+	@foreach (var track in Tracks)
+	{
+		<div class="col-12 mb-1 position-relative">
+			<div class="row">
+				@{
+					string length = track.Artist != null ? "10" : "12";
+					string padding_buttom = track.Artist != null ? "25%" : "15%";
+				}
+				<div class="col-@length">
+					<div class="embed-responsive" style="height: 165%; padding-bottom: @padding_buttom;">
+						<iframe class="embed-responsive-item" src="@($"https://open.spotify.com/embed/track/{track.Id}")" width="100%" height="100%" frameborder="0" allowfullscreen allowtransparency="true" allow="encrypted-media"></iframe>
+					</div>
+				</div>
+				@if (track.Artist != null)
+				{
+					<div class="col-2 d-flex align-items-center justify-content-start">
+						<div>
+							<button type="button" class="btn btn-outline-primary btn-sm m-1" @onclick="() => RedirectToArtistInfo(track.Artist)">
+								@track.Artist
+							</button>
+							@if (track.OtherArtists != null && track.OtherArtists.Any())
+							{
+								<div>
+									@foreach (var artist in track.OtherArtists)
+									{
+										<button type="button" class="btn btn-outline-primary btn-sm m-1 d-block" @onclick="() => RedirectToArtistInfo(artist)">
+											@artist
+										</button>
+									}
+								</div>
+							}
+							<div>
+								<button type="button" class="btn btn-outline-primary btn-sm m-1" @onclick="() => RedirectToEmotionRecognition(track.PreviewUrl)">
+									Get Emotion
+								</button>
+							</div>
+						</div>
+					</div>
+				}
+
+			</div>
+			<div class="position-absolute top-0 start-0 translate-middle" style="display: flex; gap: 5px;">
+				@{
+					string marginTop = (likedTracks.Contains(track.Id!) || dislikedTracks.Contains(track.Id!)) ? "60%" : "40%";
+				}
+				<div style="margin-left:60%; margin-top:@marginTop; display: flex; flex-direction: column; align-items: flex-end;">
+					<button type="button" class="btn btn-link" @onclick="() => LikeTrack(track.Id!)">
+						<img src="like.png" alt="Like" style="width: 24px; height: 24px;" />
+					</button>
+					@if (likedTracks.Contains(track.Id!))
+					{
+						<img src="heart.png" alt="Liked" style="margin-right:30%; width: 24px; height: 24px;" />
+					}
+					else if (dislikedTracks.Contains(track.Id!))
+					{
+						<img src="heartbroken.png" alt="Disliked" style="margin-right:30%; width: 24px; height: 24px;" />
+					}
+				</div>
+				<div style="margin-top:@marginTop; display: flex; flex-direction: column; align-items: flex-end;">
+					<button type="button" class="btn btn-link" @onclick="() => DislikeTrack(track.Id!)">
+						<img src="dislike.png" alt="Dislike" style="width: 24px; height: 24px;" />
+					</button>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+@code {
+	[Parameter]
+	public IEnumerable<Track> Tracks { get; set; } = Enumerable.Empty<Track>();
+
+	[Parameter]
+	public IEnumerable<Artist>? ArtistList { get; set; }
+
+	private HashSet<string> likedTracks = new();
+	private HashSet<string> dislikedTracks = new();
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await UpdatePreferences();
+	}
+
+	private async Task LikeTrack(string trackId)
+	{
+		if (likedTracks.Contains(trackId))
+		{
+			await UserTrackPreferencesService.DeleteUserTrackPreference(trackId);
+		}
+		else
+		{
+			await UserTrackPreferencesService.AddOrUpdateUserTrackPreference(trackId, true);
+		}
+		await UpdatePreferences();
+	}
+
+	private async Task DislikeTrack(string trackId)
+	{
+		if (dislikedTracks.Contains(trackId))
+		{
+			await UserTrackPreferencesService.DeleteUserTrackPreference(trackId);
+		}
+		else
+		{
+			await UserTrackPreferencesService.AddOrUpdateUserTrackPreference(trackId, false);
+		}
+		await UpdatePreferences();
+	}
+
+	public async Task UpdatePreferences()
+	{
+		likedTracks.Clear();
+		dislikedTracks.Clear();
+
+		foreach (var track in Tracks)
+		{
+			if (await IsLiked(track.Id!))
+			{
+				likedTracks.Add(track.Id!);
+			}
+			else if (await IsDisliked(track.Id!))
+			{
+				dislikedTracks.Add(track.Id!);
+			}
+		}
+	}
+
+	private async Task<bool> IsLiked(string trackId)
+	{
+		return await UserTrackPreferencesService.IsTrackLiked(trackId);
+	}
+
+	private async Task<bool> IsDisliked(string trackId)
+	{
+		return await UserTrackPreferencesService.IsTrackDisliked(trackId);
+	}
+
+	private void RedirectToArtistInfo(string artist)
+	{
+		SaveInLocalStorage();
+		NavigationManager.NavigateTo($"/artist-info/{Uri.EscapeDataString(artist)}");
+	}
+
+	private void RedirectToEmotionRecognition(string previewUrl)
+	{
+		SaveInLocalStorage();
+		NavigationManager.NavigateTo($"/emotion-recognition/{Uri.EscapeDataString(previewUrl)}");
+	}
+
+	private void SaveInLocalStorage()
+	{
+		JSRuntime.InvokeVoidAsync("localStorage.setItem", "tracks", JsonSerializer.Serialize(Tracks));
+		if (ArtistList != null)
+		{
+			JSRuntime.InvokeVoidAsync("localStorage.setItem", "artistList", JsonSerializer.Serialize(ArtistList));
+		}
+	}
+}

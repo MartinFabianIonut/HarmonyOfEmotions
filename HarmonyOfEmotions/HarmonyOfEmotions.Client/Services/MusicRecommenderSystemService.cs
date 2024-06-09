@@ -1,4 +1,5 @@
 ﻿using HarmonyOfEmotions.Domain;
+using System.Globalization;
 
 namespace HarmonyOfEmotions.Client.Services
 {
@@ -8,8 +9,14 @@ namespace HarmonyOfEmotions.Client.Services
 
 		public async Task<IEnumerable<Track>?> GetRecommendedTracks(float x, float y, float z)
 		{
-			return await _apiClient.GetAsync<IEnumerable<Track>>($"MusicRecommenderSystem/GetRecommendedTraks?x={x}&y={y}&z={z}");
+			string xString = x.ToString("0.0000000", CultureInfo.InvariantCulture);
+			string yString = y.ToString("0.0000000", CultureInfo.InvariantCulture);
+			string zString = z.ToString("0.0000000", CultureInfo.InvariantCulture);
+
+			string url = $"MusicRecommenderSystem/GetRecommendedTraks?x={xString}&y={yString}&z={zString}";
+			return await _apiClient.GetAsync<IEnumerable<Track>>(url);
 		}
+
 
 		public async Task<string?> GetEmotionForTrack(string previewUrl)
 		{

@@ -1,4 +1,5 @@
 ﻿@page "/artist-info"
+@page "/artist-info/{Artist}"
 @inject ArtistInfoService ArtistInfoService
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 <AuthorizeView>
@@ -10,20 +11,20 @@
 		<h1 class="my-4">Artist Info</h1>
 
 		<div class="input-group mb-3">
-			<input @bind="artist" class="form-control" placeholder="Enter artist name" />
+			<input @bind="Artist" class="form-control" placeholder="Enter artist name" />
 			<button class="btn btn-primary" @onclick="LoadArtistInfo">Load Artist Info</button>
 		</div>
 
 		@if (artistInfo != null)
 		{
-			<div class="d-flex flex-row align-items-start">
-				<div class="me-3">
+			<div class="row">
+				<div class="col-md-4">
 					@if (!string.IsNullOrEmpty(artistInfo.ImageUrl))
 					{
-						<img src="@artistInfo.ImageUrl" class="artist-image" alt="@artistInfo.Name" />
+						<img src="@artistInfo.ImageUrl" class="img-fluid" alt="@artistInfo.Name" />
 					}
 				</div>
-				<div class="flex-grow-1">
+				<div class="col-md-8">
 					<h2>@artistInfo.Name</h2>
 					@if (artistInfo.Country != null)
 					{
@@ -33,8 +34,10 @@
 					}
 					@if (artistInfo.Lifetime != null)
 					{
+						var beginYear = artistInfo.Lifetime.Begin ?? DateTime.MinValue;
+						var endYear = artistInfo.Lifetime.End ?? DateTime.MinValue;
 						<p>
-							<strong>Lived between:</strong> @artistInfo.Lifetime.Begin - @artistInfo.Lifetime.End
+							<strong>Lived between:</strong> @DateUtils.FormatDate(beginYear) - @DateUtils.FormatDate(endYear)
 						</p>
 					}
 					@if (!string.IsNullOrEmpty(artistInfo.Summary))
@@ -49,33 +52,98 @@
 							</button>
 							@if (showContent)
 							{
-								<p>@((MarkupString)@artistInfo.Content)</p>
+
+								var formattedContent = FormatContent(artistInfo.Content);
+								var paragraphs = formattedContent.Split("<br>", StringSplitOptions.RemoveEmptyEntries);
+
+								@foreach (var paragraph in paragraphs)
+								{
+									<p>@((MarkupString)paragraph)</p>
+								}
 							}
 						</div>
 					}
 				</div>
 			</div>
+
 		}
 
 	</Authorized>
 </AuthorizeView>
 
 @code {
-	private string artist;
+	[Parameter]
+	public string Artist { get; set; }
 	private Artist artistInfo;
 	private bool showContent = false;
 
+	protected override async Task OnInitializedAsync()
+	{
+		if (!string.IsNullOrEmpty(Artist))
+		{
+			await LoadArtistInfo();
+		}
+	}
+
 	private async Task LoadArtistInfo()
 	{
-		if (!string.IsNullOrEmpty(artist))
+		if (!string.IsNullOrEmpty(Artist))
 		{
-			artistInfo = await ArtistInfoService.GetArtistInfo(artist);
+			artistInfo = await ArtistInfoService.GetArtistInfo(Artist);
 		}
 	}
 
 	private void ToggleContentVisibility()
 	{
 		showContent = !showContent;
+	}
+
+	private string FormatContent(string content)
+	{
+		if (string.IsNullOrEmpty(content))
+		{
+			return string.Empty;
+		}
+
+		int maxLength = 1000; // Lungimea maximă a paragrafului
+		var paragraphs = new List<string>();
+		var lines = content.Split('\n'); // Dacă textul este format din mai multe linii
+
+		foreach (var line in lines)
+		{
+			var words = line.Split(' ');
+			var sb = new StringBuilder();
+			var lineLength = 0;
+
+			foreach (var word in words)
+			{
+				if (sb.Length + word.Length + 1 <= maxLength)
+				{
+					sb.Append(word + " ");
+					lineLength += word.Length + 1;
+				}
+				else
+				{
+					paragraphs.Add(sb.ToString());
+					sb.Clear();
+					sb.Append(word + " ");
+					lineLength = word.Length + 1;
+				}
+
+				// Adaugă un alineat nou la punct
+				if (word.EndsWith(".") && lineLength > maxLength / 2) // Punctul este la jumătatea lungimii maximă a paragrafului
+				{
+					paragraphs.Add(sb.ToString());
+					sb.Clear();
+					lineLength = 0;
+				}
+			}
+
+			// Adaugă paragraful rămas
+			paragraphs.Add(sb.ToString());
+		}
+
+		return string.Join("<br>", paragraphs); // Întoarce paragrafele separate prin un tag HTML de linie nouă
 	}
 
 	private string GetCountryEmoji(string code)

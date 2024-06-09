@@ -13,6 +13,9 @@ namespace HarmonyOfEmotions.Domain
 		[JsonProperty("artist")]
 		public string? Artist { get; set; }
 
+		[JsonProperty("artist_id")]
+		public string? ArtistId { get; set; }
+
 		[JsonProperty("other_artists")]
 		private string? OtherArtistsRaw { get; set; }
 		public string[]? OtherArtists
@@ -22,10 +25,15 @@ namespace HarmonyOfEmotions.Domain
 				if (string.IsNullOrEmpty(OtherArtistsRaw))
 					return null;
 
-				return OtherArtistsRaw.Trim('[', ']').Split(",").Select(s => s.Trim('\'')).ToArray();
+				var others = OtherArtistsRaw.Trim('[', ']').Replace("'", "").Trim().Split(',');
+				// remove empty strings
+				return others.Where(s => !string.IsNullOrEmpty(s)).ToArray();
 			}
 			set => OtherArtistsRaw = $"[{string.Join(",", value.Select(s => $"'{s}'"))}]";
 		}
+
+		[JsonProperty("other_artist_ids")]
+		public string[]? OtherArtistIds { get; set; }
 
 		[JsonProperty("album")]
 		public string? Album { get; set; }

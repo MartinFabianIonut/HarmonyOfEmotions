@@ -8,6 +8,7 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 		Task<bool> Login(string email, string password);
 		Task<bool> Register(string email, string password);
 		Task Logout();
+		Task<bool> RefreshToken();
 	}
 
 	public class AuthResponse
@@ -27,33 +28,65 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 
 	public interface ITokenService
 	{
-		Task<string?> GetTokenAsync();
-		void SetToken(string token);
+		Task<string?> GetAccessTokenAsync();
+		Task<string?> GetRefreshTokenAsync();
+		void SetTokens(string? accessToken, string? refreshToken, int expiresIn);
 	}
 
 	public class TokenService : ITokenService
 	{
-		private string? _token;
+		private string? _accessToken;
+		private string? _refreshToken;
+		private DateTime? _tokenExpiration;
 
-		public Task<string?> GetTokenAsync()
+		public Task<string?> GetAccessTokenAsync()
 		{
-			return Task.FromResult(_token);
+			if (_accessToken == null)
+			{
+				return Task.FromResult<string?>(null);
+			}
+			if (_tokenExpiration > DateTime.UtcNow)
+			{
+				return Task.FromResult(_accessToken)!;
+			}
+			return Task.FromResult<string?>("Expired");
 		}
 
-		public void SetToken(string token)
+		public Task<string?> GetRefreshTokenAsync()
 		{
-			_token = token;
+			return Task.FromResult(_refreshToken);
+		}
+
+		public void SetTokens(string? accessToken, string? refreshToken, int expiresIn)
+		{
+			_accessToken = accessToken;
+			_refreshToken = refreshToken;
+			_tokenExpiration = DateTime.UtcNow.AddSeconds(expiresIn);
 		}
 	}
 
 
-	public class BearerTokenHandler(ITokenService tokenService) : DelegatingHandler
+	public class BearerTokenHandler(ITokenService tokenService, IServiceProvider serviceProvider) : DelegatingHandler
 	{
 		private readonly ITokenService _tokenService = tokenService;
+		private readonly IServiceProvider _serviceProvider = serviceProvider;
 
 		protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			var token = await _tokenService.GetTokenAsync();
+			var token = await _tokenService.GetAccessTokenAsync();
+			if (token == "Expired")
+			{
+				using var scope = _serviceProvider.CreateScope();
+				var authService = scope.ServiceProvider.GetRequiredService<IAuthService>();
+				if (await authService.RefreshToken())
+				{
+					token = await _tokenService.GetAccessTokenAsync();
+				}
+				else
+				{
+					throw new Exception("Failed to refresh token");
+				}
+			}
 			request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 			return await base.SendAsync(request, cancellationToken);
 		}
@@ -75,7 +108,7 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 			if (response.IsSuccessStatusCode)
 			{
 				var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
-				_tokenService.SetToken(authResponse?.AccessToken!);
+				_tokenService.SetTokens(authResponse?.AccessToken!, authResponse?.RefreshToken!, authResponse.ExpiresIn!);
 				return true;
 			}
 			return false;
@@ -90,6 +123,20 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 			};
 			var response = await _httpClient.PostAsync("register", registerData);
 			return response.IsSuccessStatusCode;
+		}
+
+		public async Task<bool> RefreshToken()
+		{
+			var refreshToken = await _tokenService.GetRefreshTokenAsync();
+			_tokenService.SetTokens(null, null, 100); // Clear tokens to prevent infinite loop
+			var response = await _httpClient.PostAsync("refresh", new { RefreshToken = refreshToken });
+			if (response.IsSuccessStatusCode)
+			{
+				var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
+				_tokenService.SetTokens(authResponse?.AccessToken!, authResponse?.RefreshToken!, authResponse.ExpiresIn!);
+				return true;
+			}
+			return false;
 		}
 
 		public async Task Logout()

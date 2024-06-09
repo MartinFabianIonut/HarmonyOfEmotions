@@ -19,20 +19,16 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 				return null;
 			}
 			var musicBrainzArtist = await _musicBrainzService.GetArtistDetailsAsync(lastFmArtist.Id!);
-			if (musicBrainzArtist == null)
-			{
-				return null;
-			}
 
 			var artist = new Artist
 			{
 				Id = lastFmArtist.Id,
 				Name = lastFmArtist.Name,
-				ImageUrl = musicBrainzArtist.ImageUrl,
+				ImageUrl = musicBrainzArtist?.ImageUrl,
 				Summary = lastFmArtist.Summary,
 				Content = lastFmArtist.Content,
-				Country = musicBrainzArtist.Country,
-				Lifetime = musicBrainzArtist.Lifetime
+				Country = musicBrainzArtist?.Country,
+				Lifetime = musicBrainzArtist?.Lifetime
 			};
 
 			_logger.LogInformation("Artist found with complete info: {artist}", artist);

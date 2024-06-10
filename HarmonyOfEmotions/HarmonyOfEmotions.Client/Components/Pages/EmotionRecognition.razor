@@ -1,5 +1,6 @@
-﻿@page "/emotion-recognition/{previewUrl}"
-@inject MusicRecommenderSystemService MusicRecommenderSystemService 
+﻿@page "/emotion-recognition"
+@page "/emotion-recognition/{previewUrl}"
+@inject MusicRecommenderSystemService MusicRecommenderSystemService
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <AuthorizeView>
@@ -9,11 +10,27 @@
 	<Authorized>
 		<h1>Emotion recognition demo</h1>
 
-		@if(!string.IsNullOrEmpty(previewUrl))
+		@if (!string.IsNullOrEmpty(previewUrl))
 		{
 			<p>Emotion recognition for the track with preview URL: @previewUrl</p>
-			<p>Emotion: @emotion</p>
-		})
+			<p>Emotion predicted: @emotion</p>
+		}
+
+
+		<div class="row">
+			<div class="col-md-3">
+				<img src="surprise.png" style="widht:@surprise; height:@surprise" class="img-fluid" alt="Surprise" />
+			</div>
+			<div class="col-md-3">
+				<img src="happiness.png" style="widht:@happiness; height:@happiness" class="img-fluid" alt="Happiness" />
+			</div>
+			<div class="col-md-3">
+				<img src="restlessness.png" style="widht:@restlessness; height:@restlessness" class="img-fluid" alt="Restlessness" />
+			</div>
+			<div class="col-md-3">
+				<img src="anger.png" style="widht:@anger; height:@anger" class="img-fluid" alt="Anger" />
+			</div>
+		</div>
 
 	</Authorized>
 </AuthorizeView>
@@ -22,33 +39,33 @@
 	[Parameter]
 	public string? previewUrl { get; set; }
 	private string emotion = string.Empty;
+	private string surprise = "50%";
+	private string happiness = "50%";
+	private string restlessness = "50%";
+	private string anger = "50%";
 
 	protected override async Task OnInitializedAsync()
 	{
 		if (!string.IsNullOrEmpty(previewUrl))
 		{
 			emotion = await MusicRecommenderSystemService.GetEmotionForTrack(previewUrl);
+
 			switch (emotion)
 			{
-				case "happy":
-					// play happy music
+				case "Surprise":
+					surprise = "100%";
 					break;
-				case "sad":
-					// play sad music
+				case "Happiness":
+					happiness = "100%";
 					break;
-				case "angry":
-					// play angry music
+				case "Restlessness":
+					restlessness = "100%";
 					break;
-				case "calm":
-					// play calm music
-					break;
-				case "neutral":
-					// play neutral music
-					break;
-				default:
-					// play neutral music
+				case "Anger":
+					anger = "100%";
 					break;
 			}
+			StateHasChanged();
 		}
 	}
 }

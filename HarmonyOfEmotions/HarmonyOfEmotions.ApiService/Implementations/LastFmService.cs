@@ -112,7 +112,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "Failed to parse LastFM response for artist info");
-				return null;
+				throw new InternalServerErrorException(ServiceName.LastFMApiService, ex);
 			}
 		}
 	}

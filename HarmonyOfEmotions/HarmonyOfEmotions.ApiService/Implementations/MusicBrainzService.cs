@@ -2,6 +2,7 @@
 using HarmonyOfEmotions.ApiService.Interfaces;
 using HarmonyOfEmotions.ServiceDefaults.Utils;
 using System.Text.Json;
+using HarmonyOfEmotions.Domain.Exceptions;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
@@ -80,7 +81,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "Failed to parse MusicBrainz response for artist details");
-				return null;
+				throw new InternalServerErrorException(ServiceName.MusicBrainzApiService, ex);
 			}
 		}
 	}

@@ -26,6 +26,7 @@ public class SpotifyTrackController(
 	/// <param name="artistId">This must be the artist's id</param>
 	/// <returns> A list of top tracks</returns>
 	[HttpGet("GetTopTracksForArtist")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 	[ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]

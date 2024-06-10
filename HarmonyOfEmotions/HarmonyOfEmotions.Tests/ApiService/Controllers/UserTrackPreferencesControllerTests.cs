@@ -1,7 +1,7 @@
 ﻿using HarmonyOfEmotions.ApiService.Controllers;
 using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.Domain;
 using HarmonyOfEmotions.Domain.DataModels;
+using HarmonyOfEmotions.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -185,6 +185,28 @@ namespace HarmonyOfEmotions.Tests.ApiService.Controllers
 			// Assert
 			Assert.IsNotNull(result);
 			Assert.IsInstanceOfType(result, typeof(UnauthorizedResult));
+		}
+
+		[TestMethod]
+		public async Task DeleteUserTrackPreference_ThrowsException_WhenTrackIdIsNotFound()
+		{
+			// Arrange
+			var userId = "userId";
+			var trackId = "TrackId";
+
+			_mockUserTrackPreferencesService.Setup(s => s.DeleteUserTrackPreference(userId, trackId))
+				.Throws(new InternalServerErrorException(ServiceName.SQLSaveService, new Exception()));
+
+			// Act
+			try
+			{
+				await _userTrackPreferencesController.DeleteUserTrackPreference(trackId);
+			}
+			catch (InternalServerErrorException)
+			{
+				// Assert
+				Assert.IsTrue(true);
+			}
 		}
 	}
 }

@@ -12,9 +12,21 @@
 
 		@if (!string.IsNullOrEmpty(previewUrl))
 		{
-			<p>Emotion recognition for the track with preview URL: @previewUrl</p>
-			<p>Emotion predicted: @emotion</p>
+			<div class="emotion-info">
+				<p class="info-label">Emotion recognition for the track:</p>
+				@if (!string.IsNullOrEmpty(trackName))
+				{
+					<p class="track">@trackName</p>
+				}
+				else
+				{
+					<p class="track">@previewUrl</p>
+				}
+				<p class="info-label">Emotion predicted:</p>
+				<p class="predicted-emotion">@emotion</p>
+			</div>
 		}
+
 
 
 		<div class="row">
@@ -38,6 +50,8 @@
 @code {
 	[Parameter]
 	public string? previewUrl { get; set; }
+	[Parameter]
+	public string? trackName { get; set; }
 	private string emotion = string.Empty;
 	private string surprise = "50%";
 	private string happiness = "50%";

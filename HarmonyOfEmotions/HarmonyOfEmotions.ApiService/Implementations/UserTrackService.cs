@@ -43,7 +43,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			}
 			catch (Exception userTrackPreferencesException)
 			{
-				throw new InternalServerErrorException(ServiceName.FirebaseSaveService, userTrackPreferencesException);
+				throw new InternalServerErrorException(ServiceName.SQLSaveService, userTrackPreferencesException);
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			}
 			catch (Exception userTrackPreferencesException)
 			{
-				throw new InternalServerErrorException(ServiceName.FirebaseRepositoryService, userTrackPreferencesException);
+				throw new InternalServerErrorException(ServiceName.SQLRepositoryService, userTrackPreferencesException);
 			}
 		}
 
@@ -79,7 +79,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			}
 			catch (Exception userTrackPreferencesException)
 			{
-				throw new InternalServerErrorException(ServiceName.FirebaseSaveService, userTrackPreferencesException);
+				throw new InternalServerErrorException(ServiceName.SQLSaveService, userTrackPreferencesException);
 			}
 		}
 	}

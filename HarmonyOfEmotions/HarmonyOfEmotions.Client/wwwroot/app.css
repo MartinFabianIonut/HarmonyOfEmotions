@@ -75,3 +75,28 @@ div.nav-scrollable {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.emotion-info {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.info-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.track {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.predicted-emotion {
+    font-size: 18px;
+    font-weight: bold;
+    color: mediumslateblue;
+    text-transform: uppercase;
+}

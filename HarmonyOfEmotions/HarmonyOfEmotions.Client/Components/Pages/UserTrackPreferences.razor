@@ -1,5 +1,6 @@
 ﻿@page "/user-track-preferences"
 @inject UserTrackPreferencesService UserTrackPreferencesService
+@inherits ErrorHandlingComponentBase
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <AuthorizeView>

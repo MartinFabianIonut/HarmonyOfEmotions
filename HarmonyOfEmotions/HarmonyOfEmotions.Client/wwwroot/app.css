@@ -106,3 +106,8 @@ div.nav-scrollable {
 	height: 2rem;
 	border-width: 0.3em;
 }
+
+.wrap-url {
+	word-wrap: break-word;
+	word-break: break-all;
+}

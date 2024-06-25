@@ -1,6 +1,7 @@
 ﻿@inject UserTrackPreferencesService UserTrackPreferencesService
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
+@inherits ErrorHandlingComponentBase
 
 <div class="row">
 	@foreach (var track in Tracks)
@@ -35,7 +36,7 @@
 								</div>
 							}
 							<div>
-								<button type="button" class="mt-4 btn btn-outline-primary btn-sm m-1" @onclick="() => RedirectToEmotionRecognition(track.PreviewUrl)">
+								<button type="button" class="mt-4 btn btn-outline-primary btn-sm m-1" @onclick="() => RedirectToEmotionRecognition(track.PreviewUrl, track.Name)">
 									Get Emotion
 								</button>
 							</div>
@@ -146,10 +147,10 @@
 		NavigationManager.NavigateTo($"/artist-info/{Uri.EscapeDataString(artist)}");
 	}
 
-	private void RedirectToEmotionRecognition(string previewUrl)
+	private void RedirectToEmotionRecognition(string previewUrl, string trackName)
 	{
 		SaveInLocalStorage();
-		NavigationManager.NavigateTo($"/emotion-recognition?previewUrl={Uri.EscapeDataString(previewUrl)}");
+		NavigationManager.NavigateTo($"/emotion-recognition?previewUrl={Uri.EscapeDataString(previewUrl)}&trackName={trackName}");
 	}
 
 	private void SaveInLocalStorage()

@@ -117,8 +117,7 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 			}
 			else
 			{
-				var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
-				_errorHandlingService.HandleError(new Exception(errorResponse?.Message ?? "An error occurred while processing the login step."));
+				_errorHandlingService.HandleError(new Exception("An error occurred while processing the login step."));
 			}
 			return false;
 		}
@@ -133,8 +132,7 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 			var response = await _httpClient.PostAsync("register", registerData);
 			if (!response.IsSuccessStatusCode)
 			{
-				var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
-				_errorHandlingService.HandleError(new Exception(errorResponse?.Message ?? "An error occurred while processing the registration step"));
+				_errorHandlingService.HandleError(new Exception("An error occurred while processing the registration step"));
 			}
 			return response.IsSuccessStatusCode;
 		}
@@ -152,8 +150,7 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 			}
 			else
 			{
-				var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
-				_errorHandlingService.HandleError(new Exception(errorResponse?.Message ?? "An error occurred while processing the refresh token step."));
+				_errorHandlingService.HandleError(new Exception("An error occurred while processing the refresh token step."));
 			}
 			return false;
 		}

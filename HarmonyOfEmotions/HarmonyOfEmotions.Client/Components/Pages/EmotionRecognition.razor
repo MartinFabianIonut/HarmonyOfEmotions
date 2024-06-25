@@ -1,6 +1,7 @@
 ﻿@page "/emotion-recognition"
 @inject NavigationManager NavigationManager
 @inject MusicRecommenderSystemService MusicRecommenderSystemService
+@inherits ErrorHandlingComponentBase
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <AuthorizeView>
@@ -13,14 +14,15 @@
 		@if (!string.IsNullOrEmpty(previewUrl))
 		{
 			<div class="emotion-info">
-				<p class="info-label">Emotion recognition for the track available at:</p>
 				@if (!string.IsNullOrEmpty(trackName))
 				{
+					<p class="info-label">Emotion recognition for the track:</p>
 					<p class="track">@trackName</p>
 				}
 				else
 				{
-					<p class="track">@previewUrl</p>
+					<p class="info-label">Emotion recognition for the track available at:</p>
+					<a class="track wrap-url">@previewUrl</a>
 				}
 				<div class="card">
 					<div class="card-body">
@@ -50,16 +52,16 @@
 		}
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-3 align-content-center justify-content-center">
 				<img src="surprise.png" style="height:@surprise" class="img-fluid" alt="Surprise" />
 			</div>
-			<div class="col-md-3">
+			<div class="col-3 align-content-center justify-content-center">
 				<img src="happiness.png" style="height:@happiness" class="img-fluid" alt="Happiness" />
 			</div>
-			<div class="col-md-3">
+			<div class="col-3 align-content-center justify-content-center">
 				<img src="restlessness.png" style="height:@restlessness" class="img-fluid" alt="Restlessness" />
 			</div>
-			<div class="col-md-3">
+			<div class="col-3 align-content-center justify-content-center">
 				<img src="anger.png" style="height:@anger" class="img-fluid" alt="Anger" />
 			</div>
 		</div>

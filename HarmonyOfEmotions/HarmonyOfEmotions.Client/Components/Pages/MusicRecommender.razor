@@ -3,6 +3,7 @@
 @inject MusicRecommenderSystemService MusicRecommenderSystemService
 @inject UserTrackPreferencesService UserTrackPreferencesService
 @inject NavigationManager NavigationManager
+@inherits ErrorHandlingComponentBase
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <AuthorizeView>

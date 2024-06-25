@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /HarmonyOfEmotions/HarmonyOfEmotions.ApiService/appsettings.json
 /HarmonyOfEmotions/HarmonyOfEmotions.ApiService/appsettings.Development.json
+/HarmonyOfEmotions/HarmonyOfEmotions.ApiService/appsettings.Production.json

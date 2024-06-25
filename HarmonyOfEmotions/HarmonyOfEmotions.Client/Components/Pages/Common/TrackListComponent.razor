@@ -149,7 +149,7 @@
 	private void RedirectToEmotionRecognition(string previewUrl)
 	{
 		SaveInLocalStorage();
-		NavigationManager.NavigateTo($"/emotion-recognition/{Uri.EscapeDataString(previewUrl)}");
+		NavigationManager.NavigateTo($"/emotion-recognition?previewUrl={Uri.EscapeDataString(previewUrl)}");
 	}
 
 	private void SaveInLocalStorage()

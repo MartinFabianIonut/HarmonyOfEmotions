@@ -1,5 +1,5 @@
 ﻿@page "/emotion-recognition"
-@page "/emotion-recognition/{previewUrl}"
+@inject NavigationManager NavigationManager
 @inject MusicRecommenderSystemService MusicRecommenderSystemService
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
@@ -13,7 +13,7 @@
 		@if (!string.IsNullOrEmpty(previewUrl))
 		{
 			<div class="emotion-info">
-				<p class="info-label">Emotion recognition for the track:</p>
+				<p class="info-label">Emotion recognition for the track available at:</p>
 				@if (!string.IsNullOrEmpty(trackName))
 				{
 					<p class="track">@trackName</p>
@@ -22,25 +22,35 @@
 				{
 					<p class="track">@previewUrl</p>
 				}
+				<div class="card">
+					<div class="card-body">
+						@if (!hidden)
+						{
+							<audio autoplay controls><source src="@previewUrl" /></audio>
+						}
+						else
+						{
+							<audio controls muted><source src="@previewUrl" /></audio>
+						}
+					</div>
+				</div>
 				<p class="info-label">Emotion predicted:</p>
 				<p class="predicted-emotion">@emotion</p>
 			</div>
 		}
 
-
-
 		<div class="row">
 			<div class="col-md-3">
-				<img src="surprise.png" style="widht:@surprise; height:@surprise" class="img-fluid" alt="Surprise" />
+				<img src="surprise.png" style="height:@surprise" class="img-fluid" alt="Surprise" />
 			</div>
 			<div class="col-md-3">
-				<img src="happiness.png" style="widht:@happiness; height:@happiness" class="img-fluid" alt="Happiness" />
+				<img src="happiness.png" style="height:@happiness" class="img-fluid" alt="Happiness" />
 			</div>
 			<div class="col-md-3">
-				<img src="restlessness.png" style="widht:@restlessness; height:@restlessness" class="img-fluid" alt="Restlessness" />
+				<img src="restlessness.png" style="height:@restlessness" class="img-fluid" alt="Restlessness" />
 			</div>
 			<div class="col-md-3">
-				<img src="anger.png" style="widht:@anger; height:@anger" class="img-fluid" alt="Anger" />
+				<img src="anger.png" style="height:@anger" class="img-fluid" alt="Anger" />
 			</div>
 		</div>
 
@@ -48,18 +58,22 @@
 </AuthorizeView>
 
 @code {
-	[Parameter]
-	public string? previewUrl { get; set; }
-	[Parameter]
-	public string? trackName { get; set; }
+	private string? previewUrl;
+	private string? trackName;
 	private string emotion = string.Empty;
 	private string surprise = "50%";
 	private string happiness = "50%";
 	private string restlessness = "50%";
 	private string anger = "50%";
+	private bool hidden = true;
 
 	protected override async Task OnInitializedAsync()
 	{
+		var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+		var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+		previewUrl = query.Get("previewUrl");
+		trackName = query.Get("trackName");
+
 		if (!string.IsNullOrEmpty(previewUrl))
 		{
 			emotion = await MusicRecommenderSystemService.GetEmotionForTrack(previewUrl);

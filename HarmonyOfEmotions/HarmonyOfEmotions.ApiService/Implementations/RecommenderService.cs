@@ -32,6 +32,8 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 					throw new ExternalServiceException(ServiceName.SpotifyAudioService, httpRequestException);
 				}
 
+				double[] audioAsDouble = audio.Select(b => (double)b).ToArray();
+
 				// Save audio to file
 				try
 				{

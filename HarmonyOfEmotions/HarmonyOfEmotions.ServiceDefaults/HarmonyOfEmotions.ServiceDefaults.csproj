@@ -8,9 +8,6 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <DocumentationFile>HarmonyOfEmotions.ServiceDefaults.xml</DocumentationFile>
-    <PlatformTarget>x64</PlatformTarget>
-
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>

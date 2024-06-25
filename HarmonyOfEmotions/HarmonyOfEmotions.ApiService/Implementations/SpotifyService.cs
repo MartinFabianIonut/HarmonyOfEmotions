@@ -19,7 +19,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 				var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
 				var artistTopTracksRequest = new ArtistsTopTracksRequest("DE");
 				var response = await spotifyClient.Artists.GetTopTracks(artistId, artistTopTracksRequest);
-				var topTracks = response.Tracks;
+				var topTracks = response.Tracks.Where(t => t.PreviewUrl != null).ToList();
 				_logger.LogInformation("Top tracks found for artist {ArtistId}", artistId);
 
 				return [.. TrackUtils.ConvertToTracks(topTracks)];
@@ -35,11 +35,17 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			try
 			{
 				var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
-				var searchRequest = new SearchRequest(SearchRequest.Types.Track, keyword);
+				var searchRequest = new SearchRequest(SearchRequest.Types.Track, keyword)
+				{
+					Market = "DE",
+					Limit = 40
+				};
 				var response = await spotifyClient.Search.Item(searchRequest);
 				_logger.LogInformation("Tracks found for keyword {Keyword}", keyword);
 
-				return [.. TrackUtils.ConvertToTracks(response.Tracks.Items!)];
+				var tracksWithPreview = response.Tracks.Items!.Where(t => t.PreviewUrl != null).ToList();
+
+				return [.. TrackUtils.ConvertToTracks(tracksWithPreview)];
 			}
 			catch (Exception ex) {
 				_logger.LogError(ex, "Error while searching tracks by keyword {Keyword}", keyword);

@@ -4,31 +4,43 @@ namespace HarmonyOfEmotions.Domain.Exceptions
 {
 	public enum ServiceName
 	{
-		[Description("External error while getting audio from preview URL of Spotify")]
+		[Description("Error retrieving audio preview from Spotify.")]
 		SpotifyAudioService,
-		[Description("Internal server error while saving audio to file")]
+
+		[Description("Error saving audio file.")]
 		AudioFileService,
-		[Description("Internal server error while creating spectrogram")]
+
+		[Description("Error creating spectrogram.")]
 		SpectrogramService,
-		[Description("Internal server error while creating emotion prediction")]
+
+		[Description("Error predicting emotions.")]
 		EmotionPredictionService,
-		[Description("Internal server error while creating memory stream from spectrogram")]
+
+		[Description("Error creating memory stream from spectrogram.")]
 		MemoryStreamService,
-		[Description("Internal server error while getting data from Firebase repository")]
+
+		[Description("Error retrieving data from Firebase.")]
 		FirebaseRepositoryService,
-		[Description("Internal server error while saving data to Firebase repository")]
+
+		[Description("Error saving data to Firebase.")]
 		FirebaseSaveService,
-		[Description("Internal server error while getting data from SQL repository")]
+
+		[Description("Error retrieving data from SQL repository.")]
 		SQLRepositoryService,
-		[Description("Internal server error while saving data to SQL repository")]
+
+		[Description("Error saving data to SQL repository.")]
 		SQLSaveService,
-		[Description("Internal server error while getting data from LastFM API")]
+
+		[Description("Error retrieving data from LastFM API.")]
 		LastFMApiService,
-		[Description("Internal server error while getting data from Spotify API")]
+
+		[Description("Error retrieving data from Spotify API.")]
 		SpotifyApiService,
-		[Description("Internal server error while getting data from MusicBrainz API")]
+
+		[Description("Error retrieving data from MusicBrainz API.")]
 		MusicBrainzApiService,
-		[Description("Internal server error while generating recommendations")]
+
+		[Description("Error generating recommendations.")]
 		RecommendationService
 	}
 }

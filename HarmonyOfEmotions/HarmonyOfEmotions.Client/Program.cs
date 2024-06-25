@@ -1,6 +1,7 @@
 using HarmonyOfEmotions.Client.Components;
-using HarmonyOfEmotions.Client.Services;
+using HarmonyOfEmotions.Client.Services.ApiServices;
 using HarmonyOfEmotions.Client.Services.Auth;
+using HarmonyOfEmotions.Client.Services.ErrorHandling;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
 
@@ -12,7 +13,7 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+	.AddInteractiveServerComponents();
 
 builder.Services.AddOutputCache();
 builder.Services.AddAuthorizationCore();
@@ -39,13 +40,14 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient<ApiClient>(client =>
 {
-    // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
-    // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
-    client.BaseAddress = new("https+http://harmony-of-emotions-apiservice");
-    // content type is json
-    client.DefaultRequestHeaders.Accept.Add(new("application/json"));
+	// This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
+	// Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
+	client.BaseAddress = new("https+http://harmony-of-emotions-apiservice");
+	// content type is json
+	client.DefaultRequestHeaders.Accept.Add(new("application/json"));
 }).AddHttpMessageHandler<BearerTokenHandler>();
 
+builder.Services.AddSingleton<IErrorHandlingService, ErrorHandlingService>();
 builder.Services.AddScoped<UserTrackPreferencesService>();
 builder.Services.AddScoped<SpotifyTrackService>();
 builder.Services.AddScoped<MusicRecommenderSystemService>();
@@ -57,9 +59,9 @@ var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Error", createScopeForErrors: true);
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -72,7 +74,7 @@ app.UseAuthorization();
 app.UseOutputCache();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+	.AddInteractiveServerRenderMode();
 
 app.MapDefaultEndpoints();
 

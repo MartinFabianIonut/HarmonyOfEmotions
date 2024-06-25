@@ -1,7 +1,7 @@
 ﻿using HarmonyOfEmotions.Domain;
 using System.Globalization;
 
-namespace HarmonyOfEmotions.Client.Services
+namespace HarmonyOfEmotions.Client.Services.ApiServices
 {
 	public class MusicRecommenderSystemService(ApiClient apiClient)
 	{
@@ -16,7 +16,6 @@ namespace HarmonyOfEmotions.Client.Services
 			string url = $"MusicRecommenderSystem/GetRecommendedTraks?x={xString}&y={yString}&z={zString}";
 			return await _apiClient.GetAsync<IEnumerable<Track>>(url);
 		}
-
 
 		public async Task<string?> GetEmotionForTrack(string previewUrl)
 		{

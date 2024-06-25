@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HarmonyOfEmotions.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HarmonyOfEmotions.Client", "HarmonyOfEmotions.Client\HarmonyOfEmotions.Client.csproj", "{D7FCA150-A70B-4AB2-9716-A059A2EB57BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonyOfEmotions.Tests", "HarmonyOfEmotions.Tests\HarmonyOfEmotions.Tests.csproj", "{EB267212-5FC0-40BE-836A-58D5D3FDA1F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HarmonyOfEmotions.Tests", "HarmonyOfEmotions.Tests\HarmonyOfEmotions.Tests.csproj", "{EB267212-5FC0-40BE-836A-58D5D3FDA1F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

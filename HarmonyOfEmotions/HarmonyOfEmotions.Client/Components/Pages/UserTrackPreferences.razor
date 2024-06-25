@@ -7,30 +7,33 @@
 		<AccessDenied />
 	</NotAuthorized>
 	<Authorized>
-		<h1>User Track Preferences</h1>
+		<h1 class="my-4">User Track Preferences</h1>
 
-		@if (preferences != null)
+		@if (Preferences != null)
 		{
-			<TrackListComponent Tracks="trackPreferences" />
+			<TrackListComponent Tracks="TrackPreferences" />
 		}
 	</Authorized>
 </AuthorizeView>
 
 @code {
-	private IEnumerable<UserTrackPreference> preferences;
-	private List<Track> trackPreferences = new List<Track>();
+	private IEnumerable<UserTrackPreference>? Preferences;
+	private List<Track> TrackPreferences = new List<Track>();
 
 	protected override async Task OnInitializedAsync()
 	{
-		preferences = await UserTrackPreferencesService.GetUserTrackPreferences();
-		trackPreferences.Clear();
-		foreach (var preference in preferences)
+		Preferences = await UserTrackPreferencesService.GetUserTrackPreferences();
+		TrackPreferences.Clear();
+		if (Preferences != null)
 		{
-			var track = new Track
-				{
-					Id = preference.TrackId
-				};
-			trackPreferences.Add(track);
+			foreach (var preference in Preferences)
+			{
+				var track = new Track
+					{
+						Id = preference.TrackId
+					};
+				TrackPreferences.Add(track);
+			}
 		}
 		StateHasChanged();
 	}

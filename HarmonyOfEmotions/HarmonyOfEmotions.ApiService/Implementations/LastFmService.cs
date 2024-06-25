@@ -1,8 +1,7 @@
-﻿using HarmonyOfEmotions.ApiService.Controllers;
+﻿using HarmonyOfEmotions.ApiService.Interfaces;
 using HarmonyOfEmotions.Domain;
-using HarmonyOfEmotions.ApiService.Interfaces;
-using System.Text.Json;
 using HarmonyOfEmotions.Domain.Exceptions;
+using System.Text.Json;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
@@ -17,6 +16,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 
 		public async Task<string?> GetArtistCorrectionAsync(string artistName)
 		{
+			artistName = artistName.Trim();
 			var response = await _httpClient.GetAsync($"?method=artist.getcorrection&artist={Uri.EscapeDataString(artistName)}&api_key={_apiKey}&format=json");
 			response.EnsureSuccessStatusCode();
 
@@ -58,10 +58,9 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			{
 				_logger.LogInformation("No correction found for artist name {ArtistName}", artistName);
 			}
+			
 			try
 			{
-				// remove trailing whitespaces
-				artistName = artistName.Trim();
 				var response = await _httpClient.GetAsync($"?method=artist.getinfo&artist={Uri.EscapeDataString(artistName)}&api_key={_apiKey}&format=json");
 				response.EnsureSuccessStatusCode();
 

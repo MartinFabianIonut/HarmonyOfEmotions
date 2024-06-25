@@ -56,18 +56,30 @@
 			</div>
 
 			<div class="mb-2 d-grid gap-3">
-				<button type="submit" class="btn btn-primary">@((isLogin ? "Login" : "Register"))</button>
+				<button type="submit" class="btn btn-primary" disabled="@isLoading">
+					@if (isLoading)
+					{
+						<div class="d-flex align-items-center justify-content-center">
+							<span class="spinner-border spinner-border-sm me-4" role="status" aria-hidden="true"></span>
+							<span class="sr-only">Loading...</span>
+						</div>
+					}
+					else
+					{
+						@((isLogin ? "Login" : "Register"))
+					}
+				</button>
 			</div>
 		</EditForm>
 	</div>
 </div>
 
 @code {
-
 	[CascadingParameter]
 	public HttpContext HttpContext { get; set; } = default!;
 
 	private bool isLogin = true;
+	private bool isLoading = false;
 
 	public UserAccount UserAccount { get; set; } = new UserAccount();
 
@@ -83,6 +95,7 @@
 	private async Task HandleSubmit()
 	{
 		ErrorMessage = null;
+		isLoading = true;
 
 		if (isLogin)
 		{
@@ -92,6 +105,8 @@
 		{
 			await HandleRegister();
 		}
+
+		isLoading = false;
 	}
 
 	private async Task HandleLogin()

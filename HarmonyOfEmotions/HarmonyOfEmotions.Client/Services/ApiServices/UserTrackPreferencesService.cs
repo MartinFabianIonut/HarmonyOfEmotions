@@ -1,13 +1,13 @@
 ﻿using HarmonyOfEmotions.Client.Components.Pages;
 using HarmonyOfEmotions.Domain.DataModels;
 
-namespace HarmonyOfEmotions.Client.Services
+namespace HarmonyOfEmotions.Client.Services.ApiServices
 {
 	public class UserTrackPreferencesService(ApiClient apiClient)
 	{
 		private readonly ApiClient _apiClient = apiClient;
 
-		private class UserTrackPreferencesData 
+		private class UserTrackPreferencesData
 		{
 			public string? TrackId { get; set; }
 			public bool IsLiked { get; set; }

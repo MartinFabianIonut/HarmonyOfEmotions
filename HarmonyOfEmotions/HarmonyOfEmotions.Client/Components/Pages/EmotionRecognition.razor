@@ -8,7 +8,7 @@
 		<AccessDenied />
 	</NotAuthorized>
 	<Authorized>
-		<h1>Emotion recognition demo</h1>
+		<h1 class="my-4">Emotion recognition demo</h1>
 
 		@if (!string.IsNullOrEmpty(previewUrl))
 		{
@@ -35,7 +35,17 @@
 					</div>
 				</div>
 				<p class="info-label">Emotion predicted:</p>
-				<p class="predicted-emotion">@emotion</p>
+				@if (isLoading)
+				{
+					<div class="d-flex align-items-center">
+						<span class="spinner-border spinner-border-sm me-4" role="status" aria-hidden="true"></span>
+						<span class="sr-only">Loading...</span>
+					</div>
+				}
+				else
+				{
+					<p class="predicted-emotion">@emotion</p>
+				}
 			</div>
 		}
 
@@ -53,19 +63,19 @@
 				<img src="anger.png" style="height:@anger" class="img-fluid" alt="Anger" />
 			</div>
 		</div>
-
 	</Authorized>
 </AuthorizeView>
 
 @code {
 	private string? previewUrl;
 	private string? trackName;
-	private string emotion = string.Empty;
+	private string? emotion = string.Empty;
 	private string surprise = "50%";
 	private string happiness = "50%";
 	private string restlessness = "50%";
 	private string anger = "50%";
 	private bool hidden = true;
+	private bool isLoading = true;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -93,6 +103,7 @@
 					anger = "100%";
 					break;
 			}
+			isLoading = false;
 			StateHasChanged();
 		}
 	}

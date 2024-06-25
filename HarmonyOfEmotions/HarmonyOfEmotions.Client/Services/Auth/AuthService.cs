@@ -1,4 +1,7 @@
-﻿using System.Net.Http.Headers;
+﻿using HarmonyOfEmotions.Client.Services.ApiServices;
+using HarmonyOfEmotions.Client.Services.ErrorHandling;
+using HarmonyOfEmotions.Domain.Exceptions;
+using System.Net.Http.Headers;
 using System.Text.Json.Serialization;
 
 namespace HarmonyOfEmotions.Client.Services.Auth
@@ -92,10 +95,11 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 		}
 	}
 
-	public class AuthService(ApiClient httpClient, ITokenService tokenService) : IAuthService
+	public class AuthService(ApiClient httpClient, ITokenService tokenService, IErrorHandlingService errorHandlingService) : IAuthService
 	{
 		private readonly ApiClient _httpClient = httpClient;
 		private readonly ITokenService _tokenService = tokenService;
+		private readonly IErrorHandlingService _errorHandlingService = errorHandlingService;
 
 		public async Task<bool> Login(string email, string password)
 		{
@@ -111,6 +115,11 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 				_tokenService.SetTokens(authResponse?.AccessToken!, authResponse?.RefreshToken!, authResponse.ExpiresIn!);
 				return true;
 			}
+			else
+			{
+				var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+				_errorHandlingService.HandleError(new Exception(errorResponse?.Message ?? "An error occurred while processing the login step."));
+			}
 			return false;
 		}
 
@@ -122,6 +131,11 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 				Password = password
 			};
 			var response = await _httpClient.PostAsync("register", registerData);
+			if (!response.IsSuccessStatusCode)
+			{
+				var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+				_errorHandlingService.HandleError(new Exception(errorResponse?.Message ?? "An error occurred while processing the registration step"));
+			}
 			return response.IsSuccessStatusCode;
 		}
 
@@ -136,11 +150,17 @@ namespace HarmonyOfEmotions.Client.Services.Auth
 				_tokenService.SetTokens(authResponse?.AccessToken!, authResponse?.RefreshToken!, authResponse.ExpiresIn!);
 				return true;
 			}
+			else
+			{
+				var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+				_errorHandlingService.HandleError(new Exception(errorResponse?.Message ?? "An error occurred while processing the refresh token step."));
+			}
 			return false;
 		}
 
 		public async Task Logout()
 		{
+			_tokenService.SetTokens(null, null, 0);
 			await Task.CompletedTask;
 		}
 	}

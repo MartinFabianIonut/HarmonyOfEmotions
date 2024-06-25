@@ -8,17 +8,17 @@
 		<div class="col-12 mb-1 position-relative">
 			<div class="row">
 				@{
-					string length = track.Artist != null ? "10" : "12";
-					string padding_buttom = track.Artist != null ? "25%" : "15%";
+					string length = track.Artist != null ? "8" : "12";
+					string padding_buttom = track.Artist != null ? "33%" : "15%";
 				}
 				<div class="col-@length">
-					<div class="embed-responsive" style="height: 165%; padding-bottom: @padding_buttom;">
-						<iframe class="embed-responsive-item" src="@($"https://open.spotify.com/embed/track/{track.Id}")" width="100%" height="100%" frameborder="0" allowfullscreen allowtransparency="true" allow="encrypted-media"></iframe>
+					<div class="embed-responsive" style="height: 100%; min-height: 350px">
+						<iframe title="@track.Id" src="@($"https://open.spotify.com/embed/track/{track.Id}")" width="100%" height="100%" frameborder="0" loading="lazy" allowfullscreen="" allow="encrypted-media"></iframe>
 					</div>
 				</div>
 				@if (track.Artist != null)
 				{
-					<div class="col-2 d-flex align-items-center justify-content-start">
+					<div class="col-2 d-flex align-content-start justify-content-start">
 						<div>
 							<button type="button" class="btn btn-outline-primary btn-sm m-1" @onclick="() => RedirectToArtistInfo(track.Artist)">
 								@track.Artist
@@ -46,17 +46,17 @@
 			</div>
 			<div class="position-absolute top-0 start-0 translate-middle" style="display: flex; gap: 5px;">
 				@{
-					string marginTop = (likedTracks.Contains(track.Id!) || dislikedTracks.Contains(track.Id!)) ? "60%" : "40%";
+					string marginTop = (LikedTracks.Contains(track.Id!) || DislikedTracks.Contains(track.Id!)) ? "60%" : "40%";
 				}
 				<div style="margin-left:60%; margin-top:@marginTop; display: flex; flex-direction: column; align-items: flex-end;">
 					<button type="button" class="btn btn-link" @onclick="() => LikeTrack(track.Id!)">
 						<img src="like.png" alt="Like" style="width: 24px; height: 24px;" />
 					</button>
-					@if (likedTracks.Contains(track.Id!))
+					@if (LikedTracks.Contains(track.Id!))
 					{
 						<img src="heart.png" alt="Liked" style="margin-right:30%; width: 24px; height: 24px;" />
 					}
-					else if (dislikedTracks.Contains(track.Id!))
+					else if (DislikedTracks.Contains(track.Id!))
 					{
 						<img src="heartbroken.png" alt="Disliked" style="margin-right:30%; width: 24px; height: 24px;" />
 					}
@@ -78,8 +78,8 @@
 	[Parameter]
 	public IEnumerable<Artist>? ArtistList { get; set; }
 
-	private HashSet<string> likedTracks = new();
-	private HashSet<string> dislikedTracks = new();
+	private HashSet<string> LikedTracks = new();
+	private HashSet<string> DislikedTracks = new();
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -88,7 +88,7 @@
 
 	private async Task LikeTrack(string trackId)
 	{
-		if (likedTracks.Contains(trackId))
+		if (LikedTracks.Contains(trackId))
 		{
 			await UserTrackPreferencesService.DeleteUserTrackPreference(trackId);
 		}
@@ -101,7 +101,7 @@
 
 	private async Task DislikeTrack(string trackId)
 	{
-		if (dislikedTracks.Contains(trackId))
+		if (DislikedTracks.Contains(trackId))
 		{
 			await UserTrackPreferencesService.DeleteUserTrackPreference(trackId);
 		}
@@ -114,18 +114,18 @@
 
 	public async Task UpdatePreferences()
 	{
-		likedTracks.Clear();
-		dislikedTracks.Clear();
+		LikedTracks.Clear();
+		DislikedTracks.Clear();
 
 		foreach (var track in Tracks)
 		{
 			if (await IsLiked(track.Id!))
 			{
-				likedTracks.Add(track.Id!);
+				LikedTracks.Add(track.Id!);
 			}
 			else if (await IsDisliked(track.Id!))
 			{
-				dislikedTracks.Add(track.Id!);
+				DislikedTracks.Add(track.Id!);
 			}
 		}
 	}

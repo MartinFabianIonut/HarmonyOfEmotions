@@ -8,12 +8,6 @@ namespace HarmonyOfEmotions.Domain.Exceptions
 	{
 		private readonly ILogger<GlobalExceptionFilter> _logger = logger;
 
-		private class Error
-		{
-			public int StatusCode { get; set; }
-			public string? Message { get; set; }
-		}
-
 		public void OnException(ExceptionContext context)
 		{
 			_logger.LogError(context.Exception, "An unhandled exception occurred.");
@@ -25,7 +19,7 @@ namespace HarmonyOfEmotions.Domain.Exceptions
 				_ => 500
 			};
 
-			var error = new Error { StatusCode = statusCode, Message = context.Exception.Message };
+			var error = new ErrorResponse { StatusCode = statusCode, Message = context.Exception.Message };
 
 			context.Result = new JsonResult(error) { StatusCode = statusCode };
 			context.ExceptionHandled = true;

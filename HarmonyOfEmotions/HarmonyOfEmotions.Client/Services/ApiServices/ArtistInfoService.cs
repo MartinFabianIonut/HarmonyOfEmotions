@@ -1,6 +1,6 @@
 ﻿using HarmonyOfEmotions.Domain;
 
-namespace HarmonyOfEmotions.Client.Services
+namespace HarmonyOfEmotions.Client.Services.ApiServices
 {
 	public class ArtistInfoService(ApiClient apiClient)
 	{

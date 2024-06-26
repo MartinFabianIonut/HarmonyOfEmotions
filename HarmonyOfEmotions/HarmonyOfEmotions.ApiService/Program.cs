@@ -115,11 +115,14 @@ var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-// Configure the HTTP request pipeline.
+string tempFolder = "../tmp";
+if (!Directory.Exists(tempFolder))
+{
+	Directory.CreateDirectory(tempFolder);
+}
 
-	app.UseSwagger();
-	app.UseSwaggerUI();
-
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapIdentityApi<IdentityUser>();
 

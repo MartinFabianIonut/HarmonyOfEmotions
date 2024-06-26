@@ -1,37 +1,13 @@
 ﻿using HarmonyOfEmotions.Domain.Exceptions;
 using HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram;
 using MP3Sharp;
-using NAudio.Wave;
-using System.Drawing;
-using System.Drawing.Imaging;
+using SkiaSharp;
 
 namespace HarmonyOfEmotions.ServiceDefaults.Utils
 {
 	public static class AudioUtils
 	{
-		private static double[] ReadMp3FromBytes(byte[] mp3Bytes)
-		{
-			using var mp3Stream = new MemoryStream(mp3Bytes);
-			using var mp3Reader = new Mp3FileReader(mp3Stream);
-			var sampleProvider = mp3Reader.ToSampleProvider();
-			var buffer = new List<double>();
-
-			var readBuffer = new float[mp3Reader.WaveFormat.SampleRate * mp3Reader.WaveFormat.Channels];
-			int samplesRead;
-
-			do
-			{
-				samplesRead = sampleProvider.Read(readBuffer, 0, readBuffer.Length);
-				for (int i = 0; i < samplesRead; i++)
-				{
-					buffer.Add(readBuffer[i]);
-				}
-			} while (samplesRead > 0);
-
-			return [.. buffer];
-		}
-
-		public static double[] ReadMP3(string filePath, int bufferSize = 4096)
+		private static double[] ReadMP3(string filePath, int bufferSize = 4096)
 		{
 			List<double> audio = [];
 			MP3Stream stream = new(filePath);
@@ -47,22 +23,21 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils
 			return [.. audio];
 		}
 
-		public static Bitmap CreateGraySpetrogram(byte[] mp3Bytes)
+		public static SKBitmap CreateGraySpetrogram(byte[] mp3Bytes)
 		{
 			try
 			{
 				double[] audio;
 				try
 				{
-					audio = ReadMP3("audio-wow.mp3");
+					audio = ReadMP3("../tmp/audio-wow.mp3");
 					// delete file
-					File.Delete("audio-wow.mp3");
+					File.Delete("../tmp/audio-wow.mp3");
 				}
 				catch (IOException ioException)
 				{
 					throw new InternalServerErrorException(ServiceName.AudioFileService, ioException);
 				}
-
 				int sampleRate = 44100;
 
 				int fftSize = 1024;
@@ -80,12 +55,17 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils
 			}
 		}
 
-		public static MemoryStream GetMemoryStreamFromSpetrogram(Bitmap bmp)
+		public static MemoryStream GetMemoryStreamFromSpetrogram(SKBitmap bmp)
 		{
 			try
 			{
 				var ms = new MemoryStream();
-				bmp.Save(ms, ImageFormat.Png);
+				using (var image = SKImage.FromBitmap(bmp))
+				{
+					using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+					data.SaveTo(ms);
+				}
+				ms.Position = 0; // Reset the position of the stream to the beginning
 				return ms;
 			}
 			catch (Exception memoryStreamException)

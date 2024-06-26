@@ -13,7 +13,7 @@ namespace HarmonyOfEmotions.Domain.Exceptions
 		[Description("Error creating spectrogram.")]
 		SpectrogramService,
 
-		[Description("Error predicting emotions.")]
+		[Description("Error predicting emotion.")]
 		EmotionPredictionService,
 
 		[Description("Error creating memory stream from spectrogram.")]

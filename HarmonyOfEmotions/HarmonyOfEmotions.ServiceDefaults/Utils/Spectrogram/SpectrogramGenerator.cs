@@ -24,10 +24,8 @@
 // SOFTWARE.
 
 
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
 using FftSharp;
+using SkiaSharp;
 
 namespace HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram
 {
@@ -53,7 +51,7 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram
 		/// <summary>
 		/// Number of FFTs that remain to be processed for data which has been added but not yet analuyzed
 		/// </summary>
-		public int FftsToProcess { get => (UnprocessedData.Count - Settings.FftSize) / Settings.StepSize; }
+		public int FftsToProcess { get => (_unprocessedData.Count - _settings.FftSize) / _settings.StepSize; }
 
 		/// <summary>
 		/// Total number of FFT steps processed
@@ -63,21 +61,21 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram
 		/// <summary>
 		/// This module contains detailed FFT/Spectrogram settings
 		/// </summary>
-		private readonly Settings Settings = new(sampleRate, fftSize, stepSize, minFreq, maxFreq, offsetHz);
+		private readonly Settings _settings = new(sampleRate, fftSize, stepSize, minFreq, maxFreq, offsetHz);
 
 		/// <summary>
 		/// This is the list of FFTs which is translated to the spectrogram image when it is requested.
 		/// The length of this list is the spectrogram width.
 		/// The length of the arrays in this list is the spectrogram height.
 		/// </summary>
-		private readonly List<double[]> FFTs = new();
+		private readonly List<double[]> _fFTs = [];
 
 		/// <summary>
 		/// This list contains data values which have not yet been processed.
 		/// Process() processes all unprocessed data.
 		/// This list may not be empty after processing if there aren't enough values to fill a full FFT (FftSize).
 		/// </summary>
-		private readonly List<double> UnprocessedData = [];
+		private readonly List<double> _unprocessedData = [];
 
 
 		/// <summary>
@@ -85,7 +83,7 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram
 		/// </summary>
 		public void Add(IEnumerable<double> audio, bool process = true)
 		{
-			UnprocessedData.AddRange(audio);
+			_unprocessedData.AddRange(audio);
 			if (process)
 				Process();
 		}
@@ -103,69 +101,63 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram
 
 			Parallel.For(0, newFftCount, newFftIndex =>
 			{
-				var buffer = new Complex[Settings.FftSize];
-				int sourceIndex = newFftIndex * Settings.StepSize;
-				for (int i = 0; i < Settings.FftSize; i++)
-					buffer[i].Real = UnprocessedData[sourceIndex + i] * Settings.Window[i];
+				var buffer = new Complex[_settings.FftSize];
+				int sourceIndex = newFftIndex * _settings.StepSize;
+				for (int i = 0; i < _settings.FftSize; i++)
+					buffer[i].Real = _unprocessedData[sourceIndex + i] * _settings.Window[i];
 
 				Transform.FFT(buffer);
 
-				newFfts[newFftIndex] = new double[Settings.Height];
-				for (int i = 0; i < Settings.Height; i++)
-					newFfts[newFftIndex][i] = buffer[Settings.FftIndex1 + i].Magnitude / Settings.FftSize;
+				newFfts[newFftIndex] = new double[_settings.Height];
+				for (int i = 0; i < _settings.Height; i++)
+					newFfts[newFftIndex][i] = buffer[_settings.FftIndex1 + i].Magnitude / _settings.FftSize;
 			});
 
 			foreach (var newFft in newFfts)
-				FFTs.Add(newFft);
+				_fFTs.Add(newFft);
 			FftsProcessed += newFfts.Length;
 
-			UnprocessedData.RemoveRange(0, newFftCount * Settings.StepSize);
+			_unprocessedData.RemoveRange(0, newFftCount * _settings.StepSize);
 
 			return newFfts;
 		}
 
-		private int GetInt32(byte r, byte g, byte b) => (255 << 24) | (r << 16) | (g << 8) | b;
-#pragma warning disable CA1416 // Validate platform compatibility
-		public Bitmap GetBitmap()
+		public SKBitmap GetBitmap()
 		{
-			if (FFTs.Count == 0)
+			if (_fFTs.Count == 0)
 				throw new ArgumentException("Not enough data in FFTs to generate an image yet.");
 
-			int Width = FFTs.Count;
-			int Height = FFTs[0].Length;
-			Bitmap bmp = new(Width, Height, PixelFormat.Format8bppIndexed);
+			int width = _fFTs.Count;
+			int height = _fFTs[0].Length;
 
-			ColorPalette pal = bmp.Palette;
-			for (int i = 0; i < 256; i++)
-				pal.Entries[i] = Color.FromArgb(GetInt32((byte)i, (byte)i, (byte)i));
-			bmp.Palette = pal;
+			var bitmap = new SKBitmap(width, height, SKColorType.Gray8, SKAlphaType.Opaque);
+			var pixels = new byte[width * height];
 
-			Rectangle lockRect = new(0, 0, Width, Height);
-			BitmapData bitmapData = bmp.LockBits(lockRect, ImageLockMode.ReadOnly, bmp.PixelFormat);
-			int stride = bitmapData.Stride;
-
-			byte[] bytes = new byte[bitmapData.Stride * bmp.Height];
-			Parallel.For(0, Width, col =>
+			Parallel.For(0, width, col =>
 			{
 				int sourceCol = col;
-
-				for (int row = 0; row < Height; row++)
+				for (int row = 0; row < height; row++)
 				{
-					double value = FFTs[sourceCol][row];
-
+					double value = _fFTs[sourceCol][row];
 					value = 20 * Math.Log10(value + 1);
-
 					value *= 3;
 					value = Math.Min(value, 255);
-					int bytePosition = (Height - 1 - row) * stride + col;
-					bytes[bytePosition] = (byte)value;
+
+					int bytePosition = (height - 1 - row) * width + col;
+					pixels[bytePosition] = (byte)value;
 				}
 			});
 
-			Marshal.Copy(bytes, 0, bitmapData.Scan0, bytes.Length);
-			bmp.UnlockBits(bitmapData);
+			using (var pixmap = bitmap.PeekPixels())
+			{
+				if (pixmap != null)
+				{
+					var pixelSpan = pixmap.GetPixelSpan<byte>();
+					pixels.CopyTo(pixelSpan);
+				}
+			}
 
-			return bmp;
+			return bitmap;
 		}
 
 		/// <summary>
@@ -174,13 +166,11 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram
 		/// <param name="fileName">Path of the file to save.</param>
 		public void SaveImage(string fileName)
 		{
-			if (FFTs.Count == 0)
-				throw new InvalidOperationException("Spectrogram contains no data. Use Add() to add signal data.");
-
-			ImageFormat fmt = ImageFormat.Png;
-
-			GetBitmap().Save(fileName, fmt);
+			var bitmap = GetBitmap();
+			using var image = SKImage.FromBitmap(bitmap);
+			using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+			using var stream = File.OpenWrite(fileName);
+			data.SaveTo(stream);
 		}
-#pragma warning restore CA1416 // Validate platform compatibility
 	}
 }

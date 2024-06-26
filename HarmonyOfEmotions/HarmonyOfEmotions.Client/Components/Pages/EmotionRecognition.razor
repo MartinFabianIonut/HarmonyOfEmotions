@@ -79,6 +79,7 @@
 	private bool hidden = true;
 	private bool isLoading = true;
 
+	[Authorize]
 	protected override async Task OnInitializedAsync()
 	{
 		var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);

@@ -4,6 +4,7 @@
 @inject UserTrackPreferencesService UserTrackPreferencesService
 @inject NavigationManager NavigationManager
 @inherits ErrorHandlingComponentBase
+@inject AuthenticationStateProvider AuthStateProvider
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 <AuthorizeView>
@@ -18,6 +19,9 @@
 				<div class="card border-0">
 					<div class="card-body flex-column">
 						<div class="text-center mt-1">
+							<div>
+								<p>Click on the matrix to select your current mood!</p
+							</div>
 							<div class="matrix-container">
 								<canvas @ref="canvasRef" width="800" height="600" @onclick="OnCanvasClick"></canvas>
 							</div>
@@ -72,6 +76,12 @@
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
+		var authenticationState = await ((CustomAuthenticationStateProvider)AuthStateProvider).GetAuthenticationStateAsync();
+		if (!authenticationState.User.Identity.IsAuthenticated)
+		{
+			return;
+		}
+
 		if (firstRender)
 		{
 			await JSRuntime.InvokeVoidAsync("drawMatrix", canvasRef);

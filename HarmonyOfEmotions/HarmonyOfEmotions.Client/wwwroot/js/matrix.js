@@ -7,10 +7,22 @@ window.drawCircle = function (canvas, x, y) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 	drawMatrix(canvas); // Draw the matrix
 	ctx.beginPath();
-	ctx.arc(x, y, 5, 0, 2 * Math.PI);
+	if (screen.width < 768) {
+		diameter = 2;
+		stroke = 1;
+	} else {
+		diameter = 4;
+		stroke = 2;
+	}
+	ctx.arc(x, y, diameter, 0, 2 * Math.PI); 
+	
+
+	ctx.lineWidth = stroke; // Set the stroke width
+	ctx.strokeStyle = '#ab032d'; // Set the stroke color to match the fill color
+	ctx.stroke(); // Draw the circle outline
+
 	ctx.fillStyle = 'red'; // Change color as desired
-	ctx.fill();
-	ctx.stroke();
+	ctx.fill(); // Fill the circle
 }
 
 window.drawMatrix = function (canvas) {
@@ -27,9 +39,6 @@ window.drawMatrix = function (canvas) {
 	height = width * 0.75;
 	canvas.width = width;
 	canvas.height = height;
-
-	console.log(screen.width)
-	console.log(screen.availWidth)
 
 	// Clear the canvas
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -52,6 +61,10 @@ window.drawMatrix = function (canvas) {
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 	ctx.fillStyle = 'white';
+	ctx.shadowColor = 'black';
+	ctx.shadowOffsetX = -4;
+	ctx.shadowOffsetY = 1;
+	ctx.shadowBlur = 6;
 	if (screen.width < 768) {
 		ctx.font = '10px Bold Arial';
 	} else {
@@ -60,13 +73,13 @@ window.drawMatrix = function (canvas) {
 
 	// Write words at specific relative points based on canvas dimensions
 	var textPositions = [
-		{ text: 'Happy', x: width * 0.9, y: height * 0.45 },
-		{ text: 'Pleased', x: width * 0.88, y: height * 0.55 },
+		{ text: 'Happy', x: width * 0.88, y: height * 0.45 },
+		{ text: 'Pleased', x: width * 0.865, y: height * 0.57 },
 		{ text: 'Confident', x: width * 0.65, y: height * 0.60 },
 		{ text: 'Relaxed', x: width * 0.8, y: height * 0.75 },
 		{ text: 'Calm', x: width * 0.75, y: height * 0.8 },
 		{ text: 'Pensive', x: width * 0.55, y: height * 0.72 },
-		{ text: 'Peaceful', x: width * 0.87, y: height * 0.85 },
+		{ text: 'Peaceful', x: width * 0.85, y: height * 0.88 },
 		{ text: 'Sleepy', x: width * 0.6, y: height * 0.95 },
 		{ text: 'Bored', x: width * 0.34, y: height * 0.9 },
 		{ text: 'Melancholic', x: width * 0.4, y: height * 0.79 },
@@ -83,10 +96,10 @@ window.drawMatrix = function (canvas) {
 		{ text: 'Tense', x: width * 0.35, y: height * 0.1 },
 		{ text: 'Astonished', x: width * 0.6, y: height * 0.1 },
 		{ text: 'Ambitious', x: width * 0.65, y: height * 0.25 },
-		{ text: 'Excited', x: width * 0.88, y: height * 0.2 },
+		{ text: 'Excited', x: width * 0.86, y: height * 0.17 },
 		{ text: 'Delighted', x: width * 0.825, y: height * 0.3 },
 		{ text: 'Convinced', x: width * 0.7, y: height * 0.4 },
-		{ text: 'Expectant', x: width * 0.55, y: height * 0.45 },
+		{ text: 'Expectant', x: width * 0.55, y: height * 0.49 },
 		{ text: 'Impatient', x: width * 0.4, y: height * 0.45 }
 	];
 

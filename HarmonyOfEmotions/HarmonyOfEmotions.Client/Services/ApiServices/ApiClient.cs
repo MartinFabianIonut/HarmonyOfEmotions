@@ -18,8 +18,15 @@ namespace HarmonyOfEmotions.Client.Services.ApiServices
 			}
 			else
 			{
-				var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
-				_errorHandlingService.HandleError(new Exception(errorResponse?.Message ?? "An error occurred while processing the GET request."));
+				try
+				{
+					var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+					_errorHandlingService.HandleError(new Exception(errorResponse?.Message ?? "An error occurred while processing the GET request."));
+				}
+				catch (Exception)
+				{
+					// do nothing
+				}
 			}
 
 			return default;

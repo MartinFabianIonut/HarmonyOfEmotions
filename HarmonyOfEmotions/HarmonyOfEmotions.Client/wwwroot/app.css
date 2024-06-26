@@ -111,3 +111,24 @@ div.nav-scrollable {
 	word-wrap: break-word;
 	word-break: break-all;
 }
+
+
+/* Font for mobile devices */
+@media (max-width: 768px) {
+	.btn-artist {
+		font-size: 11px; /* Adjust font size if needed */
+	}
+}
+
+/* Ensure that both columns are equal height */
+.embed-responsive-container {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Allow the right-side column to grow and fill the height of the left-side container */
+.artist-buttons {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}

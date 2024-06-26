@@ -37,7 +37,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 				// Save audio to file
 				try
 				{
-					File.WriteAllBytes("audio-wow.mp3", audio);
+					File.WriteAllBytes("../tmp/audio-wow.mp3", audio);
 				}
 				catch (IOException ioException)
 				{
@@ -78,7 +78,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "General error while getting emotion for track");
-				throw new InternalServerErrorException(ServiceName.RecommendationService, ex);
+				throw new InternalServerErrorException(ServiceName.EmotionPredictionService, ex);
 			}
 		}
 

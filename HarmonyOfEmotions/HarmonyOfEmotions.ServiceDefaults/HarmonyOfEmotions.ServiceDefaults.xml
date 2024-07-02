@@ -1321,19 +1321,19 @@
             Total number of FFT steps processed
             </summary>
         </member>
-        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.Settings">
+        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator._settings">
             <summary>
             This module contains detailed FFT/Spectrogram settings
             </summary>
         </member>
-        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.FFTs">
+        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator._fFTs">
             <summary>
             This is the list of FFTs which is translated to the spectrogram image when it is requested.
             The length of this list is the spectrogram width.
             The length of the arrays in this list is the spectrogram height.
             </summary>
         </member>
-        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator.UnprocessedData">
+        <member name="F:HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram.SpectrogramGenerator._unprocessedData">
             <summary>
             This list contains data values which have not yet been processed.
             Process() processes all unprocessed data.

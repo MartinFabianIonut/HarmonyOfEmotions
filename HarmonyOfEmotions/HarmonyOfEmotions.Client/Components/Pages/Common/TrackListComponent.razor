@@ -47,20 +47,20 @@
 				}
 				<div style="margin-left:60%; margin-top:@marginTop; display: flex; flex-direction: column; align-items: flex-end;">
 					<button type="button" class="btn btn-link" @onclick="() => LikeTrack(track.Id!)">
-						<img src="like.png" alt="Like" style="width: 24px; height: 24px;" />
+						<img src="images/like.png" alt="Like" style="width: 24px; height: 24px;" />
 					</button>
 					@if (LikedTracks.Contains(track.Id!))
 					{
-						<img src="heart.png" alt="Liked" style="margin-right:30%; width: 24px; height: 24px;" />
+						<img src="images/heart.png" alt="Liked" style="margin-right:30%; width: 24px; height: 24px;" />
 					}
 					else if (DislikedTracks.Contains(track.Id!))
 					{
-						<img src="heartbroken.png" alt="Disliked" style="margin-right:30%; width: 24px; height: 24px;" />
+						<img src="images/heartbroken.png" alt="Disliked" style="margin-right:30%; width: 24px; height: 24px;" />
 					}
 				</div>
 				<div style="margin-top:@marginTop; display: flex; flex-direction: column; align-items: flex-end;">
 					<button type="button" class="btn btn-link" @onclick="() => DislikeTrack(track.Id!)">
-						<img src="dislike.png" alt="Dislike" style="width: 24px; height: 24px;" />
+						<img src="images/dislike.png" alt="Dislike" style="width: 24px; height: 24px;" />
 					</button>
 				</div>
 			</div>

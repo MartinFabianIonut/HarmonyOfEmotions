@@ -11,9 +11,9 @@ namespace HarmonyOfEmotions.Client.Services.ErrorHandling
 		[Inject]
 		protected IJSRuntime? JSRuntime { get; set; }
 
-		protected override void OnInitialized() => ErrorHandlingService.OnError += HandleError;
+		protected override void OnInitialized() => ErrorHandlingService!.OnError += HandleError;
 
-		public void Dispose() => ErrorHandlingService.OnError -= HandleError;
+		public void Dispose() => ErrorHandlingService!.OnError -= HandleError;
 
 		protected virtual void HandleError(string errorMessage)
 		{

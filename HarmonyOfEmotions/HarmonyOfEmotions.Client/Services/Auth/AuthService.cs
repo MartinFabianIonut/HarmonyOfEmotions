@@ -1,6 +1,5 @@
 ﻿using HarmonyOfEmotions.Client.Services.ApiServices;
 using HarmonyOfEmotions.Client.Services.ErrorHandling;
-using HarmonyOfEmotions.Domain.Exceptions;
 using System.Net.Http.Headers;
 using System.Text.Json.Serialization;
 

@@ -2,61 +2,61 @@
 @page "/spotify-tracks/{searchKeyword}"
 @inject SpotifyTrackService SpotifyTrackService
 @inject UserTrackPreferencesService UserTrackPreferencesService
+@inject GoogleSearchAutocompleteService GoogleSearchAutocompleteService
 @inject NavigationManager NavigationManager
 @inherits ErrorHandlingComponentBase
 @inject IJSRuntime JSRuntime
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-<AuthorizeView>
-	<NotAuthorized>
-		<AccessDenied />
-	</NotAuthorized>
-	<Authorized>
-		<h1 class="my-4">Spotify Tracks</h1>
+<AuthenticatedContent>
+	<h1 class="my-4">Spotify Tracks</h1>
 
-		<div class="input-group mb-3">
-			<input @bind="searchKeyword" placeholder="Search for an artist, a composer, or a song" class="form-control" />
-			<button class="btn btn-primary" @onclick="SearchTracks">Search</button>
-		</div>
+	<div class="input-group mb-3">
+		<input @bind="searchKeyword" @oninput="OnInputChanged" placeholder="Search for an artist, a composer, or a song" class="form-control" />
+		<button class="btn btn-primary" @onclick="SearchTracks">Search</button>
+	</div>
 
-		<br />
+	@if (suggestions != null && suggestions.Any())
+	{
+		<ul class="list-group position-absolute" style="z-index: 1;">
+			@foreach (var suggestion in suggestions)
+			{
+				<li class="list-group-item list-group-item-action" @onclick="() => SelectSuggestion(suggestion)">
+					@suggestion
+				</li>
+			}
+		</ul>
+	}
 
-		@if (tracks != null || topTracks != null)
-		{
-			<div class="row">
-				<div class="col-lg-10 col-md-12">
-					@if (!showTopTracks)
-					{
-						<TrackListComponent Tracks="tracks" ArtistList="artistList" />
-					}
-					else
-					{
-						<TrackListComponent Tracks="topTracks" ArtistList="artistList" />
-					}
-				</div>
-				<div class="col-lg-2 col-md-12 text-center">
-					<h3>See top tracks of one of these artists</h3>
-					<ul>
-						@foreach (var artist in artistList)
-						{
-							<li>
-								<button class="btn btn-link" @onclick="() => LoadTopTracks(artist.Id)">@artist.Name</button>
-							</li>
-						}
-					</ul>
-				</div>
+	<br />
+
+	@if (tracks != null)
+	{
+		<div class="row">
+			<div class="col-lg-10 col-md-12">
+				<TrackListComponent Tracks="tracks" ArtistList="artistList" />
 			</div>
-		}
+			<div class="col-lg-2 col-md-12 text-center">
+				<h3>See top tracks of one of these artists</h3>
+				<ul>
+					@foreach (var artist in artistList!)
+					{
+						<li>
+							<button class="btn btn-link" @onclick="() => LoadTopTracks(artist.Id!)">@artist.Name</button>
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	}
+</AuthenticatedContent>
 
-	</Authorized>
-</AuthorizeView>
 @code {
 	[Parameter]
 	public string? searchKeyword { get; set; }
 	private IEnumerable<Track>? tracks;
-	private IEnumerable<Track>? topTracks;
 	private IEnumerable<Artist>? artistList;
-	private bool showTopTracks = false;
+	private List<string> suggestions = new();
 
 	private async Task SearchTracks()
 	{
@@ -64,7 +64,7 @@
 		{
 			tracks = await SpotifyTrackService.SearchTracksByKeyword(searchKeyword);
 			LoadArtistList();
-			showTopTracks = false;
+			StateHasChanged();
 		}
 	}
 
@@ -74,14 +74,12 @@
 		{
 			var artistSet = new HashSet<Artist>(new ArtistNameComparer());
 
-			// Adăugăm artiștii principali
 			foreach (var track in tracks)
 			{
 				artistSet.Add(new Artist { Id = track.ArtistId, Name = track.Artist });
 			}
 
-			// Adăugăm ceilalți artiști
-			var otherArtists = tracks.SelectMany(t => t.OtherArtists.Zip(t.OtherArtistIds, (name, id) => new Artist { Id = id, Name = name }));
+			var otherArtists = tracks.SelectMany(t => t.OtherArtists!.Zip(t.OtherArtistsId!, (name, id) => new Artist { Id = id, Name = name }));
 			foreach (var artist in otherArtists)
 			{
 				artistSet.Add(artist);
@@ -93,8 +91,30 @@
 
 	private async Task LoadTopTracks(string artistId)
 	{
-		topTracks = await SpotifyTrackService.GetTopTracksForArtist(artistId);
-		showTopTracks = true;
+		tracks = await SpotifyTrackService.GetTopTracksForArtist(artistId);
+		LoadArtistList();
+	}
+
+	private async Task OnInputChanged(ChangeEventArgs e)
+	{
+		searchKeyword = e.Value.ToString();
+		if (!string.IsNullOrEmpty(searchKeyword))
+		{
+			suggestions = (await GoogleSearchAutocompleteService.FetchSearchKeywords(searchKeyword)).ToList();
+		}
+		else
+		{
+			suggestions.Clear();
+		}
+		StateHasChanged();
+	}
+
+	private async Task SelectSuggestion(string suggestion)
+	{
+		searchKeyword = suggestion;
+		suggestions.Clear();
+		StateHasChanged();
+		await SearchTracks();
 	}
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -107,6 +127,7 @@
 			{
 				tracks = JsonSerializer.Deserialize<IEnumerable<Track>>(storedTracks);
 				artistList = JsonSerializer.Deserialize<IEnumerable<Artist>>(storedArtistList);
+				LoadArtistList();
 				await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "tracks");
 				await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "artistList");
 				StateHasChanged();
@@ -116,7 +137,7 @@
 
 	private class ArtistNameComparer : IEqualityComparer<Artist>
 	{
-		public bool Equals(Artist x, Artist y)
+		public bool Equals(Artist? x, Artist? y)
 		{
 			if (x == null || y == null) return false;
 			return x.Name == y.Name;
@@ -124,7 +145,7 @@
 
 		public int GetHashCode(Artist obj)
 		{
-			return obj.Name.GetHashCode();
+			return obj.Name!.GetHashCode();
 		}
 	}
 }

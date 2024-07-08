@@ -1,8 +1,9 @@
 ﻿using FireSharp.Interfaces;
-using System.Collections.Concurrent;
-using HarmonyOfEmotions.Domain;
+using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using HarmonyOfEmotions.ApiService.Interfaces;
 using HarmonyOfEmotions.Domain.Exceptions;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
+using System.Collections.Concurrent;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
@@ -115,6 +116,10 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 
 				var response = await _client.GetAsync(cacheKey);
 				var data = response.ResultAs<Dictionary<string, Track>>();
+				foreach (var track in data.Values)
+				{
+					track.IsRecommended = true;
+				}
 				_cache.TryAdd(cacheKey, data.Values.ToArray());
 				return [.. data.Values];
 			}

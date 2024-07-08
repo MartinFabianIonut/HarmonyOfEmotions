@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HarmonyOfEmotions.Domain
+namespace HarmonyOfEmotions.Domain.Authentication
 {
 	public class UserAccount
 	{
@@ -8,7 +8,7 @@ namespace HarmonyOfEmotions.Domain
 		[EmailAddress]
 		public string? Email { get; set; }
 
-		[Required(AllowEmptyStrings = false, ErrorMessage = "Please enter a password.")]
+		[Required(AllowEmptyStrings = false, ErrorMessage = "Please enter a password that is at least 6 characters long.")]
 		[MinLength(6)]
 		public string? Password { get; set; }
 

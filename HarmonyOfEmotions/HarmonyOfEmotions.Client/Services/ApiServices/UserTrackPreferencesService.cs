@@ -1,5 +1,4 @@
-﻿using HarmonyOfEmotions.Client.Components.Pages;
-using HarmonyOfEmotions.Domain.DataModels;
+﻿using HarmonyOfEmotions.Domain.RecommenderSystem;
 
 namespace HarmonyOfEmotions.Client.Services.ApiServices
 {

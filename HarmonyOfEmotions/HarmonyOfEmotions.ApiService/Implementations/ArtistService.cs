@@ -1,9 +1,9 @@
-﻿using HarmonyOfEmotions.Domain;
-using HarmonyOfEmotions.ApiService.Interfaces;
+﻿using HarmonyOfEmotions.ApiService.Interfaces;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
-	public class ArtistService(
+    public class ArtistService(
 		ILastFmService lastFmService, 
 		IMusicBrainzService musicBrainzService,
 		ILogger<ArtistService> logger) : IArtistService

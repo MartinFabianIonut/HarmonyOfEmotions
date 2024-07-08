@@ -1,9 +1,10 @@
-﻿using SpotifyAPI.Web;
-using HarmonyOfEmotions.ApiService.Authentication;
-using HarmonyOfEmotions.Domain;
+﻿using HarmonyOfEmotions.ApiService.Authentication;
+using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.ServiceDefaults.Utils;
 using HarmonyOfEmotions.Domain.Exceptions;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
+using HarmonyOfEmotions.ServiceDefaults.Utils;
+using SpotifyAPI.Web;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
@@ -16,6 +17,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 		{
 			try
 			{
+				artistId = artistId.Trim();
 				var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
 				var artistTopTracksRequest = new ArtistsTopTracksRequest("DE");
 				var response = await spotifyClient.Artists.GetTopTracks(artistId, artistTopTracksRequest);
@@ -34,6 +36,7 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 		{
 			try
 			{
+				keyword = keyword.Trim();
 				var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
 				var searchRequest = new SearchRequest(SearchRequest.Types.Track, keyword)
 				{
@@ -49,6 +52,28 @@ namespace HarmonyOfEmotions.ApiService.Implementations
 			}
 			catch (Exception ex) {
 				_logger.LogError(ex, "Error while searching tracks by keyword {Keyword}", keyword);
+				throw new ExternalServiceException(ServiceName.SpotifyApiService, ex);
+			}
+		}
+
+		public async Task<string[]> GetAutocompleteSearchKeywords(string keyword)
+		{
+			try
+			{
+				keyword = keyword.Trim();
+				var spotifyClient = await _spotifyClientBuilder.BuildClientAsync();
+				var searchRequest = new SearchRequest(SearchRequest.Types.Track, keyword)
+				{
+					Market = "DE",
+					Limit = 5
+				};
+				var response = await spotifyClient.Search.Item(searchRequest);
+				_logger.LogInformation("Autocomplete search keywords found for keyword {Keyword}", keyword);
+
+				return response.Tracks.Items!.Select(t => t.Name).ToArray();
+			}
+			catch (Exception ex) {
+				_logger.LogError(ex, "Error while getting autocomplete search keywords for keyword {Keyword}", keyword);
 				throw new ExternalServiceException(ServiceName.SpotifyApiService, ex);
 			}
 		}

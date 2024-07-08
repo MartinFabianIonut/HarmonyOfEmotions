@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HarmonyOfEmotions.Domain.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
 
-namespace HarmonyOfEmotions.Domain.Exceptions
+namespace HarmonyOfEmotions.ServiceDefaults.Exceptions
 {
-	public class GlobalExceptionFilter(ILogger<GlobalExceptionFilter> logger) : IExceptionFilter
+	public class GlobalExceptionFilter() : IExceptionFilter
 	{
-		private readonly ILogger<GlobalExceptionFilter> _logger = logger;
 
 		public void OnException(ExceptionContext context)
 		{
-			_logger.LogError(context.Exception, "An unhandled exception occurred.");
-
 			var statusCode = context.Exception switch
 			{
 				ExternalServiceException => 503,

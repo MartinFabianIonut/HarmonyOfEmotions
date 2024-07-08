@@ -1,4 +1,4 @@
-﻿namespace HarmonyOfEmotions.Domain
+﻿namespace HarmonyOfEmotions.Domain.RecommenderSystem
 {
 	/// <summary>
 	/// The country of the artist.

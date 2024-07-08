@@ -69,6 +69,7 @@
 </div>
 
 @code {
+
 	[Parameter]
 	public IEnumerable<Track> Tracks { get; set; } = Enumerable.Empty<Track>();
 
@@ -81,6 +82,7 @@
 	protected override async Task OnParametersSetAsync()
 	{
 		await UpdatePreferences();
+		SaveInLocalStorage();
 	}
 
 	private async Task LikeTrack(string trackId)
@@ -139,19 +141,20 @@
 
 	private void RedirectToArtistInfo(string artist)
 	{
-		SaveInLocalStorage();
 		NavigationManager.NavigateTo($"/artist-info/{Uri.EscapeDataString(artist)}");
 	}
 
 	private void RedirectToEmotionRecognition(string previewUrl, string trackName)
 	{
-		SaveInLocalStorage();
 		NavigationManager.NavigateTo($"/emotion-recognition?previewUrl={Uri.EscapeDataString(previewUrl)}&trackName={trackName}");
 	}
 
 	private void SaveInLocalStorage()
 	{
-		JSRuntime.InvokeVoidAsync("localStorage.setItem", "tracks", JsonSerializer.Serialize(Tracks));
+		if (Tracks.Any(testc => testc.Artist != null))
+		{
+			JSRuntime.InvokeVoidAsync("localStorage.setItem", "tracks", JsonSerializer.Serialize(Tracks));
+		}
 		if (ArtistList != null)
 		{
 			JSRuntime.InvokeVoidAsync("localStorage.setItem", "artistList", JsonSerializer.Serialize(ArtistList));

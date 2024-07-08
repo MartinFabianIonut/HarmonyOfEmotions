@@ -3,24 +3,20 @@
 @inherits ErrorHandlingComponentBase
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-<AuthorizeView>
-	<NotAuthorized>
-		<AccessDenied />
-	</NotAuthorized>
-	<Authorized>
+<AuthenticatedContent>
 		<h1 class="my-4">User Track Preferences</h1>
 
 		@if (Preferences != null)
 		{
 			<TrackListComponent Tracks="TrackPreferences" />
 		}
-	</Authorized>
-</AuthorizeView>
+</AuthenticatedContent>
 
 @code {
 	private IEnumerable<UserTrackPreference>? Preferences;
 	private List<Track> TrackPreferences = new List<Track>();
 
+	[Authorize]
 	protected override async Task OnInitializedAsync()
 	{
 		Preferences = await UserTrackPreferencesService.GetUserTrackPreferences();

@@ -1,13 +1,13 @@
 ﻿using HarmonyOfEmotions.ApiService.Controllers;
 using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.Domain;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace HarmonyOfEmotions.Tests.ApiService.Controllers
 {
-	[TestClass]
+    [TestClass]
 	public class SpotifyTrackControllerTests
 	{
 		private Mock<ISpotifyService> _mockSpotifyService;

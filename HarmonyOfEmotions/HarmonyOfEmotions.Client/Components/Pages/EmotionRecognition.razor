@@ -4,11 +4,7 @@
 @inherits ErrorHandlingComponentBase
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-<AuthorizeView>
-	<NotAuthorized>
-		<AccessDenied />
-	</NotAuthorized>
-	<Authorized>
+<AuthenticatedContent>
 		<h1 class="my-4">Emotion recognition demo</h1>
 
 		@if (!string.IsNullOrEmpty(previewUrl))
@@ -65,8 +61,7 @@
 				<img src="images/anger.png" style="height:@anger" class="img-fluid" alt="Anger" />
 			</div>
 		</div>
-	</Authorized>
-</AuthorizeView>
+</AuthenticatedContent>
 
 @code {
 	private string? previewUrl;
@@ -79,7 +74,6 @@
 	private bool hidden = true;
 	private bool isLoading = true;
 
-	[Authorize]
 	protected override async Task OnInitializedAsync()
 	{
 		var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);

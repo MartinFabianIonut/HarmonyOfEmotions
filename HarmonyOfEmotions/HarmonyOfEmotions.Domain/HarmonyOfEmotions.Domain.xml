@@ -4,7 +4,481 @@
         <name>HarmonyOfEmotions.Domain</name>
     </assembly>
     <members>
-        <member name="T:HarmonyOfEmotions.Domain.Country">
+        <member name="T:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions">
+            <summary>
+            Extension methods for <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />
+            </summary>
+        </member>
+        <member name="F:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.Length">
+            <summary>
+            The number of members in the enum.
+            This is a non-distinct count of defined names.
+            </summary>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.ToStringFast(HarmonyOfEmotions.Domain.Authentication.AuthState)">
+            <summary>
+            Returns the string representation of the <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState"/> value.
+            If the attribute is decorated with a <c>[Display]</c> attribute, then
+            uses the provided value. Otherwise uses the name of the member, equivalent to
+            calling <c>ToString()</c> on <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to retrieve the string value for</param>
+            <returns>The string representation of the value</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.IsDefined(HarmonyOfEmotions.Domain.Authentication.AuthState)">
+            <summary>
+            Returns a boolean telling whether the given enum value exists in the enumeration.
+            </summary>
+            <param name="value">The value to check if it's defined</param>
+            <returns><c>true</c> if the value exists in the enumeration, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.IsDefined(System.String)">
+            <summary>
+            Returns a boolean telling whether an enum with the given name exists in the enumeration.
+            </summary>
+            <param name="name">The name to check if it's defined</param>
+            <returns><c>true</c> if a member with the name exists in the enumeration, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.IsDefined(System.String,System.Boolean)">
+            <summary>
+            Returns a boolean telling whether an enum with the given name exists in the enumeration,
+            or if a member decorated with a <c>[Display]</c> attribute
+            with the required name exists.
+            </summary>
+            <param name="name">The name to check if it's defined</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value of metadata attributes,otherwise ignores them</param>
+            <returns><c>true</c> if a member with the name exists in the enumeration, or a member is decorated
+            with a <c>[Display]</c> attribute with the name, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.IsDefined(System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Returns a boolean telling whether an enum with the given name exists in the enumeration
+            </summary>
+            <param name="name">The name to check if it's defined</param>
+            <returns><c>true</c> if a member with the name exists in the enumeration, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.IsDefined(System.ReadOnlySpan{System.Char}@,System.Boolean)">
+            <summary>
+            Returns a boolean telling whether an enum with the given name exists in the enumeration,
+            or optionally if a member decorated with a <c>[Display]</c> attribute
+            with the required name exists.
+            Slower then the <see cref="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.IsDefined(System.String,System.Boolean)" /> overload, but doesn't allocate memory./>
+            </summary>
+            <param name="name">The name to check if it's defined</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value of metadata attributes,otherwise ignores them</param>
+            <returns><c>true</c> if a member with the name exists in the enumeration, or a member is decorated
+            with a <c>[Display]</c> attribute with the name, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.Parse(System.String)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.Parse(System.String,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.Parse(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value included in metadata attributes such as
+            <c>[Display]</c> attribute when parsing, otherwise only considers the member names.</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.TryParse(System.String,HarmonyOfEmotions.Domain.Authentication.AuthState@)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />. This parameter is passed uninitialized.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.TryParse(System.String,HarmonyOfEmotions.Domain.Authentication.AuthState@,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The string representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />. This parameter is passed uninitialized.</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.TryParse(System.String,HarmonyOfEmotions.Domain.Authentication.AuthState@,System.Boolean,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The string representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />. This parameter is passed uninitialized.</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value included in metadata attributes such as
+            <c>[Display]</c> attribute when parsing, otherwise only considers the member names.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.Parse(System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.Parse(System.ReadOnlySpan{System.Char}@,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.Parse(System.ReadOnlySpan{System.Char}@,System.Boolean,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value included in metadata attributes such as
+            <c>[Display]</c> attribute when parsing, otherwise only considers the member names.</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.TryParse(System.ReadOnlySpan{System.Char}@,HarmonyOfEmotions.Domain.Authentication.AuthState@)">
+            <summary>
+            Converts the span representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The span representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />. This parameter is passed uninitialized.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.TryParse(System.ReadOnlySpan{System.Char}@,HarmonyOfEmotions.Domain.Authentication.AuthState@,System.Boolean)">
+            <summary>
+            Converts the span representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The span representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />. This parameter is passed uninitialized.</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.TryParse(System.ReadOnlySpan{System.Char}@,HarmonyOfEmotions.Domain.Authentication.AuthState@,System.Boolean,System.Boolean)">
+            <summary>
+            Converts the span representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The span representation of the enumeration name or underlying value to convert</param>
+            <param name="result">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /> whose
+            value is represented by <paramref name="result"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />. This parameter is passed uninitialized.</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value included in metadata attributes such as
+            <c>[Display]</c> attribute when parsing, otherwise only considers the member names.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.GetValues">
+            <summary>
+            Retrieves an array of the values of the members defined in
+            <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />.
+            Note that this returns a new array with every invocation, so
+            should be cached if appropriate.
+            </summary>
+            <returns>An array of the values defined in <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Authentication.AuthStateExtensions.GetNames">
+            <summary>
+            Retrieves an array of the names of the members defined in
+            <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" />.
+            Note that this returns a new array with every invocation, so
+            should be cached if appropriate.
+            </summary>
+            <returns>An array of the names of the members defined in <see cref="T:HarmonyOfEmotions.Domain.Authentication.AuthState" /></returns>
+        </member>
+        <member name="T:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions">
+            <summary>
+            Extension methods for <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />
+            </summary>
+        </member>
+        <member name="F:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.Length">
+            <summary>
+            The number of members in the enum.
+            This is a non-distinct count of defined names.
+            </summary>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.ToStringFast(HarmonyOfEmotions.Domain.Exceptions.ServiceName)">
+            <summary>
+            Returns the string representation of the <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName"/> value.
+            If the attribute is decorated with a <c>[Display]</c> attribute, then
+            uses the provided value. Otherwise uses the name of the member, equivalent to
+            calling <c>ToString()</c> on <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to retrieve the string value for</param>
+            <returns>The string representation of the value</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.IsDefined(HarmonyOfEmotions.Domain.Exceptions.ServiceName)">
+            <summary>
+            Returns a boolean telling whether the given enum value exists in the enumeration.
+            </summary>
+            <param name="value">The value to check if it's defined</param>
+            <returns><c>true</c> if the value exists in the enumeration, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.IsDefined(System.String)">
+            <summary>
+            Returns a boolean telling whether an enum with the given name exists in the enumeration.
+            </summary>
+            <param name="name">The name to check if it's defined</param>
+            <returns><c>true</c> if a member with the name exists in the enumeration, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.IsDefined(System.String,System.Boolean)">
+            <summary>
+            Returns a boolean telling whether an enum with the given name exists in the enumeration,
+            or if a member decorated with a <c>[Display]</c> attribute
+            with the required name exists.
+            </summary>
+            <param name="name">The name to check if it's defined</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value of metadata attributes,otherwise ignores them</param>
+            <returns><c>true</c> if a member with the name exists in the enumeration, or a member is decorated
+            with a <c>[Display]</c> attribute with the name, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.IsDefined(System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Returns a boolean telling whether an enum with the given name exists in the enumeration
+            </summary>
+            <param name="name">The name to check if it's defined</param>
+            <returns><c>true</c> if a member with the name exists in the enumeration, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.IsDefined(System.ReadOnlySpan{System.Char}@,System.Boolean)">
+            <summary>
+            Returns a boolean telling whether an enum with the given name exists in the enumeration,
+            or optionally if a member decorated with a <c>[Display]</c> attribute
+            with the required name exists.
+            Slower then the <see cref="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.IsDefined(System.String,System.Boolean)" /> overload, but doesn't allocate memory./>
+            </summary>
+            <param name="name">The name to check if it's defined</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value of metadata attributes,otherwise ignores them</param>
+            <returns><c>true</c> if a member with the name exists in the enumeration, or a member is decorated
+            with a <c>[Display]</c> attribute with the name, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.Parse(System.String)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.Parse(System.String,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.Parse(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value included in metadata attributes such as
+            <c>[Display]</c> attribute when parsing, otherwise only considers the member names.</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.TryParse(System.String,HarmonyOfEmotions.Domain.Exceptions.ServiceName@)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />. This parameter is passed uninitialized.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.TryParse(System.String,HarmonyOfEmotions.Domain.Exceptions.ServiceName@,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The string representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />. This parameter is passed uninitialized.</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.TryParse(System.String,HarmonyOfEmotions.Domain.Exceptions.ServiceName@,System.Boolean,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The string representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />. This parameter is passed uninitialized.</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value included in metadata attributes such as
+            <c>[Display]</c> attribute when parsing, otherwise only considers the member names.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.Parse(System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.Parse(System.ReadOnlySpan{System.Char}@,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.Parse(System.ReadOnlySpan{System.Char}@,System.Boolean,System.Boolean)">
+            <summary>
+            Converts the string representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            </summary>
+            <param name="name">The case-sensitive string representation of the enumeration name or underlying value to convert</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value included in metadata attributes such as
+            <c>[Display]</c> attribute when parsing, otherwise only considers the member names.</param>
+            <returns>An object of type <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="name"/></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.TryParse(System.ReadOnlySpan{System.Char}@,HarmonyOfEmotions.Domain.Exceptions.ServiceName@)">
+            <summary>
+            Converts the span representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The span representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />. This parameter is passed uninitialized.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.TryParse(System.ReadOnlySpan{System.Char}@,HarmonyOfEmotions.Domain.Exceptions.ServiceName@,System.Boolean)">
+            <summary>
+            Converts the span representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The span representation of the enumeration name or underlying value to convert</param>
+            <param name="value">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="value"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />. This parameter is passed uninitialized.</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.TryParse(System.ReadOnlySpan{System.Char}@,HarmonyOfEmotions.Domain.Exceptions.ServiceName@,System.Boolean,System.Boolean)">
+            <summary>
+            Converts the span representation of the name or numeric value of
+            an <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> to the equivalent instance.
+            The return value indicates whether the conversion succeeded.
+            </summary>
+            <param name="name">The span representation of the enumeration name or underlying value to convert</param>
+            <param name="result">When this method returns, contains an object of type 
+            <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /> whose
+            value is represented by <paramref name="result"/> if the parse operation succeeds.
+            If the parse operation fails, contains the default value of the underlying type
+            of <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />. This parameter is passed uninitialized.</param>
+            <param name="ignoreCase"><c>true</c> to read value in case insensitive mode; <c>false</c> to read value in case sensitive mode.</param>
+            <param name="allowMatchingMetadataAttribute">If <c>true</c>, considers the value included in metadata attributes such as
+            <c>[Display]</c> attribute when parsing, otherwise only considers the member names.</param>
+            <returns><c>true</c> if the value parameter was converted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.GetValues">
+            <summary>
+            Retrieves an array of the values of the members defined in
+            <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />.
+            Note that this returns a new array with every invocation, so
+            should be cached if appropriate.
+            </summary>
+            <returns>An array of the values defined in <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /></returns>
+        </member>
+        <member name="M:HarmonyOfEmotions.Domain.Exceptions.ServiceNameExtensions.GetNames">
+            <summary>
+            Retrieves an array of the names of the members defined in
+            <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" />.
+            Note that this returns a new array with every invocation, so
+            should be cached if appropriate.
+            </summary>
+            <returns>An array of the names of the members defined in <see cref="T:HarmonyOfEmotions.Domain.Exceptions.ServiceName" /></returns>
+        </member>
+        <member name="T:HarmonyOfEmotions.Domain.RecommenderSystem.Country">
             <summary>
             The country of the artist.
             </summary>

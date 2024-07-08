@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using NetEscapades.EnumGenerators;
+using System.ComponentModel;
 
 namespace HarmonyOfEmotions.Domain.Exceptions
 {
+	[EnumExtensions]
 	public enum ServiceName
 	{
 		[Description("Error retrieving audio preview from Spotify.")]

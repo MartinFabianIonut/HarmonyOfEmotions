@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using HarmonyOfEmotions.ApiService.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HarmonyOfEmotions.ApiService.Controllers;
 
@@ -9,7 +8,7 @@ namespace HarmonyOfEmotions.ApiService.Controllers;
 /// </summary>
 /// <param name="logger"> For logging purposes</param>
 /// <param name="service"> The service that will handle the requests</param>
-[ApiController, Authorize]
+[ApiController]
 [Route("[controller]")]
 public class ArtistInfoController(
 	ILogger<ArtistInfoController> logger,

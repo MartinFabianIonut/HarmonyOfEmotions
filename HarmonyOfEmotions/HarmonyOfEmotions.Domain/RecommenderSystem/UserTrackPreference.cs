@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HarmonyOfEmotions.Domain.DataModels
+namespace HarmonyOfEmotions.Domain.RecommenderSystem
 {
 	public class UserTrackPreference
 	{

@@ -1,9 +1,9 @@
-﻿using HarmonyOfEmotions.Domain;
+﻿using HarmonyOfEmotions.Domain.RecommenderSystem;
 using SpotifyAPI.Web;
 
 namespace HarmonyOfEmotions.ServiceDefaults.Utils
 {
-	public static class TrackUtils
+    public static class TrackUtils
 	{
 		public static Track ConvertToTrack(FullTrack track)
 		{
@@ -15,11 +15,12 @@ namespace HarmonyOfEmotions.ServiceDefaults.Utils
 				ArtistId = track.Artists.First().Id,
 				Album = track.Album.Name,
 				OtherArtists = track.Artists.Skip(1).Select(a => a.Name).ToArray(),
-				OtherArtistIds = track.Artists.Skip(1).Select(a => a.Id).ToArray(),
+				OtherArtistsId = track.Artists.Skip(1).Select(a => a.Id).ToArray(),
 				PreviewUrl = track.PreviewUrl,
 				ImageUrl = track.Album.Images.First().Url,
 				TrackNumber = track.TrackNumber,
-				Year = DateUtils.ConvertStringToDateTime(track.Album.ReleaseDate)
+				Year = DateUtils.ConvertStringToDateTime(track.Album.ReleaseDate),
+				IsRecommended = false
 			};
 		}
 		public static Track[] ConvertToTracks(List<FullTrack> tracks)

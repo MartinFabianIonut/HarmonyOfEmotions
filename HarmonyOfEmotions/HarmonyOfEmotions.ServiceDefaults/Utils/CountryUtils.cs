@@ -1,11 +1,11 @@
-﻿using HarmonyOfEmotions.Domain;
+﻿using HarmonyOfEmotions.Domain.RecommenderSystem;
 using System.Collections;
 using System.Globalization;
 using System.Resources;
 
 namespace HarmonyOfEmotions.ServiceDefaults.Utils
 {
-	public static class CountryUtils
+    public static class CountryUtils
 	{
 		private static readonly Dictionary<string, Country> _countries;
 

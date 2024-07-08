@@ -1,8 +1,8 @@
-﻿using HarmonyOfEmotions.Domain;
+﻿using HarmonyOfEmotions.Domain.RecommenderSystem;
 
 namespace HarmonyOfEmotions.ApiService.Interfaces
 {
-	public interface IRepository
+    public interface IRepository
 	{
 		Task<Centroid[]> GetCentroids();
 		Task<Centroid[]> GetClusteredData();

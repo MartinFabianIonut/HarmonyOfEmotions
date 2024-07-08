@@ -7,11 +7,9 @@
 		<div class="card border-0">
 			<div class="card-body flex-column">
 				<div class="text-center mt-5">
-					<img src="images/restricted.png" style="max-width:7rem;" />
+					<img src="@imageUrl" style="max-width:7rem;" />
 				</div>
-				<div class="text-center mb-5">
-					<span class="text-danger fw-bolder">Access denied</span>
-				</div>
+				<h4 class="text-muted text-center m-4">@message</h4>
 				<div class="text-center">
 					<button class="btn btn-primary" @onclick="NavigateToLogin">Go to Login</button>
 				</div>
@@ -21,6 +19,26 @@
 </div>
 
 @code {
+	[Parameter]
+	public AuthState? Reason { get; set; }
+
+	private string message = string.Empty;
+	private string imageUrl = "images/restricted.png";
+	private bool isSessionExpired => Reason == AuthState.SessionExpired;
+	private bool isUnauthorized => Reason == AuthState.Unauthenticated;
+
+	protected override void OnParametersSet()
+	{
+		if (isSessionExpired)
+		{
+			imageUrl = "images/expired.png";
+		}
+		else
+		{
+			imageUrl = "images/restricted.png";
+		}
+		message = EnumDescriptionUtils.GetEnumDescription(Reason!);
+	}
 	private void NavigateToLogin()
 	{
 		Navigation.NavigateTo("/login");

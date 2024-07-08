@@ -1,5 +1,5 @@
 using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.Domain.DataModels;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;

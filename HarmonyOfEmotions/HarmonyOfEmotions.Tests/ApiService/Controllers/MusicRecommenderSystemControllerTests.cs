@@ -1,6 +1,6 @@
 ﻿using HarmonyOfEmotions.ApiService.Controllers;
 using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.Domain;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HarmonyOfEmotions.Tests.ApiService.Controllers
 {
-	[TestClass]
+    [TestClass]
 	public class MusicRecommenderSystemControllerTests
 	{
 		private Mock<IRecommenderService> _mockMusicRecommenderSystemService;

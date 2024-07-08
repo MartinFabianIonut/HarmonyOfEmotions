@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace HarmonyOfEmotions.Domain
+namespace HarmonyOfEmotions.Domain.RecommenderSystem
 {
 	public class Track
 	{
@@ -29,11 +29,30 @@ namespace HarmonyOfEmotions.Domain
 				// remove empty strings
 				return others.Where(s => !string.IsNullOrEmpty(s)).ToArray();
 			}
-			set => OtherArtistsRaw = $"[{string.Join(",", value.Select(s => $"'{s}'"))}]";
+			set
+			{
+				OtherArtistsRaw = $"[{string.Join(",", value.Select(s => $"'{s}'"))}]";
+			}
 		}
 
-		[JsonProperty("other_artist_ids")]
-		public string[]? OtherArtistIds { get; set; }
+		[JsonProperty("other_artists_id")]
+		private string? OtherArtistsIdRaw { get; set; }
+		public string[]? OtherArtistsId
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(OtherArtistsIdRaw))
+					return null;
+
+				var others = OtherArtistsIdRaw.Trim('[', ']').Replace("'", "").Trim().Split(',');
+				// remove empty strings
+				return others.Where(s => !string.IsNullOrEmpty(s)).ToArray();
+			}
+			set
+			{
+				OtherArtistsIdRaw = $"[{string.Join(",", value.Select(s => $"'{s}'"))}]";
+			}
+		}
 
 		[JsonProperty("album")]
 		public string? Album { get; set; }
@@ -47,9 +66,9 @@ namespace HarmonyOfEmotions.Domain
 		[JsonProperty("track_number")]
 		public int TrackNumber { get; set; }
 
-		public DateTime Year 
+		public DateTime Year
 		{
-			get 
+			get
 			{
 				if (string.IsNullOrEmpty(YearString))
 				{
@@ -109,5 +128,8 @@ namespace HarmonyOfEmotions.Domain
 
 		[JsonProperty("tempoid")]
 		public float Tempo { get; set; }
+
+		[JsonProperty("is_recommended")]
+		public bool IsRecommended { get; set; }
 	}
 }

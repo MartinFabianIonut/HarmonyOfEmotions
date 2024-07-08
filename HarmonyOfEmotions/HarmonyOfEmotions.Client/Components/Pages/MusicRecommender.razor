@@ -7,11 +7,7 @@
 @inject AuthenticationStateProvider AuthStateProvider
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-<AuthorizeView>
-	<NotAuthorized>
-		<AccessDenied />
-	</NotAuthorized>
-	<Authorized>
+<AuthenticatedContent>
 		<h1 class="my-4">Music Recommender System</h1>
 
 		<div class="row">
@@ -28,8 +24,6 @@
 
 							<div class="slider-container">
 								<label for="zSlider">Select danceability value:</label>
-
-								<!-- Adjusted width, step value, and added background color -->
 								<input type="range" id="zSlider" min="0" max="100000" step="1" @bind="z" class="slider" style="width: 300px; background-color: #ddd;" />
 							</div>
 
@@ -48,8 +42,7 @@
 		{
 			<TrackListComponent Tracks="recommendedTracks" />
 		}
-	</Authorized>
-</AuthorizeView>
+</AuthenticatedContent>
 
 @code {
 	private ElementReference canvasRef;
@@ -76,21 +69,24 @@
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-		var authenticationState = await ((CustomAuthenticationStateProvider)AuthStateProvider).GetAuthenticationStateAsync();
-		if (!authenticationState.User.Identity.IsAuthenticated)
-		{
-			return;
-		}
-
 		if (firstRender)
 		{
+			var authenticationState = await ((CustomAuthenticationStateProvider)AuthStateProvider).GetAuthenticationStateAsync();
+			if (!authenticationState.User.Identity!.IsAuthenticated)
+			{
+				return;
+			}
 			await JSRuntime.InvokeVoidAsync("drawMatrix", canvasRef);
 			var storedTracks = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "tracks");
 			if (!string.IsNullOrEmpty(storedTracks))
 			{
-				recommendedTracks = JsonSerializer.Deserialize<IEnumerable<Track>>(storedTracks);
-				await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "tracks");
-				StateHasChanged();
+				var tracks = JsonSerializer.Deserialize<IEnumerable<Track>>(storedTracks);
+				recommendedTracks = tracks!.Any(track => track.IsRecommended == true) ? tracks : null;
+				if (recommendedTracks != null)
+				{
+					await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "tracks");
+					StateHasChanged();
+				}
 			}
 		}
 	}

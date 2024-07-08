@@ -1,0 +1,41 @@
+﻿@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager NavigationManager
+
+@code {
+	private bool isAuthenticated;
+	private bool isLoading = true;
+
+	protected override async Task OnInitializedAsync()
+	{
+		var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+		isAuthenticated = authState.User.Identity!.IsAuthenticated;
+
+		var claims = authState.User.Claims;
+		var expirationClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.Expired);
+
+		Reason = expirationClaim != null
+			? AuthState.SessionExpired
+			: (!isAuthenticated ? AuthState.Unauthenticated : AuthState.Authenticated);
+
+		isLoading = false;
+	}
+}
+
+@if (isLoading)
+{
+	<p>Loading...</p>
+}
+else if (isAuthenticated)
+{
+	@ChildContent
+}
+else
+{
+	<AccessDenied Reason="@Reason" />
+}
+
+@code {
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+	private AuthState? Reason { get; set; }
+}

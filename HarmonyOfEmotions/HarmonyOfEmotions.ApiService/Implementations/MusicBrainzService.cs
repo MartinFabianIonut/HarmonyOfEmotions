@@ -1,8 +1,9 @@
-﻿using HarmonyOfEmotions.Domain;
+﻿using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using HarmonyOfEmotions.ApiService.Interfaces;
+using HarmonyOfEmotions.Domain.Exceptions;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
 using HarmonyOfEmotions.ServiceDefaults.Utils;
 using System.Text.Json;
-using HarmonyOfEmotions.Domain.Exceptions;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {

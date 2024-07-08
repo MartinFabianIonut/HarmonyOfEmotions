@@ -1,7 +1,9 @@
 using HarmonyOfEmotions.Client.Components;
 using HarmonyOfEmotions.Client.Services.ApiServices;
-using HarmonyOfEmotions.Client.Services.Auth;
+using HarmonyOfEmotions.Client.Services.Authentication;
 using HarmonyOfEmotions.Client.Services.ErrorHandling;
+using HarmonyOfEmotions.Domain.Authentication;
+using HarmonyOfEmotions.ServiceDefaults.Utils;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
 
@@ -17,20 +19,38 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddOutputCache();
 builder.Services.AddAuthorizationCore();
-// add iauthservice
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddSingleton<ITokenService, TokenService>();
-builder.Services.AddSingleton<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
+// add services for session management
 builder.Services.AddHttpContextAccessor();
-//builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+	options.IdleTimeout = TimeSpan.FromMinutes(30);
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
+});
+
+// add services for authentication
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddTransient<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
 builder.Services.AddTransient<BearerTokenHandler>();
 
 builder.Services.AddCascadingAuthenticationState();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-	.AddCookie(options =>
+
+var harmonyAuthentication = AuthState.HarmonyAuthentication.ToString();
+builder.Services.AddAuthentication(options =>
+{
+	options.DefaultAuthenticateScheme = harmonyAuthentication;
+	options.DefaultChallengeScheme = harmonyAuthentication;
+})
+	.AddCookie(harmonyAuthentication, options =>
 	{
-		options.Cookie.Name = "HarmonyOfEmotions.Client";
+		options.Cookie.Name = "HarmonyOfEmotions.Authentication";
+		options.Cookie.HttpOnly = true;  // Cookie HTTP-only
+		options.Cookie.SecurePolicy = CookieSecurePolicy.Always;  // Secure cookie
+		options.Cookie.SameSite = SameSiteMode.Strict;  // SameSite policy
 		options.LoginPath = "/login";
 		options.LogoutPath = "/logout";
 		options.AccessDeniedPath = "/access-denied";
@@ -38,6 +58,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddAuthorization();
 
+// add services for API client
 builder.Services.AddHttpClient<ApiClient>(client =>
 {
 	// This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
@@ -47,11 +68,16 @@ builder.Services.AddHttpClient<ApiClient>(client =>
 	client.DefaultRequestHeaders.Accept.Add(new("application/json"));
 }).AddHttpMessageHandler<BearerTokenHandler>();
 
+// add services for error handling
 builder.Services.AddSingleton<IErrorHandlingService, ErrorHandlingService>();
+
+// add services for API calls
 builder.Services.AddScoped<UserTrackPreferencesService>();
 builder.Services.AddScoped<SpotifyTrackService>();
 builder.Services.AddScoped<MusicRecommenderSystemService>();
 builder.Services.AddScoped<ArtistInfoService>();
+builder.Services.AddScoped<ZenQuotesService>();
+builder.Services.AddScoped<GoogleSearchAutocompleteService>();
 
 builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 
@@ -67,9 +93,15 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-app.UseAntiforgery();
+
+app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
+
+app.UseAntiforgery();
 
 app.UseOutputCache();
 

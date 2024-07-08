@@ -1,4 +1,5 @@
 ﻿using HarmonyOfEmotions.Domain.Exceptions;
+using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using HarmonyOfEmotions.ServiceDefaults.Utils.Spectrogram;
 using MP3Sharp;
 using SkiaSharp;

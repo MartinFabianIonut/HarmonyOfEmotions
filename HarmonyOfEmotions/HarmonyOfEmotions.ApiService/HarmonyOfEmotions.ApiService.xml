@@ -85,7 +85,7 @@
             <param name="logger"> For logging purposes</param>
             <param name="service"> The service that will handle the requests</param>
         </member>
-        <member name="M:HarmonyOfEmotions.ApiService.Controllers.UserTrackPreferencesController.AddOrUpdateUserTrackPreference(HarmonyOfEmotions.Domain.DataModels.UserTrackPreference)">
+        <member name="M:HarmonyOfEmotions.ApiService.Controllers.UserTrackPreferencesController.AddOrUpdateUserTrackPreference(HarmonyOfEmotions.Domain.RecommenderSystem.UserTrackPreference)">
             <summary>
             Save the user's track preference (either liked or disliked).
             </summary>

@@ -1,6 +1,6 @@
 ﻿using HarmonyOfEmotions.ApiService.Controllers;
 using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.Domain;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace HarmonyOfEmotions.Tests.ApiService.Controllers
 {
-	[TestClass]
+    [TestClass]
 	public class ArtistInfoControllerTests
 	{
 		private Mock<IArtistService> _mockArtistService;

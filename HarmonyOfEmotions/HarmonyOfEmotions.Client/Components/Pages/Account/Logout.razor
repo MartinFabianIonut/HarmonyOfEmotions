@@ -20,12 +20,14 @@
 </div>
 
 @code {
+	[CascadingParameter]
+	public HttpContext? HttpContext { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
-		((CustomAuthenticationStateProvider)AuthStateProvider).NotifyUserLogout();
+		await ((CustomAuthenticationStateProvider)AuthStateProvider).NotifyUserLogout();
+
 		NavigationManager.NavigateTo("/login");
 	}
-
 }

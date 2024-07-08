@@ -3,11 +3,7 @@
 @inherits ErrorHandlingComponentBase
 @inject ArtistInfoService ArtistInfoService
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
-<AuthorizeView>
-	<NotAuthorized>
-		<AccessDenied />
-	</NotAuthorized>
-	<Authorized>
+<AuthenticatedContent>
 
 		<h1 class="my-4">Artist Info</h1>
 
@@ -70,9 +66,7 @@
 				</div>
 			</div>
 		}
-
-	</Authorized>
-</AuthorizeView>
+</AuthenticatedContent>
 
 @code {
 	[Parameter]

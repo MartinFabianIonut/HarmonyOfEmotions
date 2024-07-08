@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace HarmonyOfEmotions.Domain.Exceptions
+namespace HarmonyOfEmotions.ServiceDefaults.Utils
 {
-	public static class ServiceDescriptionUtility
+	public static class EnumDescriptionUtils
 	{
-		public static string GetServiceDescription(Enum serviceName)
+		public static string GetEnumDescription(Enum serviceName)
 		{
 			FieldInfo field = serviceName.GetType()?.GetField(serviceName.ToString())!;
 			DescriptionAttribute[] attributes = (DescriptionAttribute[])field.GetCustomAttributes(typeof(DescriptionAttribute), false);

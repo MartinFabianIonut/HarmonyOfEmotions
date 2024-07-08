@@ -1,4 +1,4 @@
-﻿using HarmonyOfEmotions.Domain;
+﻿using HarmonyOfEmotions.Domain.RecommenderSystem;
 
 namespace HarmonyOfEmotions.Client.Services.ApiServices
 {

@@ -1,7 +1,8 @@
 ﻿using HarmonyOfEmotions.ApiService.Data;
+using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.Domain.DataModels;
 using HarmonyOfEmotions.Domain.Exceptions;
+using HarmonyOfEmotions.Domain.RecommenderSystem;
 using Microsoft.EntityFrameworkCore;
 
 namespace HarmonyOfEmotions.ApiService.Implementations

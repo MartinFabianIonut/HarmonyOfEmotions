@@ -1,9 +1,4 @@
 ﻿@page "/login"
-@rendermode @(new InteractiveServerRenderMode(prerender: false))
-@inject IAuthService AuthService
-@inject NavigationManager Navigation
-@inject AuthenticationStateProvider AuthStateProvider
-@inherits ErrorHandlingComponentBase
 
 <br />
 <h2>Authentication</h2>
@@ -12,131 +7,13 @@
 	<div class="col-lg-4 offset-lg-4 pt-4 pb-4 border">
 		<div class="mb-3 text-center flex-column">
 			<img src="images/user.png" alt="User" class="img-fluid" style="max-width:5rem;" />
-			<h3>@(isLogin ? "Sign in" : "Register")</h3>
+			<h3>Sign in</h3>
 		</div>
 
-		<div class="text-center">
-			<button @onclick="ToggleForm" class="mb-3 btn btn-link">
-				@if (isLogin)
-				{
-					<span>Don't have an account? Register</span>
-				}
-				else
-				{
-					<span>Already have an account? Sign in</span>
-				}
-			</button>
+		<div class="text-center mb-3">
+			<span>Don't have an account? <a class="fw-bolder" href="/register">Register</a></span>
 		</div>
 
-		<EditForm Model="@UserAccount" OnValidSubmit="HandleSubmit">
-			<DataAnnotationsValidator />
-
-			<div class="mb-4">
-				<label>Email</label>
-				<InputText @bind-Value="UserAccount.Email" class="form-control" placeholder="Email" />
-				<ValidationMessage For="@(() => UserAccount.Email)" />
-			</div>
-
-			<div class="mb-3">
-				<label>Password</label>
-				<InputText @bind-Value="UserAccount.Password" class="form-control" type="password" placeholder="Password" />
-				<ValidationMessage For="@(() => UserAccount.Password)" />
-			</div>
-
-			@if (!isLogin)
-			{
-				<div class="mb-3">
-					<label>Confirm Password</label>
-					<InputText @bind-Value="UserAccount.ConfirmPassword" class="form-control" type="password" placeholder="Confirm Password" />
-					<ValidationMessage For="@(() => UserAccount.ConfirmPassword)" />
-				</div>
-			}
-
-			<div class="mb-3 text-center">
-				<span class="text-danger">@ErrorMessage</span>
-			</div>
-
-			<div class="mb-2 d-grid gap-3">
-				<button type="submit" class="btn btn-primary" disabled="@isLoading">
-					@if (isLoading)
-					{
-						<div class="d-flex align-items-center justify-content-center">
-							<span class="spinner-border spinner-border-sm me-4" role="status" aria-hidden="true"></span>
-							<span class="sr-only">Loading...</span>
-						</div>
-					}
-					else
-					{
-						@((isLogin ? "Login" : "Register"))
-					}
-				</button>
-			</div>
-		</EditForm>
+		<LoginRegisterForm IsLogin="true"/>
 	</div>
 </div>
-
-@code {
-	[CascadingParameter]
-	public HttpContext HttpContext { get; set; } = default!;
-
-	private bool isLogin = true;
-	private bool isLoading = false;
-
-	public UserAccount UserAccount { get; set; } = new UserAccount();
-
-	private string? ErrorMessage { get; set; }
-
-	private void ToggleForm()
-	{
-		isLogin = !isLogin;
-		UserAccount.IsRegistering = !isLogin;
-		ErrorMessage = null; // Clear error message when toggling
-	}
-
-	private async Task HandleSubmit()
-	{
-		ErrorMessage = null;
-		isLoading = true;
-
-		if (isLogin)
-		{
-			await HandleLogin();
-		}
-		else
-		{
-			await HandleRegister();
-		}
-
-		isLoading = false;
-	}
-
-	private async Task HandleLogin()
-	{
-		var result = await AuthService.Login(UserAccount.Email!, UserAccount.Password!);
-
-		if (!result)
-		{
-			ErrorMessage = "Invalid email or password";
-			return;
-		}
-
-		// mark the user as authenticated
-		((CustomAuthenticationStateProvider)AuthStateProvider).NotifyUserAuthentication(UserAccount.Email!);
-
-		Navigation.NavigateTo("/music-recommender-system");
-	}
-
-	private async Task HandleRegister()
-	{
-		var result = await AuthService.Register(UserAccount.Email!, UserAccount.Password!);
-
-		if (!result)
-		{
-			ErrorMessage = "Registration failed";
-			return;
-		}
-
-		// Automatically log in the user after successful registration
-		await HandleLogin();
-	}
-}

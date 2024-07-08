@@ -1,8 +1,8 @@
-﻿using HarmonyOfEmotions.Domain;
+﻿using HarmonyOfEmotions.Domain.RecommenderSystem;
 
 namespace HarmonyOfEmotions.ApiService.Interfaces
 {
-	public interface IArtistService
+    public interface IArtistService
 	{
 		Task<Artist?> GetCompleteArtistInfoAsync(string artistName);
 	}

@@ -1,0 +1,30 @@
+﻿ @rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<button type="submit" class="btn btn-primary" disabled="@IsLoading" @onclick="HandleClick">
+	@if (IsLoading)
+	{
+		<div class="d-flex align-items-center justify-content-center">
+			<span class="spinner-border spinner-border-sm me-4" role="status" aria-hidden="true"></span>
+			<span class="sr-only">Loading...</span>
+		</div>
+	}
+	else
+	{
+		<span>@Text</span>
+	}
+</button>
+
+@code {
+	[Parameter]
+	public EventCallback OnClick { get; set; }
+
+	[Parameter]
+	public string? Text { get; set; }
+
+	private bool IsLoading { get; set; }
+
+	private void HandleClick()
+	{
+		IsLoading = true;
+	}
+}

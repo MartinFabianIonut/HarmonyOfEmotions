@@ -1,6 +1,5 @@
 ﻿using HarmonyOfEmotions.ApiService.Implementations;
 using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.Domain;
 using HarmonyOfEmotions.Domain.RecommenderSystem;
 using Microsoft.Extensions.Logging;
 using Moq;

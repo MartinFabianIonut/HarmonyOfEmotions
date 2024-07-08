@@ -44,6 +44,8 @@ namespace HarmonyOfEmotions.Client.Services.Authentication
 			var user = new ClaimsPrincipal(identity);
 
 			await _httpContextAccessor.HttpContext?.SignInAsync(AuthState.HarmonyAuthentication.ToString(), user)!;
+
+			NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
 		}
 
 		public async Task NotifyUserLogout()

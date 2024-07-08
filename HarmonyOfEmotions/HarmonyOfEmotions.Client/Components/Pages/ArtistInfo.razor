@@ -3,8 +3,8 @@
 @inherits ErrorHandlingComponentBase
 @inject ArtistInfoService ArtistInfoService
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
-<AuthenticatedContent>
 
+<AuthenticatedContent>
 		<h1 class="my-4">Artist Info</h1>
 
 		<div class="input-group mb-3">
@@ -12,39 +12,39 @@
 			<button class="btn btn-primary" @onclick="LoadArtistInfo">Load Artist Info</button>
 		</div>
 
-		@if (ArtistInformation != null)
+		@if (artistInformation != null)
 		{
 			<div class="row">
 				@{
-					string length = ArtistInformation.ImageUrl != null ? "8" : "12";
+					string length = artistInformation.ImageUrl != null ? "8" : "12";
 				}
-				@if (!string.IsNullOrEmpty(ArtistInformation.ImageUrl))
+				@if (!string.IsNullOrEmpty(artistInformation.ImageUrl))
 				{
 					<div class="col-md-4">
-						<img src="@ArtistInformation.ImageUrl" class="img-fluid" alt="@ArtistInformation.Name" />
+						<img src="@artistInformation.ImageUrl" class="img-fluid" alt="@artistInformation.Name" />
 					</div>
 				}
 				<div class="col-md-@length">
-					<h2>@ArtistInformation.Name</h2>
-					@if (ArtistInformation.Country != null)
+					<h2>@artistInformation.Name</h2>
+					@if (artistInformation.Country != null)
 					{
 						<p>
-							<strong>Country:</strong> @ArtistInformation.Country.Name @GetCountryEmoji(ArtistInformation.Country.Code)
+							<strong>Country:</strong> @artistInformation.Country.Name @GetCountryEmoji(artistInformation.Country.Code)
 						</p>
 					}
-					@if (ArtistInformation.Lifetime != null)
+					@if (artistInformation.Lifetime != null)
 					{
-						var beginYear = ArtistInformation.Lifetime.Begin ?? DateTime.MinValue;
-						var endYear = ArtistInformation.Lifetime.End ?? DateTime.MinValue;
+						var beginYear = artistInformation.Lifetime.Begin ?? DateTime.MinValue;
+						var endYear = artistInformation.Lifetime.End ?? DateTime.MinValue;
 						<p>
 							<strong>Lived between:</strong> @DateUtils.FormatDate(beginYear) - @DateUtils.FormatDate(endYear)
 						</p>
 					}
-					@if (!string.IsNullOrEmpty(ArtistInformation.Summary))
+					@if (!string.IsNullOrEmpty(artistInformation.Summary))
 					{
-						<p><strong>Biography:</strong> @((MarkupString)ArtistInformation.Summary)</p>
+						<p><strong>Biography:</strong> @((MarkupString)artistInformation.Summary)</p>
 					}
-					@if (!string.IsNullOrEmpty(ArtistInformation.Content))
+					@if (!string.IsNullOrEmpty(artistInformation.Content))
 					{
 						<div>
 							<button class="btn btn-link" @onclick="ToggleContentVisibility">
@@ -53,7 +53,7 @@
 							@if (showContent)
 							{
 
-								var formattedContent = FormatContent(ArtistInformation.Content);
+								var formattedContent = FormatContent(artistInformation.Content);
 								var paragraphs = formattedContent.Split("<br>", StringSplitOptions.RemoveEmptyEntries);
 
 								@foreach (var paragraph in paragraphs)
@@ -71,7 +71,7 @@
 @code {
 	[Parameter]
 	public string? Artist { get; set; }
-	private Artist? ArtistInformation;
+	private Artist? artistInformation;
 	private bool showContent = false;
 
 	protected override async Task OnInitializedAsync()
@@ -86,7 +86,7 @@
 	{
 		if (!string.IsNullOrEmpty(Artist))
 		{
-			ArtistInformation = await ArtistInfoService.GetArtistInfo(Artist);
+			artistInformation = await ArtistInfoService.GetArtistInfo(Artist);
 		}
 	}
 

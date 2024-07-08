@@ -1,8 +1,8 @@
 ﻿using HarmonyOfEmotions.ApiService.Controllers;
-using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using HarmonyOfEmotions.ApiService.Interfaces;
 using HarmonyOfEmotions.Domain.Exceptions;
 using HarmonyOfEmotions.Domain.RecommenderSystem;
+using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

@@ -14,5 +14,5 @@
 	document.body.appendChild(errorAlert);
 	setTimeout(function () {
 		document.body.removeChild(errorAlert);
-	}, 5000); // 5000 milliseconds = 5 seconds
+	}, 5000);
 }

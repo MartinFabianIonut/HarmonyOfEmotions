@@ -1,7 +1,7 @@
 ﻿ @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
-<button type="submit" class="btn btn-primary" disabled="@IsLoading" @onclick="HandleClick">
-	@if (IsLoading)
+<button type="submit" class="btn btn-primary" disabled="@isLoading" @onclick="HandleClick">
+	@if (isLoading)
 	{
 		<div class="d-flex align-items-center justify-content-center">
 			<span class="spinner-border spinner-border-sm me-4" role="status" aria-hidden="true"></span>
@@ -21,10 +21,10 @@
 	[Parameter]
 	public string? Text { get; set; }
 
-	private bool IsLoading { get; set; }
+	private bool isLoading { get; set; }
 
 	private void HandleClick()
 	{
-		IsLoading = true;
+		isLoading = true;
 	}
 }

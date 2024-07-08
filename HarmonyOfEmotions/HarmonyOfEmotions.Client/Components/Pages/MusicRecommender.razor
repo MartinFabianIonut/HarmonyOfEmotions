@@ -16,7 +16,7 @@
 					<div class="card-body flex-column">
 						<div class="text-center mt-1">
 							<div>
-								<p>Click on the matrix to select your current mood!</p
+								<p>Click on the matrix to select your current mood!</p>
 							</div>
 							<div class="matrix-container">
 								<canvas @ref="canvasRef" width="800" height="600" @onclick="OnCanvasClick"></canvas>
@@ -71,6 +71,12 @@
 	{
 		if (firstRender)
 		{
+			if (NavigationManager.ToAbsoluteUri(NavigationManager.Uri).ToString().Contains("login"))
+			{
+				NavigationManager.NavigateTo("/music-recommender-system");
+				await JSRuntime.InvokeVoidAsync("location.reload");
+			}
+
 			var authenticationState = await ((CustomAuthenticationStateProvider)AuthStateProvider).GetAuthenticationStateAsync();
 			if (!authenticationState.User.Identity!.IsAuthenticated)
 			{

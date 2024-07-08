@@ -1,7 +1,24 @@
 ﻿@inject AuthenticationStateProvider AuthStateProvider
 @inject NavigationManager NavigationManager
 
+@if (isLoading)
+{
+	<p>Loading...</p>
+}
+else if (isAuthenticated)
+{
+	@ChildContent
+}
+else
+{
+	<AccessDenied Reason="@reason" />
+}
+
 @code {
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+	private AuthState? reason { get; set; }
+
 	private bool isAuthenticated;
 	private bool isLoading = true;
 
@@ -13,29 +30,10 @@
 		var claims = authState.User.Claims;
 		var expirationClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.Expired);
 
-		Reason = expirationClaim != null
+		reason = expirationClaim != null
 			? AuthState.SessionExpired
 			: (!isAuthenticated ? AuthState.Unauthenticated : AuthState.Authenticated);
 
 		isLoading = false;
 	}
-}
-
-@if (isLoading)
-{
-	<p>Loading...</p>
-}
-else if (isAuthenticated)
-{
-	@ChildContent
-}
-else
-{
-	<AccessDenied Reason="@Reason" />
-}
-
-@code {
-	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
-	private AuthState? Reason { get; set; }
 }

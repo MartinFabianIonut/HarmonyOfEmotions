@@ -1,14 +1,14 @@
 ﻿using HarmonyOfEmotions.ApiService.Authentication;
-using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using HarmonyOfEmotions.ApiService.Interfaces;
 using HarmonyOfEmotions.Domain.Exceptions;
 using HarmonyOfEmotions.Domain.RecommenderSystem;
+using HarmonyOfEmotions.ServiceDefaults.Exceptions;
 using HarmonyOfEmotions.ServiceDefaults.Utils;
 using SpotifyAPI.Web;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
-	public class SpotifyService(SpotifyClientBuilder spotifyClientBuilder, ILogger<SpotifyService> logger) : Centroid, ISpotifyService
+	public class SpotifyService(SpotifyClientBuilder spotifyClientBuilder, ILogger<SpotifyService> logger) : ISpotifyService
 	{
 		private readonly SpotifyClientBuilder _spotifyClientBuilder = spotifyClientBuilder;
 		private readonly ILogger<SpotifyService> _logger = logger;

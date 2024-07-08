@@ -43,17 +43,17 @@
 			</div>
 			<div class="position-absolute top-0 start-0 translate-middle" style="display: flex; gap: 5px;">
 				@{
-					string marginTop = (LikedTracks.Contains(track.Id!) || DislikedTracks.Contains(track.Id!)) ? "60%" : "40%";
+					string marginTop = (likedTracks.Contains(track.Id!) || dislikedTracks.Contains(track.Id!)) ? "60%" : "40%";
 				}
 				<div style="margin-left:60%; margin-top:@marginTop; display: flex; flex-direction: column; align-items: flex-end;">
 					<button type="button" class="btn btn-link" @onclick="() => LikeTrack(track.Id!)">
 						<img src="images/like.png" alt="Like" style="width: 24px; height: 24px;" />
 					</button>
-					@if (LikedTracks.Contains(track.Id!))
+					@if (likedTracks.Contains(track.Id!))
 					{
 						<img src="images/heart.png" alt="Liked" style="margin-right:30%; width: 24px; height: 24px;" />
 					}
-					else if (DislikedTracks.Contains(track.Id!))
+					else if (dislikedTracks.Contains(track.Id!))
 					{
 						<img src="images/heartbroken.png" alt="Disliked" style="margin-right:30%; width: 24px; height: 24px;" />
 					}
@@ -76,8 +76,8 @@
 	[Parameter]
 	public IEnumerable<Artist>? ArtistList { get; set; }
 
-	private HashSet<string> LikedTracks = new();
-	private HashSet<string> DislikedTracks = new();
+	private HashSet<string> likedTracks = new();
+	private HashSet<string> dislikedTracks = new();
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -87,7 +87,7 @@
 
 	private async Task LikeTrack(string trackId)
 	{
-		if (LikedTracks.Contains(trackId))
+		if (likedTracks.Contains(trackId))
 		{
 			await UserTrackPreferencesService.DeleteUserTrackPreference(trackId);
 		}
@@ -100,7 +100,7 @@
 
 	private async Task DislikeTrack(string trackId)
 	{
-		if (DislikedTracks.Contains(trackId))
+		if (dislikedTracks.Contains(trackId))
 		{
 			await UserTrackPreferencesService.DeleteUserTrackPreference(trackId);
 		}
@@ -113,18 +113,18 @@
 
 	public async Task UpdatePreferences()
 	{
-		LikedTracks.Clear();
-		DislikedTracks.Clear();
+		likedTracks.Clear();
+		dislikedTracks.Clear();
 
 		foreach (var track in Tracks)
 		{
 			if (await IsLiked(track.Id!))
 			{
-				LikedTracks.Add(track.Id!);
+				likedTracks.Add(track.Id!);
 			}
 			else if (await IsDisliked(track.Id!))
 			{
-				DislikedTracks.Add(track.Id!);
+				dislikedTracks.Add(track.Id!);
 			}
 		}
 	}

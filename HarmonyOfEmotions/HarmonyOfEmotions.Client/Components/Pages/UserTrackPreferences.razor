@@ -6,30 +6,30 @@
 <AuthenticatedContent>
 		<h1 class="my-4">User Track Preferences</h1>
 
-		@if (Preferences != null)
+		@if (preferences != null)
 		{
-			<TrackListComponent Tracks="TrackPreferences" />
+			<TrackListComponent Tracks="trackPreferences" />
 		}
 </AuthenticatedContent>
 
 @code {
-	private IEnumerable<UserTrackPreference>? Preferences;
-	private List<Track> TrackPreferences = new List<Track>();
+	private IEnumerable<UserTrackPreference>? preferences;
+	private List<Track> trackPreferences = new List<Track>();
 
 	[Authorize]
 	protected override async Task OnInitializedAsync()
 	{
-		Preferences = await UserTrackPreferencesService.GetUserTrackPreferences();
-		TrackPreferences.Clear();
-		if (Preferences != null)
+		preferences = await UserTrackPreferencesService.GetUserTrackPreferences();
+		trackPreferences.Clear();
+		if (preferences != null)
 		{
-			foreach (var preference in Preferences)
+			foreach (var preference in preferences)
 			{
 				var track = new Track
 					{
 						Id = preference.TrackId
 					};
-				TrackPreferences.Add(track);
+				trackPreferences.Add(track);
 			}
 		}
 		StateHasChanged();

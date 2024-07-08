@@ -15,18 +15,20 @@ namespace HarmonyOfEmotions.Client.Services.ApiServices
 
 			try
 			{
-				// Parse the JSON response
 				var jsonResponse = JArray.Parse(response);
 
-				// Extract the keyword suggestions, which are the second element in the array
 				var suggestions = jsonResponse[1].ToObject<string[]>();
 
+				if (suggestions == null)
+				{
+					return [];
+				}
 				return suggestions.Take(5).ToArray();
 			}
 			catch (Exception)
 			{
 				_errorHandlingService.HandleError(new Exception("An error occurred while fetching the search keywords."));
-				return Array.Empty<string>();
+				return [];
 			}
 		}
 	}

@@ -3,8 +3,8 @@ using HarmonyOfEmotions.Domain.RecommenderSystem;
 
 namespace HarmonyOfEmotions.ApiService.Implementations
 {
-    public class ArtistService(
-		ILastFmService lastFmService, 
+	public class ArtistService(
+		ILastFmService lastFmService,
 		IMusicBrainzService musicBrainzService,
 		ILogger<ArtistService> logger) : IArtistService
 	{

@@ -1,10 +1,4 @@
-﻿using HarmonyOfEmotions.ApiService.Controllers;
-using HarmonyOfEmotions.ApiService.Implementations;
-using HarmonyOfEmotions.ApiService.Interfaces;
-using HarmonyOfEmotions.Domain;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using HarmonyOfEmotions.ApiService.Implementations;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.Protected;

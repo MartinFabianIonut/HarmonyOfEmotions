@@ -7,7 +7,7 @@ using Moq;
 
 namespace HarmonyOfEmotions.Tests.ApiService.Controllers
 {
-    [TestClass]
+	[TestClass]
 	public class SpotifyTrackControllerTests
 	{
 		private Mock<ISpotifyService> _mockSpotifyService;

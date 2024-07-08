@@ -29,7 +29,7 @@
 	}
 
 	<div class="mb-3 text-center">
-		<span class="text-danger">@ErrorMessage</span>
+		<span class="text-danger">@errorMessage</span>
 	</div>
 
 	<div class="mb-2 d-grid gap-3">
@@ -48,12 +48,12 @@
 	[SupplyParameterFromForm]
 	public UserAccount UserAccount { get; set; } = new UserAccount();
 
-	private string? ErrorMessage { get; set; }
+	private string? errorMessage { get; set; }
 	private string? AuthText => IsLogin ? "Login" : "Register";
 
 	private async Task HandleSubmit()
 	{
-		ErrorMessage = null;
+		errorMessage = null;
 
 		if (IsLogin)
 		{
@@ -65,7 +65,7 @@
 		}
 
 
-		Navigation.NavigateTo("/home", true);
+		Navigation.NavigateTo("/music-recommender-system", true);
 	}
 
 	private async Task HandleLogin()
@@ -76,7 +76,7 @@
 
 			if (result == null)
 			{
-				ErrorMessage = "Invalid email or password";
+				errorMessage = "Invalid email or password";
 				return;
 			}
 
@@ -84,7 +84,7 @@
 		}
 		catch (Exception ex)
 		{
-			ErrorMessage = ex.Message;
+			errorMessage = ex.Message;
 			return;
 		}
 	}
@@ -95,7 +95,7 @@
 
 		if (result == null)
 		{
-			ErrorMessage = "Registration failed";
+			errorMessage = "Registration failed";
 			return;
 		}
 

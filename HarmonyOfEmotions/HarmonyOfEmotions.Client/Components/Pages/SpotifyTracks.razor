@@ -12,7 +12,7 @@
 	<h1 class="my-4">Spotify Tracks</h1>
 
 	<div class="input-group mb-3">
-		<input @bind="searchKeyword" @oninput="OnInputChanged" placeholder="Search for an artist, a composer, or a song" class="form-control" />
+		<input @bind="SearchKeyword" @oninput="OnInputChanged" placeholder="Search for an artist, a composer, or a song" class="form-control" />
 		<button class="btn btn-primary" @onclick="SearchTracks">Search</button>
 	</div>
 
@@ -53,16 +53,17 @@
 
 @code {
 	[Parameter]
-	public string? searchKeyword { get; set; }
+	public string? SearchKeyword { get; set; }
 	private IEnumerable<Track>? tracks;
 	private IEnumerable<Artist>? artistList;
 	private List<string> suggestions = new();
+	private Timer? timer;
 
 	private async Task SearchTracks()
 	{
-		if (!string.IsNullOrEmpty(searchKeyword))
+		if (!string.IsNullOrEmpty(SearchKeyword))
 		{
-			tracks = await SpotifyTrackService.SearchTracksByKeyword(searchKeyword);
+			tracks = await SpotifyTrackService.SearchTracksByKeyword(SearchKeyword);
 			LoadArtistList();
 			StateHasChanged();
 		}
@@ -97,21 +98,27 @@
 
 	private async Task OnInputChanged(ChangeEventArgs e)
 	{
-		searchKeyword = e.Value.ToString();
-		if (!string.IsNullOrEmpty(searchKeyword))
+		SearchKeyword = e.Value.ToString();
+		timer?.Dispose();
+		timer = new Timer(OnTimerElapsed, null, 1000, Timeout.Infinite);
+	}
+
+	private async void OnTimerElapsed(object? state)
+	{
+		if (!string.IsNullOrEmpty(SearchKeyword))
 		{
-			suggestions = (await GoogleSearchAutocompleteService.FetchSearchKeywords(searchKeyword)).ToList();
+			suggestions = (await GoogleSearchAutocompleteService.FetchSearchKeywords(SearchKeyword)).ToList();
 		}
 		else
 		{
 			suggestions.Clear();
 		}
-		StateHasChanged();
+		await InvokeAsync(StateHasChanged);
 	}
 
 	private async Task SelectSuggestion(string suggestion)
 	{
-		searchKeyword = suggestion;
+		SearchKeyword = suggestion;
 		suggestions.Clear();
 		StateHasChanged();
 		await SearchTracks();

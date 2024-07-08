@@ -2,7 +2,7 @@
 
 namespace HarmonyOfEmotions.ApiService.Interfaces
 {
-    public interface IMusicBrainzService
+	public interface IMusicBrainzService
 	{
 		Task<Artist?> GetArtistDetailsAsync(string artistId);
 	}

@@ -5,16 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HarmonyOfEmotions.Tests.ApiService.Controllers
 {
-    [TestClass]
+	[TestClass]
 	public class MusicRecommenderSystemControllerTests
 	{
 		private Mock<IRecommenderService> _mockMusicRecommenderSystemService;

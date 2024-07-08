@@ -1,100 +1,49 @@
 ﻿@page "/"
-@page "/home"
 @inject ZenQuotesService ZenQuotesService
 @inject NavigationManager NavigationManager
 
-<PageTitle>Home</PageTitle>
-
-<style>
-	.background {
-		background-size: cover;
-		background-position: center;
-		height: 100vh;
-		color: white;
-		text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-	}
-
-	.card {
-		background-color: rgba(0, 0, 70, 0.4);
-		border-radius: 13px;
-	}
-
-	.quote {
-		font-size: 1.2rem;
-		font-style: italic;
-	}
-
-	.quote-author {
-		font-size: 1rem;
-		font-weight: bold;
-	}
-</style>
-
-<div class="background d-flex align-items-top justify-content-center">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h1 class="my-4 fw-bolder text-center">Welcome to <span class="text-primary">Harmony of Emotions</span></h1>
-			</div>
-			<div class="col-12">
-				<div class="card p-4">
-					<div class="card-body">
-						<AuthenticatedContent>
-							<AuthorizeView>
-								<Authorized>
-									<div class="text-center mb-4">
-										<span>You are logged in as <b>@context.User.Identity?.Name</b>. <a class="fw-bolder" href="/logout">Logout</a></span>
-									</div>
-
-									<div class="text-center mt-4">
-										<p class="quote">"@quote"</p>
-										<p class="quote-author mb-4">- @quoteAuthor</p>
-										<p>Double click on the button below to get music recommendations based on your mood!</p>
-										@if (@mustRefresh)
-										{
-											<a class="btn btn-primary btn-md" href="/">Get recommendations</a>
-										}
-										else
-										{
-											Thread.Sleep(300);
-											<a class="btn btn-primary btn-md" href="/music-recommender-system">Get recommendations</a>
-										}
-									</div>
-								</Authorized>
-							</AuthorizeView>
-						</AuthenticatedContent>
+<AuthenticatedContent>
+	<AuthorizeView>
+		<div class="background d-flex align-items-top justify-content-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<h1 class="my-4 fw-bolder text-center">Welcome to <span class="text-primary">Harmony of Emotions</span></h1>
+					</div>
+					<div class="col-12">
+						<div class="home-card card p-4">
+							<div class="card-body">
+								<div class="text-center mb-4">
+									<span>You are logged in as <b>@context.User.Identity?.Name</b>. <a class="fw-bolder" href="/logout">Logout</a></span>
+								</div>
+								<div class="text-center mt-4">
+									<p class="quote">"@quote"</p>
+									<p class="quote-author mb-4">- @quoteAuthor</p>
+									<p>Click on the button below to get music recommendations based on your mood!</p>
+									<a class="btn btn-primary btn-md" href="/music-recommender-system">Get recommendations</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	</AuthorizeView>
+</AuthenticatedContent>
 
 @code {
 	private string quote = "Loading quote...";
 	private string quoteAuthor = string.Empty;
-	private bool mustRefresh = false;
 
 	protected override async Task OnInitializedAsync()
-	{
-		if (NavigationManager.Uri.EndsWith("/home", StringComparison.OrdinalIgnoreCase))
-		{
-			mustRefresh = true;
-		}
-		await FetchQuote();
-		
-		StateHasChanged();
-	}
-
-	private async Task FetchQuote()
 	{
 		try
 		{
 			var quoteResponse = await ZenQuotesService.FetchQuote();
 			if (quoteResponse != null)
 			{
-				quote = quoteResponse?.Quote!;
-				quoteAuthor = quoteResponse?.Author!;
+				quote = quoteResponse.Quote!;
+				quoteAuthor = quoteResponse.Author!;
 			}
 		}
 		catch (Exception)
